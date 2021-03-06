@@ -1,0 +1,12 @@
+mkrootfs  -  create rootfs tarball for Zeppelin
+===============================================
+
+# make rootfs  - prepare (build and install core pkgsrc) rootfs dir
+# make revdep  - check rootfs for missing libraries of installed pkgs
+# make tar.xz  - prepare tarball
+# make clean   - remove rootfs, tar.xz, and .gpg if exists
+# make rmall   - clean + remove distfiles, tar.xz, logs
+
+Sign tarball:
+
+# sudo -u USER make sign EMAIL=xxx@xxx
