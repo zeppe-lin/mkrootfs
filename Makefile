@@ -16,8 +16,8 @@ NEED_ROOT_PRIVILEGES:
 rootfs: NEED_ROOT_PRIVILEGES
 	mkdir -p $(ROOTFS_DIR)/var/lib/pkg
 	touch $(ROOTFS_DIR)/var/lib/pkg/db
-	install -o pkgmk -d $(CURDIR)/{srcs,pkgs,logs}
-	pkgman --root=$(ROOTFS_DIR) --config=pkgman.conf install \
+	install -o pkgmk -d $(CURDIR)/{distfiles,packages,logs}
+	pkgman --root=$(ROOTFS_DIR) --config=$(CURDIR)/pkgman.conf install \
 		-d --group --margs="-cf $(CURDIR)/pkgmk.conf" $(PACKAGES)
 
 revdep: NEED_ROOT_PRIVILEGES
