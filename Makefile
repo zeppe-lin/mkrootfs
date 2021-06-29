@@ -21,13 +21,13 @@ rootfs: NEED_ROOT_PRIVILEGES
 		-d --group --margs="-cf $(CURDIR)/pkgmk.conf" $(PACKAGES)
 
 revdep: NEED_ROOT_PRIVILEGES
-	chroot $(ROOTFS_DIR) revdep
+	chroot $(ROOTFS_DIR) revdep -vvv | grep -v ': ok'
 
 tar.xz: NEED_ROOT_PRIVILEGES
 	(cd $(ROOTFS_DIR) ; tar -cJf $(ROOTFS_TXZ) . ; sync)
 
 sign:
-	gpg --sign --default-key $(EMAIL) $(ROOTFS_TXZ)
+	gpg --output $(ROOTFS_TXZ).sig --detach-sig $(ROOTFS_TXZ)
 
 clean:  NEED_ROOT_PRIVILEGES
 	rm -rf $(ROOTFS_DIR) $(ROOTFS_TXZ) $(ROOTFS_TXZ).gpg
