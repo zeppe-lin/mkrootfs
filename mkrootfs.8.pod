@@ -42,32 +42,32 @@ Mandatory arguments to long options are mandatory for short options too.
 
 =over 8
 
-=item B<-r>, B<--rootfs> I<PATH>
+=item B<-r>, B<--rootfs>=I<PATH>
 
 Set path to rootfs directory.
 
-=item B<-t>, B<--tar> I<FILE>
+=item B<-t>, B<--tar>=I<FILE>
 
 Set path to compressed rootfs tarball.
 
-=item B<-l>, B<--log> I<FILE>
+=item B<-l>, B<--log>=I<FILE>
 
 Set path to log file for L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>.
 
-=item B<-p>, B<--packages> "I<PKG1> I<PKG2>..."
+=item B<-p>, B<--packages>="I<PKG1> I<PKG2>..."
 
 Set default packages to extract into the rootfs directory.
 
-=item B<-c>, B<--config> I<FILE>
+=item B<-c>, B<--config>=I<FILE>
 
 Use alternative configuration file (default is F</etc/mkrootfs/config>).
 
-=item B<-x>, B<--pkgmk-config> I<FILE>
+=item B<-x>, B<--pkgmk-config>=I<FILE>
 
 Use alternative L<pkgmk(8)|https://zeppe-lin.github.io/pkgmk.8.html>'s
 configuration file (default is F</etc/pkgmk.conf>).
 
-=item B<-y>, B<--pkgman-config> I<FILE>
+=item B<-y>, B<--pkgman-config>=I<FILE>
 
 Use alternative
 L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>'s configuration
