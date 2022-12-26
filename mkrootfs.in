@@ -127,12 +127,14 @@ make_tarball_signature() {
 	fi
 }
 
+# XXX
 remove_rootfs_and_buildlog() {
 	info "cleaning rootfs directory and build log..."
 
 	rm -rf "$ROOTFS_DIR" "$ROOTFS_LOG"
 }
 
+# XXX
 remove_tarball_and_sig() {
 	info "cleaning rootfs tarball and signature"
 
@@ -150,12 +152,10 @@ Build customized root filesystem for chroot installation.
 
 COMMANDS:
 
-  build       prepare rootfs directory
+  rootfs      prepare rootfs directory
   revdep      check rootfs directory for missing libraries
-  tarball     compress rootfs directory (prepare tarball)
+  tar         compress rootfs directory (prepare tarball)
   sign        sign prepared tarball
-  clean       remove rootfs directory and logfile
-  clean-all   remove rootfs directory, logfile, tarball and signature
 
 OPTIONS:
 
@@ -236,7 +236,7 @@ parse_options() {
 			print_help
 			exit 0
 			;;
-		build|revdep|tarball|sign|clean|clean-all)
+		rootfs|revdep|tar|sign)
 			MKROOTFS_ACTION="$1"
 			;;
 		*)
@@ -261,7 +261,7 @@ main() {
 	parse_options "$@"
 
 	case $MKROOTFS_ACTION in
-	build)
+	rootfs)
 		check_root_privs
 		build_rootfs
 		;;
@@ -270,7 +270,7 @@ main() {
 		check_rootfs_dir
 		check_rootfs_libs
 		;;
-	tarball)
+	tar)
 		check_root_privs
 		check_rootfs_dir
 		make_tarball
@@ -278,15 +278,6 @@ main() {
 	sign)
 		check_tarball
 		make_tarball_signature
-		;;
-	clean)
-		check_root_privs
-		remove_rootfs_and_buildlog
-		;;
-	clean-all)
-		check_root_privs
-		remove_rootfs_and_buildlog
-		remove_tarball_and_sig
 		;;
 	esac
 }
@@ -296,10 +287,10 @@ interrupted() {
 	error "Interrupted."
 
 	case $MKROOTFS_ACTION in
-	build)
+	rootfs)
 		remove_rootfs_and_buildlog
 		;;
-	tarball)
+	tar)
 		remove_tarball_and_sig
 		;;
 	esac
