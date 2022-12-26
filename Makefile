@@ -16,7 +16,7 @@ check:
 	@podchecker *.pod
 	@grep -Eiho "https?://[^\"\\'> ]+" *.* | httpx -silent -fc 200 -sc
 
-install:
+install: all
 	mkdir -p ${DESTDIR}/usr/sbin
 	mkdir -p ${DESTDIR}/usr/share/man/man5
 	mkdir -p ${DESTDIR}/usr/share/man/man7
