@@ -52,20 +52,20 @@ check_rootfs_dir() {
 }
 
 build_rootfs() {
-	info "prepare rootfs..."
+	info "Preparing rootfs in $ROOTFS_DIR ..."
 
 	if ! mkdir -p "$ROOTFS_DIR/var/lib/pkg"; then
-		error "can't create the pkgdb directory: $ROOTFS_DIR/var/lib/pkg"
+		error "Can't create the pkgdb directory: $ROOTFS_DIR/var/lib/pkg"
 		exit $E_BUILD
 	fi
 
 	if ! touch "$ROOTFS_DIR/var/lib/pkg/db"; then
-		error "can't create the pkgdb file: $ROOTFS_DIR/var/lib/pkg/db"
+		error "Can't create the pkgdb file: $ROOTFS_DIR/var/lib/pkg/db"
 		exit $E_BUILD
 	fi
 
 	if ! touch "$ROOTFS_LOG"; then
-		error "can't create the pkgman's logfile: $ROOTFS_LOG"
+		error "Can't create the pkgman's logfile: $ROOTFS_LOG"
 		exit $E_BUILD
 	fi
 
@@ -82,7 +82,7 @@ build_rootfs() {
 		--margs="-cf $ROOTFS_PKGMK_CONF"       \
 		$ROOTFS_PKG;
 	then
-		error "can't build rootfs directory: $ROOTFS_DIR"
+		error "Can't build rootfs directory: $ROOTFS_DIR"
 		exit $E_BUILD
 	else
 		info "rootfs directory was created: $ROOTFS_DIR"
@@ -90,7 +90,7 @@ build_rootfs() {
 }
 
 check_rootfs_libs() {
-	info "check rootfs for missing libraries..."
+	info "Checking rootfs ($ROOTFS_DIR) for missing libraries ..."
 
 	if ! chroot "$ROOTFS_DIR" revdep -p; then
 		error "rootfs has missing libraries"
@@ -99,7 +99,7 @@ check_rootfs_libs() {
 }
 
 make_tarball() {
-	info "prepare rootfs tarball..."
+	info "Preparing rootfs tarball ($ROOTFS_TAR) ..."
 
 	(
 	if ! cd "$ROOTFS_DIR"; then
@@ -117,7 +117,7 @@ make_tarball() {
 }
 
 make_tarball_signature() {
-	info "sign rootfs tarball..."
+	info "Signing rootfs tarball ($ROOTFS_TAR) ..."
 
 	if ! gpg --output "$ROOTFS_TAR.sig" --detach-sig "$ROOTFS_TAR"; then
 		error "can't create signature for $ROOTFS_TAR"
@@ -129,14 +129,14 @@ make_tarball_signature() {
 
 # XXX
 remove_rootfs_and_buildlog() {
-	info "removing rootfs directory and build log..."
+	info "Removing rootfs directory and build log ..."
 
 	rm -rf "$ROOTFS_DIR" "$ROOTFS_LOG"
 }
 
 # XXX
 remove_tarball_and_sig() {
-	info "removing rootfs tarball and signature"
+	info "Removing rootfs tarball and signature ..."
 
 	rm -f "$ROOTFS_TAR" "$ROOTFS_TAR.sig"
 }
