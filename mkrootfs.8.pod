@@ -18,7 +18,7 @@ mkrootfs builds customized root filesystem for chroot installation.
 
 =over 8
 
-=item B<build>
+=item B<rootfs>
 
 Prepare rootfs directory.
 
@@ -26,21 +26,13 @@ Prepare rootfs directory.
 
 Check rootfs directory for missing libraries.
 
-=item B<tarball>
+=item B<tar>
 
 Compress rootfs directory (prepare tarball).
 
 =item B<sign>
 
 Sign prepared tarball.
-
-=item B<clean>
-
-Remove rootfs directory and logfile.
-
-=item B<clean-all>
-
-Remove rootfs directory, logfile, tarball and signature.
 
 =back
 
