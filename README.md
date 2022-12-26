@@ -23,6 +23,14 @@ REQUIREMENTS
 - podchecker(1pm) to check PODs for errors
 - httpx(1) to check URLs for non-200 response codes
 
+INSTALL
+-------
+The shell command `make install` should install this package.
+
+The shell command `make check` should start some tests, like checking
+PODs for errors, checking documentation URLs for non-200 response
+codes, etc.
+
 LICENSE
 -------
 *mkrootfs* is licensed through the GNU General Public License v3 or
