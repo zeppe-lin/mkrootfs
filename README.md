@@ -1,8 +1,7 @@
 ABOUT
 -----
-This directory contains *mkrootfs*, an utility written in POSIX sh(1p)
-to make root filesystem of Zeppe-Lin distribution for chroot
-installation.
+This directory contains *mkrootfs*, an utility that makes root
+filesystem of Zeppe-Lin distribution for chroot installation.
 
 REQUIREMENTS
 ------------
