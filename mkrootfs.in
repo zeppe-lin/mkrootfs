@@ -161,15 +161,15 @@ OPTIONS:
 
   Mandatory arguments to long options are mandatory for short options too.
 
-  -r, --rootfs         PATH  set path to rootfs directory
-  -t, --tar            FILE  set path to compressed rootfs tarball
-  -l, --log            FILE  set pkgman's log output file
-  -p, --packages       LIST  set default packages list (space separated)
-  -c, --config         FILE  set path to config
-  -x, --pkgmk-config   FILE  set path to pkgmk's configuration file
-  -y, --pkgman-config  FILE  set path to pkgman's configuration file
-  -v, --version              print version and exit
-  -h, --help                 print help and exit
+  -r, --rootfs=PATH         set path to rootfs directory
+  -t, --tar=PATH            set path to compressed rootfs tarball
+  -l, --log=PATH            set pkgman's log output file
+  -p, --packages=LIST       set default packages list (space separated)
+  -c, --config=PATH         set path to config
+  -x, --pkgmk-config=PATH   set path to pkgmk's configuration file
+  -y, --pkgman-config=PATH  set path to pkgman's configuration file
+  -v, --version             print version and exit
+  -h, --help                print help and exit
 EOF
 }
 
@@ -195,39 +195,77 @@ parse_options() {
 			ROOTFS_DIR="$2"
 			shift
 			;;
+		--rootfs=*|-r*)
+			ROOTFS_DIR="$(echo "$1" | sed 's/^-\(-rootfs=\|r\)//')"
+			assert_optarg '-r (--rootfs)' "$ROOTFS_DIR"
+			;;
+
 		-t|--tar)
 			assert_optarg "$@"
 			ROOTFS_TAR="$2"
 			shift
 			;;
+		--tar=*|-t*)
+			ROOTFS_TAR="$(echo "$1" | sed 's/^-\(-tar=\|t\)//')"
+			assert_optarg '-t (--tar)' "$ROOTFS_TAR"
+			;;
+
 		-l|--log)
 			assert_optarg "$@"
 			ROOTFS_LOG="$2"
 			shift
 			;;
+		--log=*|-l*)
+			ROOTFS_LOG="$(echo "$1" | sed 's/^-\(-log=\|l\)//')"
+			assert_optarg '-l (--log)' "$ROOTFS_LOG"
+			;;
+
 		-p|--packages)
 			assert_optarg "$@"
 			ROOTFS_PKG="$2"
 			shift
 			;;
+		--packages=*|-p*)
+			ROOTFS_PKG="$(echo "$1" | sed 's/^-\(-packages=\|p\)//')"
+			assert_optarg '-p (--packages)' "$ROOTFS_PKG"
+			;;
+
 		-c|--config)
 			assert_optarg "$@"
 			assert_filefound "$2"
 			MKROOTFS_CONF="$2"
 			shift
 			;;
+		--config=*|-c*)
+			MKROOTFS_CONF="$(echo "$1" | sed 's/^-\(-config=\|c\)//')"
+			assert_optarg '-c (--config)' "$MKROOTFS_CONF"
+			assert_filefound "$MKROOTFS_CONF"
+			;;
+
 		-x|--pkgmk-config)
 			assert_optarg "$@"
 			assert_filefound "$2"
 			ROOTFS_PKGMK_CONF="$2"
 			shift
 			;;
+		--pkgmk-config=*|-x*)
+			ROOTFS_PKGMK_CONF="$(echo "$1" | sed 's/^-\(-pkgmk-config=\|x\)//')"
+			assert_optarg '-x (--pkgmk-config)' "$ROOTFS_PKGMK_CONF"
+			assert_filefound "$ROOTFS_PKGMK_CONF"
+			;;
+
 		-y|--pkgman-config)
 			assert_optarg "$@"
 			assert_filefound "$2"
 			ROOTFS_PKGMAN_CONF="$2"
 			shift
 			;;
+		--pkgman-config=*|-y*)
+			ROOTFS_PKGMAN_CONF="$(echo "$1" | sed 's/^-\(-pkgman-config=\|y\)//')"
+			assert_optarg '-y (--pkgman-config)' "$ROOTFS_PKGMAN_CONF"
+			assert_filefound "$ROOTFS_PKGMAN_CONF"
+			;;
+
 		-v|--version)
 			echo "mkrootfs: @VERSION@"
 			exit 0
@@ -236,9 +274,11 @@ parse_options() {
 			print_help
 			exit 0
 			;;
+
 		rootfs|revdep|tar|sign)
 			MKROOTFS_ACTION="$1"
 			;;
+
 		*)
 			echo "mkrootfs: invalid option $1"
 			exit $E_GENERAL
