@@ -67,7 +67,7 @@ for more information.
 
 Create the rootfs directory, build and install packages:
 
-  $ sudo mkrootfs build
+  $ sudo mkrootfs rootfs
 
 In the end, you'll see the report of installed packages and the
 message that C<Install transaction done> in case of success.
@@ -87,7 +87,7 @@ their missing dependencies.  Exit code 2 will be returned in this case.
 
 Now, prepare the rootfs tarball.
 
-  $ sudo mkrootfs tarball
+  $ sudo mkrootfs tar
 
 This will compress root filesystem into the C<tar.xz> archive.
 
