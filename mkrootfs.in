@@ -92,7 +92,7 @@ build_rootfs() {
 check_rootfs_libs() {
 	info "Checking rootfs ($ROOTFS_DIR) for missing libraries ..."
 
-	if ! chroot "$ROOTFS_DIR" revdep -p; then
+	if ! chroot "$ROOTFS_DIR" revdep -P; then
 		error "rootfs has missing libraries"
 		exit $E_REVDEP
 	fi
