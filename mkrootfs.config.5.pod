@@ -1,0 +1,135 @@
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+mkrootfs.config - configuration file for mkrootfs
+
+=head1 SYNOPSIS
+
+B</etc/mkrootfs/config>
+
+=head1 DESCRIPTION
+
+This manual page describes the format of the
+L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>'s
+configuration file.
+
+mkrootfs configuration file is a list of environment variables.
+Each variable must be written in POSIX way, bashism not allowed.
+
+Example:
+
+  key=value
+
+If value contains spaces it must be quoted:
+
+  key="value1 value2"
+
+If value contains special symbols like C<$>, it must be escaped or
+quoted using single quotes:
+
+  key=\\$value
+  key='$value'
+
+If line exceeded maximum space on your display and you want to make it
+more readable, you can concatenate them:
+
+  key=value
+  key="${key}value"
+
+If you want to temporary undefine variable without actually deleting
+it, you can simply prepend C<#>:
+
+  #key=value
+
+=head1 GENERAL OPTIONS
+
+=head2 B<ROOTFS_DIR>="I<PATH>"
+
+Set directory for root filesystem.
+
+Default: C</tmp/rootfs-{DATE}-{ARCH}>, where C<{DATE}> is the output
+of C<date +%F>, and the C<{ARCH}> is the output of C<uname -m>
+commands.
+
+=head2 B<ROOTFS_TAR>="I<FILE>"
+
+Set filename for compressed root filesystem.
+
+Default: C<ROOTFS_DIR>.tar.xz
+
+=head2 B<ROOTFS_PKG>="I<PKG1> I<PKG2>..."
+
+Packages that will be extracted into the C<ROOTFS_DIR>.
+
+Default: all packages from core.
+
+=head2 B<ROOTFS_LOG>="I<FILE>"
+
+The log file for
+L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>'s invocations.
+
+Default: C<ROOTFS_DIR>.log
+
+=head2 B<ROOTFS_PKGMK_CONF>="I<FILE>"
+
+The configuration file for
+L<pkgmk(8)|https://zeppe-lin.github.io/pkgmk.8.html>'s invocations.
+
+Default: C</etc/pkgmk.conf>.
+
+=head2 B<ROOTFS_PKGMAN_CONF>="I<FILE>"
+
+The configuration file for
+L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>'s invocations.
+
+=head1 EXAMPLE
+
+  #
+  # /etc/mkrootfs/config: mkrootfs(8) configuration
+  #
+  # See mkrootfs.conf(5) for more information.
+  #
+
+  # path to the temporary directory for rootfs
+  ROOTFS_DIR="/tmp/rootfs-$(date +%F)-$(uname -m)"
+
+  # path to the compressed rootfs tarball
+  ROOTFS_TAR="$ROOTFS_DIR.tar.xz"
+
+  # log file for pkgman's invocations
+  ROOTFS_LOG="$ROOTFS_DIR.log"
+
+  # build and install all core packages into rootfs dir
+  ROOTFS_PKG="$(pkgman printf "%p %n\n" | awk '/core /{print $NF}')"
+
+  # configuration file for pkgmk's invocations
+  ROOTFS_PKGMK_CONF=/etc/pkgmk.conf
+
+  # configuration file for pkgman's invocations
+  ROOTFS_PKGMAN_CONF=/etc/pkgman.conf
+
+  # End of file.
+
+=head1 FILES
+
+=over 8
+
+=item F</etc/mkrootfs/config>
+
+Configuration file for
+L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>.
+
+=back
+
+=head1 SEE ALSO
+
+L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>,
+L<mkrootfs.release(7)|https://zeppe-lin.github.io/mkrootfs.release.7.html>
+
+=cut
+
+# vim:sw=2:ts=2:sts=2:et:tw=71:cc=72
+# End of file.

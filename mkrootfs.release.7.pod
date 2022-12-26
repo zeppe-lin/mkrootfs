@@ -1,0 +1,197 @@
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+mkrootfs.release - prepare release with mkrootfs
+
+=head1 DESCRIPTION
+
+This manual page describes the how to build zeppe-lin root filesystem
+tarball and prepare the release on github.
+
+=head2 CONFIGURATION
+
+By default, L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>
+uses F</etc/mkrootfs/config>, F</etc/pkgmk.conf> and
+F</etc/pkgman.conf> configuration files.
+These files (if you haven't edited them in your zeppe-lin installation)
+contain reasonable defaults and can be used to create a root
+filesystem with your current built system packages.
+
+If you changed configuration files mentioned above, for example
+changed C<CFLAGS> in F</etc/pkgmk.conf> from C<-march=x86_64> to
+C<-march=native>, but want to build rootfs for generic x86_64, then
+make a copy of F<pkgmk.conf> with your settings and tell
+L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html> to use it by
+using C<-x>/C<--pkgmk-config> command-line options:
+
+  $ sudo mkrootfs -x /etc/mkrootfs/pkgmk.conf ...
+
+You can also edit F</etc/mkrootfs/config> and place the following line:
+
+  ROOTFS_PKGMK_CONF=/etc/mkrootfs/pkgmk.conf
+
+Also, use the C<-y>/C<--pkgman-config> option if you want to use your
+custom F<pkgman.conf> file, or add the following line to default
+mkrootfs' configuration file:
+
+  ROOTFS_PKGMAN_CONF=/etc/mkrootfs/pkgman.conf
+
+By default, L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>
+builds the rootfs in the F</tmp/rootfs-{DATE}-{ARCH}> directory, and
+saves build+installation logs in F</tmp/rootfs-{DATE}-{ARCH}.log>.
+This can be changed by C<-r>/C<--rootfs> and C<-l>/C<--log>
+command-line options.  Also, default location can be changed by editing
+F</etc/mkrootfs/config> as showed above:
+
+  ROOTFS_DIR=...
+  ROOTFS_LOG=...
+
+Also, by default
+L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>
+builds and installs only I<core> packages.  This can be changed by
+C<-p>/C<--packages> command-line option or by declaring C<ROOTFS_PKG>
+variable in F</etc/mkrootfs/config>.
+
+See
+L<mkrootfs.config(5)|https://zeppe-lin.github.io/mkrootfs.config.5.html>
+for more information.
+
+=head2 MAKE TARBALL
+
+=over 2
+
+=item B<Create the root filesystem>
+
+Create the rootfs directory, build and install packages:
+
+  $ sudo mkrootfs build
+
+In the end, you'll see the report of installed packages and the
+message that C<Install transaction done> in case of success.
+Otherwise, exit code 1 will be returned.
+
+The next step is to check the rootfs for missing libraries of
+installed packages.
+
+=item B<Check for missing libraries>
+
+  $ sudo mkrootfs revdep
+
+In case there are some missing libraries, you'll see the packages and
+their missing dependencies.  Exit code 2 will be returned in this case.
+
+=item B<Compress root filesystem>
+
+Now, prepare the rootfs tarball.
+
+  $ sudo mkrootfs tarball
+
+This will compress root filesystem into the C<tar.xz> archive.
+
+=item B<Sign compressed root filesystem>
+
+You must sign the created tarball.
+
+  $ mkrootfs sign
+
+This command calls L<gpg(1)|https://www.mankier.com/1/gpg> with your
+default signing key.  It doesn't need to be called via
+L<sudo(8)|https://www.mankier.com/8/sudo> unless the C<root> owns the
+signing keys.
+
+As a result (if you haven't edited default settings), you have the
+following:
+
+=over 8
+
+=item F</tmp/rootfs-{DATE}-{ARCH}>
+
+This is a root filesystem directory.
+
+=item F</tmp/rootfs-{DATE}-{ARCH}.log>
+
+This is a build+installation log file for the prepared above rootfs
+directory.
+
+=item F</tmp/rootfs-{DATE}-{ARCH}.tar.xz>
+
+This is a rootfs tarball.
+
+=item F</tmp/rootfs-{DATE}-{ARCH}.tar.xz.sig>
+
+This is a rootfs tarball signature.
+
+=back
+
+=back
+
+=head2 PREPARE OFFICIAL RELEASE
+
+First, you need to prepare rootfs tarball as described above.  Next,
+create a tag in C<pkgsrc> repository (F</usr/src/pkgsrc>).
+Example:
+
+  cd /usr/src/pkgsrc
+
+  PREVTAG=$(git describe --tags --abbrev=0)
+  CURTAG=$(date +%F)
+
+  git tag -a $CURTAG -m $CURTAG
+  git push
+  git push --tags
+
+Secondly, go to zeppe-lin's C<pkgsrc> repository on the GitHub and
+press C<Draft a new release>
+(L<https://github.com/zeppe-lin/pkgsrc/release/new>).
+
+=over 8
+
+=item *
+
+Select B<Choose a tag> and select the tag you previously created.
+
+=item *
+
+Set B<Release title> the same as the tag.  To describe this release,
+prepare the git log for the rootfs tarball:
+
+  $ git log --oneline $PREVTAG..$CURTAG core/ |
+	      xclip -selection clipboard
+
+Next, paste the clipboard content into the C<Describe> section on
+GitHub.
+
+=item *
+
+Attach previously created rootfs tarball and it's signature.
+
+=item *
+
+Publish the release.
+
+=item *
+
+B<REMEMBER> to update the rootfs' URL in the C<Zeppe-Lin Handbook>
+(L<https://github.com/zeppe-lin/handbook>).
+
+Also, after that, regenerate the website:
+
+  $ cd /usr/src/zeppe-lin.github.io
+  $ make
+	$ make update
+	$ git push
+
+=back
+
+=head2 SEE ALSO
+
+L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>,
+L<mkrootfs.config(5)|https://zeppe-lin.github.io/mkrootfs.config.5.html>
+
+=cut
+
+<!-- vim:sw=2:ts=2:sts=2:tw=71:cc=72
+End of file. -->

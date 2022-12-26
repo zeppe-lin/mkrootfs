@@ -1,0 +1,329 @@
+#!/bin/sh
+
+######################################################################
+# error codes
+######################################################################
+
+readonly E_GENERAL=1
+readonly E_BUILD=2
+readonly E_REVDEP=3
+readonly E_TARBALL=4
+readonly E_SIGN=5
+
+######################################################################
+# notification helpers
+######################################################################
+
+info() {
+	echo "=======> $1"
+}
+
+warning() {
+	info "WARNING: $1" >&2
+}
+
+error() {
+	info "ERROR: $1" >&2
+}
+
+######################################################################
+# mkrootfs' routines
+######################################################################
+
+check_tarball() {
+	if [ ! -f "$ROOTFS_TAR" ]; then
+		error "$ROOTFS_TAR doesn't exists"
+		exit $E_GENERAL
+	fi
+}
+
+check_root_privs() {
+	if [ "$(id -u)" != 0 ]; then
+		error "$MKROOTFS_ACTION needs root privileges"
+		exit $E_GENERAL
+	fi
+}
+
+check_rootfs_dir() {
+	if [ ! -d "$ROOTFS_DIR" ]; then
+		error "$ROOTFS_DIR doesn't exists"
+		exit $E_GENERAL
+	fi
+}
+
+build_rootfs() {
+	info "prepare rootfs..."
+
+	if ! mkdir -p "$ROOTFS_DIR/var/lib/pkg"; then
+		error "can't create the pkgdb directory: $ROOTFS_DIR/var/lib/pkg"
+		exit $E_BUILD
+	fi
+
+	if ! touch "$ROOTFS_DIR/var/lib/pkg/db"; then
+		error "can't create the pkgdb file: $ROOTFS_DIR/var/lib/pkg/db"
+		exit $E_BUILD
+	fi
+
+	if ! touch "$ROOTFS_LOG"; then
+		error "can't create the pkgman's logfile: $ROOTFS_LOG"
+		exit $E_BUILD
+	fi
+
+	# (intentional)
+	# shellcheck disable=SC2086
+	if ! pkgman \
+		--root="$ROOTFS_DIR"                   \
+		--config="$ROOTFS_PKGMAN_CONF"         \
+		--config-append="writelog enabled"     \
+		--config-append="logfile $ROOTFS_LOG"  \
+		--config-append="logmode append"       \
+		--config-append="runscripts no"        \
+		install --force --deps --group -d      \
+		--margs="-cf $ROOTFS_PKGMK_CONF"       \
+		$ROOTFS_PKG;
+	then
+		error "can't build rootfs directory: $ROOTFS_DIR"
+		exit $E_BUILD
+	else
+		info "rootfs directory was created: $ROOTFS_DIR"
+	fi
+}
+
+check_rootfs_libs() {
+	info "check rootfs for missing libraries..."
+
+	if ! chroot "$ROOTFS_DIR" revdep -p; then
+		error "rootfs has missing libraries"
+		exit $E_REVDEP
+	fi
+}
+
+make_tarball() {
+	info "prepare rootfs tarball..."
+
+	(
+	if ! cd "$ROOTFS_DIR"; then
+		error "can't change the working directory to $ROOTFS_DIR"
+		exit $E_TARBALL
+	fi
+	if ! tar -cJf "$ROOTFS_TAR" .; then
+		error "can't create rootfs tarball"
+		exit $E_TARBALL
+	fi
+	sync
+	)
+
+	info "$ROOTFS_TAR was created"
+}
+
+make_tarball_signature() {
+	info "sign rootfs tarball..."
+
+	if ! gpg --output "$ROOTFS_TAR.sig" --detach-sig "$ROOTFS_TAR"; then
+		error "can't create signature for $ROOTFS_TAR"
+		exit $E_SIGN
+	else
+		info "$ROOTFS_TAR.sig was created"
+	fi
+}
+
+remove_rootfs_and_buildlog() {
+	info "cleaning rootfs directory and build log..."
+
+	rm -rf "$ROOTFS_DIR" "$ROOTFS_LOG"
+}
+
+remove_tarball_and_sig() {
+	info "cleaning rootfs tarball and signature"
+
+	rm -f "$ROOTFS_TAR" "$ROOTFS_TAR.sig"
+}
+
+######################################################################
+# main and main's helpers
+######################################################################
+
+print_help() {
+	cat <<EOF
+Usage: ${0##*/} [COMMAND] [OPTIONS]...
+Build customized root filesystem for chroot installation.
+
+COMMANDS:
+
+  build       prepare rootfs directory
+  revdep      check rootfs directory for missing libraries
+  tarball     compress rootfs directory (prepare tarball)
+  sign        sign prepared tarball
+  clean       remove rootfs directory and logfile
+  clean-all   remove rootfs directory, logfile, tarball and signature
+
+OPTIONS:
+
+  Mandatory arguments to long options are mandatory for short options too.
+
+  -r, --rootfs         PATH  set path to rootfs directory
+  -t, --tar            FILE  set path to compressed rootfs tarball
+  -l, --log            FILE  set pkgman's log output file
+  -p, --packages       LIST  set default packages list (space separated)
+  -c, --config         FILE  set path to config
+  -x, --pkgmk-config   FILE  set path to pkgmk's configuration file
+  -y, --pkgman-config  FILE  set path to pkgman's configuration file
+  -v, --version              print version and exit
+  -h, --help                 print help and exit
+EOF
+}
+
+assert_filefound() {
+	if [ ! "$1" ]; then
+		echo "mkrootfs: file $1 not found"
+		exit $E_GENERAL
+	fi
+}
+
+assert_optarg() {
+	if [ ! "$2" ]; then
+		echo "mkrootfs: option $1 requires an argument"
+		exit $E_GENERAL
+	fi
+}
+
+parse_options() {
+	while [ "$1" ]; do
+		case $1 in
+		-r|--rootfs)
+			assert_optarg "$@"
+			ROOTFS_DIR="$2"
+			shift
+			;;
+		-t|--tar)
+			assert_optarg "$@"
+			ROOTFS_TAR="$2"
+			shift
+			;;
+		-l|--log)
+			assert_optarg "$@"
+			ROOTFS_LOG="$2"
+			shift
+			;;
+		-p|--packages)
+			assert_optarg "$@"
+			ROOTFS_PKG="$2"
+			shift
+			;;
+		-c|--config)
+			assert_optarg "$@"
+			assert_filefound "$2"
+			MKROOTFS_CONF="$2"
+			shift
+			;;
+		-x|--pkgmk-config)
+			assert_optarg "$@"
+			assert_filefound "$2"
+			ROOTFS_PKGMK_CONF="$2"
+			shift
+			;;
+		-y|--pkgman-config)
+			assert_optarg "$@"
+			assert_filefound "$2"
+			ROOTFS_PKGMAN_CONF="$2"
+			shift
+			;;
+		-v|--version)
+			echo "mkrootfs: @VERSION@"
+			exit 0
+			;;
+		-h|--help)
+			print_help
+			exit 0
+			;;
+		build|revdep|tarball|sign|clean|clean-all)
+			MKROOTFS_ACTION="$1"
+			;;
+		*)
+			echo "mkrootfs: invalid option $1"
+			exit $E_GENERAL
+			;;
+		esac
+		shift
+	done
+}
+
+main() {
+	if [ ! -f "$MKROOTFS_CONF" ]; then
+		warning "configuration file not found, using defaults"
+	else
+		# shellcheck source="/etc/mkrootfs/config"
+		. "$MKROOTFS_CONF"
+		assert_filefound "$ROOTFS_PKGMK_CONF"
+		assert_filefound "$ROOTFS_PKGMAN_CONF"
+	fi
+
+	parse_options "$@"
+
+	case $MKROOTFS_ACTION in
+	build)
+		check_root_privs
+		build_rootfs
+		;;
+	revdep)
+		check_root_privs
+		check_rootfs_dir
+		check_rootfs_libs
+		;;
+	tarball)
+		check_root_privs
+		check_rootfs_dir
+		make_tarball
+		;;
+	sign)
+		check_tarball
+		make_tarball_signature
+		;;
+	clean)
+		check_root_privs
+		remove_rootfs_and_buildlog
+		;;
+	clean-all)
+		check_root_privs
+		remove_rootfs_and_buildlog
+		remove_tarball_and_sig
+		;;
+	esac
+}
+
+interrupted() {
+	echo ""
+	error "Interrupted."
+
+	case $MKROOTFS_ACTION in
+	build)
+		remove_rootfs_and_buildlog
+		;;
+	tarball)
+		remove_tarball_and_sig
+		;;
+	esac
+}
+
+trap "interrupted" HUP INT QUIT TERM
+
+######################################################################
+# default configuration
+######################################################################
+
+export LC_ALL=POSIX
+
+MKROOTFS_CONF=/etc/mkrootfs/config
+
+ROOTFS_DIR="${TMPDIR:-/tmp}/rootfs-$(date +%F)-$(uname -m)"
+ROOTFS_TAR="$ROOTFS_DIR.tar.xz"
+ROOTFS_LOG="$ROOTFS_DIR.log"
+ROOTFS_PKG="$(pkgman list --all --path | awk -F/ '/core\//{print $NF}')"
+
+ROOTFS_PKGMK_CONF=/etc/pkgmk.conf
+ROOTFS_PKGMAN_CONF=/etc/pkgman.conf
+
+main "$@"
+
+# vim:cc=72:tw=70
+# End of file.

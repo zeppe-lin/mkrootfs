@@ -1,0 +1,146 @@
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+mkrootfs - make root filesystem for chroot installation
+
+=head1 SYNOPSIS
+
+B<mkrootfs> [I<COMMAND>] [I<OPTIONS>]...
+
+=head1 DESCRIPTION
+
+mkrootfs builds customized root filesystem for chroot installation.
+
+=head2 COMMANDS
+
+=over 8
+
+=item B<build>
+
+Prepare rootfs directory.
+
+=item B<revdep>
+
+Check rootfs directory for missing libraries.
+
+=item B<tarball>
+
+Compress rootfs directory (prepare tarball).
+
+=item B<sign>
+
+Sign prepared tarball.
+
+=item B<clean>
+
+Remove rootfs directory and logfile.
+
+=item B<clean-all>
+
+Remove rootfs directory, logfile, tarball and signature.
+
+=back
+
+=head2 OPTIONS
+
+Mandatory arguments to long options are mandatory for short options too.
+
+=over 8
+
+=item B<-r>, B<--rootfs> I<PATH>
+
+Set path to rootfs directory.
+
+=item B<-t>, B<--tar> I<FILE>
+
+Set path to compressed rootfs tarball.
+
+=item B<-l>, B<--log> I<FILE>
+
+Set path to log file for L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>.
+
+=item B<-p>, B<--packages> "I<PKG1> I<PKG2>..."
+
+Set default packages to extract into the rootfs directory.
+
+=item B<-c>, B<--config> I<FILE>
+
+Use alternative configuration file (default is F</etc/mkrootfs/config>).
+
+=item B<-x>, B<--pkgmk-config> I<FILE>
+
+Use alternative L<pkgmk(8)|https://zeppe-lin.github.io/pkgmk.8.html>'s
+configuration file (default is F</etc/pkgmk.conf>).
+
+=item B<-y>, B<--pkgman-config> I<FILE>
+
+Use alternative
+L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>'s configuration
+file (default is F</etc/pkgman.conf>).
+
+=back
+
+=head1 FILES
+
+=over 8
+
+=item F</etc/mkrootfs/config>
+
+Global mkrootfs' configuration.  See
+L<mkrootfs.config(5)|https://zeppe-lin.github.io/mkrootfs.config.5>
+manual page for more information.
+
+=item F</etc/pkgmk.conf>
+
+Configuration file for invocated pkgmk.
+
+=item F</etc/pkgman.conf>
+
+Configuration file for invocated pkgman.
+
+=back
+
+=head1 EXIT STATUS
+
+=over 8
+
+=item "0"
+
+No error occurred.
+
+=item "1"
+
+A general error has occurred.
+
+=item "2"
+
+An error occurred during building rootfs directory.
+
+=item "3"
+
+An error occurred during checking rootfs directory for missing
+libraries.
+
+=item "4"
+
+An error occurred during compressing rootfs directory (preparing the
+tarball).
+
+=item "5"
+
+An error occurred during signing prepared tarball.
+
+=back
+
+=head1 SEE ALSO
+
+L<mkrootfs.config(5)|https://zeppe-lin.github.io/mkrootfs.config.5.html>,
+L<mkrootfs.release(7)|https://zeppe-lin.github.io/mkrootfs.release.7.html>
+
+=cut
+
+# vim:sw=2:ts=2:sts=2:et:tw=71:cc=72
+# End of file.
