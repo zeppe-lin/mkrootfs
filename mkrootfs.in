@@ -129,14 +129,14 @@ make_tarball_signature() {
 
 # XXX
 remove_rootfs_and_buildlog() {
-	info "cleaning rootfs directory and build log..."
+	info "removing rootfs directory and build log..."
 
 	rm -rf "$ROOTFS_DIR" "$ROOTFS_LOG"
 }
 
 # XXX
 remove_tarball_and_sig() {
-	info "cleaning rootfs tarball and signature"
+	info "removing rootfs tarball and signature"
 
 	rm -f "$ROOTFS_TAR" "$ROOTFS_TAR.sig"
 }
