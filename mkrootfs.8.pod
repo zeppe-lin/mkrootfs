@@ -83,7 +83,7 @@ file (default is F</etc/pkgman.conf>).
 
 Global mkrootfs' configuration.  See
 L<mkrootfs.config(5)|https://zeppe-lin.github.io/mkrootfs.config.5>
-manual page for more information.
+for more information.
 
 =item F</etc/pkgmk.conf>
 
