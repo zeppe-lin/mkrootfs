@@ -159,7 +159,7 @@ Set B<Release title> the same as the tag.  To describe this release,
 prepare the git log for the rootfs tarball:
 
   $ git log --oneline $PREVTAG..$CURTAG core/ |
-	      xclip -selection clipboard
+      xclip -selection clipboard
 
 Next, paste the clipboard content into the C<Describe> section on
 GitHub.
