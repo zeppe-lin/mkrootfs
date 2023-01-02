@@ -193,5 +193,5 @@ L<mkrootfs.config(5)|https://zeppe-lin.github.io/mkrootfs.config.5.html>
 
 =cut
 
-<!-- vim:sw=2:ts=2:sts=2:tw=71:cc=72
+<!-- vim:sw=2:ts=2:sts=2:et:cc=72:tw=70
 End of file. -->
