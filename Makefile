@@ -13,7 +13,9 @@ all:  mkrootfs mkrootfs.8 mkrootfs.config.5 mkrootfs.release.7
 		-n $(basename $@) -s $(subst .,,$(suffix $@)) $< > $@
 
 check:
+	@echo "=======> Check PODs for errors"
 	@podchecker *.pod
+	@echo "=======> Check URLs for non-200 response code"
 	@grep -Eiho "https?://[^\"\\'> ]+" *.* | httpx -silent -fc 200 -sc
 
 install: all
