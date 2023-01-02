@@ -181,8 +181,8 @@ Also, after that, regenerate the website:
 
   $ cd /usr/src/zeppe-lin.github.io
   $ make
-	$ make update
-	$ git push
+  $ make update
+  $ git push
 
 =back
 
