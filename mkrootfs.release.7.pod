@@ -99,8 +99,8 @@ You must sign the created tarball.
 
 This command calls L<gpg(1)|https://www.mankier.com/1/gpg> with your
 default signing key.  It doesn't need to be called via
-L<sudo(8)|https://www.mankier.com/8/sudo> unless the C<root> owns the
-signing keys.
+L<sudo(8)|https://www.mankier.com/8/sudo> or as C<root> unless the
+C<root> owns the signing keys.
 
 As a result (if you haven't edited default settings), you have the
 following:
