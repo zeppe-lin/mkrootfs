@@ -12,13 +12,13 @@ Build time:
 Runtime:
   * POSIX sh(1p) and "mandatory utilities"
   * pkgman(1) from [pkgman][1] distribution
-  - pkgmk(8) from [pkgmk][2] distribution
-  - tar(1)
-  - gnupg(1) is optional, used to sign rootfs tarball
+  * pkgmk(8) from [pkgmk][2] distribution
+  * tar(1)
+  * gnupg(1) is optional, used to sign rootfs tarball
 
 Tests:
-  - podchecker(1pm) from perl distribution to check PODs for errors
-  - httpx(1) to check URLs for non-200 response codes
+  * podchecker(1pm) from perl distribution to check PODs for errors
+  * httpx(1) to check URLs for non-200 response codes
 
 INSTALL
 -------
