@@ -6,7 +6,7 @@ VERSION = 0.2.1
 all:  mkrootfs mkrootfs.8 mkrootfs.config.5 mkrootfs.release.7
 
 %: %.in
-	sed "s/@VERSION@/${VERSION}/g" $^ > $@
+	sed "s/@VERSION@/${VERSION}/g" $< > $@
 
 %: %.pod
 	pod2man --nourls -r ${VERSION} -c ' ' \
