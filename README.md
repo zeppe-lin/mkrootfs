@@ -7,17 +7,17 @@ REQUIREMENTS
 ------------
 Build time:
   * POSIX sh(1p), make(1p) and "mandatory utilities"
-  * pod2man(1pm) from perl distribution to build man pages
+  * pod2man(1pm) to build man pages
 
 Runtime:
   * POSIX sh(1p) and "mandatory utilities"
-  * pkgman(1) from [pkgman][1] distribution
-  * pkgmk(8) from [pkgmk][2] distribution
+  * [pkgman(1)][1]
+  * [pkgmk(8)][2]
   * tar(1)
   * gnupg(1) is optional, used to sign rootfs tarball
 
 Tests:
-  * podchecker(1pm) from perl distribution to check PODs for errors
+  * podchecker(1pm) to check PODs for errors
   * curl(1) to check URLs for response codes
 
 INSTALL
