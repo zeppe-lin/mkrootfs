@@ -107,7 +107,7 @@ L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>'s invocations.
   ROOTFS_LOG="$ROOTFS_DIR.log"
 
   # build and install all core packages into rootfs dir
-  ROOTFS_PKG="$(pkgman printf "%p %n\n" | awk '/core /{print $NF}')"
+  ROOTFS_PKG="$(ls -1 /usr/src/pkgsrc/core)"
 
   # configuration file for pkgmk's invocations
   ROOTFS_PKGMK_CONF=/etc/pkgmk.conf
