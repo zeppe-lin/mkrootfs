@@ -24,11 +24,14 @@ install: all
 	mkdir -p ${DESTDIR}/usr/share/man/man5
 	mkdir -p ${DESTDIR}/usr/share/man/man7
 	mkdir -p ${DESTDIR}/usr/share/man/man8
-	cp -f mkrootfs ${DESTDIR}/usr/sbin/
-	chmod +x ${DESTDIR}/usr/sbin/mkrootfs
+	cp -f mkrootfs           ${DESTDIR}/usr/sbin/
 	cp -f mkrootfs.config.5  ${DESTDIR}/usr/share/man/man5/
 	cp -f mkrootfs.release.7 ${DESTDIR}/usr/share/man/man7/
 	cp -f mkrootfs.8         ${DESTDIR}/usr/share/man/man8/
+	chmod 0755 ${DESTDIR}/usr/sbin/mkrootfs
+	chmod 0644 ${DESTDIR}/usr/share/man/man5/mkrootfs.config.5
+	chmod 0644 ${DESTDIR}/usr/share/man/man7/mkrootfs.release.7
+	chmod 0644 ${DESTDIR}/usr/share/man/man8/mkrootfs.8
 
 uninstall:
 	rm -f ${DESTDIR}/usr/sbin/mkrootfs
