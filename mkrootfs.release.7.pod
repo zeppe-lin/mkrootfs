@@ -11,7 +11,7 @@ mkrootfs.release - prepare release with mkrootfs
 This manual page describes the how to build zeppe-lin root filesystem
 tarball and prepare the release on github.
 
-=head2 CONFIGURATION
+=head1 CONFIGURATION
 
 By default, L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>
 uses F</etc/mkrootfs/config>, F</etc/pkgmk.conf> and
@@ -59,7 +59,7 @@ See
 L<mkrootfs.config(5)|https://zeppe-lin.github.io/mkrootfs.config.5.html>
 for more information.
 
-=head2 MAKE TARBALL
+=head1 MAKE TARBALL
 
 =over 2
 
@@ -128,7 +128,7 @@ This is a rootfs tarball signature.
 
 =back
 
-=head2 PREPARE OFFICIAL RELEASE
+=head1 PREPARE OFFICIAL RELEASE
 
 First, you need to prepare rootfs tarball as described above.  Next,
 create a tag in C<pkgsrc> repository (F</usr/src/pkgsrc>).
@@ -186,7 +186,7 @@ Also, after that, regenerate the website:
 
 =back
 
-=head2 SEE ALSO
+=head1 SEE ALSO
 
 L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>,
 L<mkrootfs.config(5)|https://zeppe-lin.github.io/mkrootfs.config.5.html>
