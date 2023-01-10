@@ -69,7 +69,7 @@ build_rootfs() {
 		exit $E_BUILD
 	fi
 
-	# (intentional)
+	# Intentional.
 	# shellcheck disable=SC2086
 	if ! pkgman \
 		--root="$ROOTFS_DIR"                   \
