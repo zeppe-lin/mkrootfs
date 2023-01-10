@@ -46,7 +46,9 @@ it, you can simply prepend C<#>:
 
 =head1 GENERAL OPTIONS
 
-=head2 B<ROOTFS_DIR>="I<PATH>"
+=over 8
+
+=item B<ROOTFS_DIR>="I<PATH>"
 
 Set directory for root filesystem.
 
@@ -54,36 +56,38 @@ Default: C</tmp/rootfs-{DATE}-{ARCH}>, where C<{DATE}> is the output
 of C<date +%F>, and the C<{ARCH}> is the output of C<uname -m>
 commands.
 
-=head2 B<ROOTFS_TAR>="I<FILE>"
+=item B<ROOTFS_TAR>="I<FILE>"
 
 Set filename for compressed root filesystem.
 
 Default: C<ROOTFS_DIR>.tar.xz
 
-=head2 B<ROOTFS_PKG>="I<PKG1> I<PKG2>..."
+=item B<ROOTFS_PKG>="I<PKG1> I<PKG2>..."
 
 Packages that will be extracted into the C<ROOTFS_DIR>.
 
 Default: all packages from core.
 
-=head2 B<ROOTFS_LOG>="I<FILE>"
+=item B<ROOTFS_LOG>="I<FILE>"
 
 The log file for
 L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>'s invocations.
 
 Default: C<ROOTFS_DIR>.log
 
-=head2 B<ROOTFS_PKGMK_CONF>="I<FILE>"
+=item B<ROOTFS_PKGMK_CONF>="I<FILE>"
 
 The configuration file for
 L<pkgmk(8)|https://zeppe-lin.github.io/pkgmk.8.html>'s invocations.
 
 Default: C</etc/pkgmk.conf>.
 
-=head2 B<ROOTFS_PKGMAN_CONF>="I<FILE>"
+=item B<ROOTFS_PKGMAN_CONF>="I<FILE>"
 
 The configuration file for
 L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>'s invocations.
+
+=back
 
 =head1 EXAMPLE
 
