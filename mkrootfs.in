@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ######################################################################
-# error codes
+# error codes                                                        #
 ######################################################################
 
 readonly E_GENERAL=1
@@ -11,7 +11,7 @@ readonly E_TARBALL=4
 readonly E_SIGN=5
 
 ######################################################################
-# notification helpers
+# notification helpers                                               #
 ######################################################################
 
 info() {
@@ -27,7 +27,7 @@ error() {
 }
 
 ######################################################################
-# mkrootfs' routines
+# mkrootfs' routines                                                 #
 ######################################################################
 
 check_tarball() {
@@ -142,7 +142,7 @@ remove_tarball_and_sig() {
 }
 
 ######################################################################
-# main and main's helpers
+# main and main's helpers                                            #
 ######################################################################
 
 print_help() {
@@ -339,18 +339,16 @@ interrupted() {
 trap "interrupted" HUP INT QUIT TERM
 
 ######################################################################
-# default configuration
+# default configuration                                              #
 ######################################################################
 
 export LC_ALL=POSIX
 
 MKROOTFS_CONF=/etc/mkrootfs/config
-
 ROOTFS_DIR="${TMPDIR:-/tmp}/rootfs-$(date +%F)-$(uname -m)"
 ROOTFS_TAR="$ROOTFS_DIR.tar.xz"
 ROOTFS_LOG="$ROOTFS_DIR.log"
 ROOTFS_PKG="$(pkgman list --all --path | awk -F/ '/core\//{print $NF}')"
-
 ROOTFS_PKGMK_CONF=/etc/pkgmk.conf
 ROOTFS_PKGMAN_CONF=/etc/pkgman.conf
 
