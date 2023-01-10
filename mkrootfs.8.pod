@@ -12,9 +12,9 @@ B<mkrootfs> [I<COMMAND>] [I<OPTIONS>]...
 
 =head1 DESCRIPTION
 
-mkrootfs builds customized root filesystem for chroot installation.
+B<mkrootfs> builds customized root filesystem for chroot installation.
 
-=head2 COMMANDS
+=head1 COMMANDS
 
 =over 8
 
@@ -36,7 +36,7 @@ Sign prepared tarball.
 
 =back
 
-=head2 OPTIONS
+=head1 OPTIONS
 
 Mandatory arguments to long options are mandatory for short options too.
 
@@ -52,7 +52,8 @@ Set path to compressed rootfs tarball.
 
 =item B<-l>, B<--log>=I<FILE>
 
-Set path to log file for L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>.
+Set path to log file for
+L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>.
 
 =item B<-p>, B<--packages>="I<PKG1> I<PKG2>..."
 
