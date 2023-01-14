@@ -1,8 +1,5 @@
 .POSIX:
 
-# mkrootfs version
-VERSION = 1.0.0
-
 all:  mkrootfs mkrootfs.8 mkrootfs.config.5 mkrootfs.release.7
 
 %: %.in
