@@ -1,5 +1,7 @@
 .POSIX:
 
+include config.mk
+
 all:  mkrootfs mkrootfs.8 mkrootfs.config.5 mkrootfs.release.7
 
 %: %.in
