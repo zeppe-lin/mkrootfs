@@ -1,7 +1,7 @@
 ABOUT
 -----
-This directory contains *mkrootfs*, an utility that makes root
-filesystem of Zeppe-Lin distribution for chroot installation.
+This directory contains _mkrootfs_, an utility that makes root
+filesystem of _Zeppe-Lin_ distribution for chroot installation.
 
 REQUIREMENTS
 ------------
@@ -11,8 +11,7 @@ Build time:
 
 Runtime:
   * POSIX sh(1p) and "mandatory utilities"
-  * [pkgman(1)][1]
-  * [pkgmk(8)][2]
+  * [pkgman][1] and [pkgmk][2]
   * tar(1)
   * gnupg(1) is optional, used to sign rootfs tarball
 
@@ -29,15 +28,13 @@ The shell command `make check` should start some tests.
 
 LICENSE
 -------
-*mkrootfs* is licensed through the GNU General Public License v3 or
+_mkrootfs_ is licensed through the GNU General Public License v3 or
 later <http://gnu.org/licenses/gpl.html>.
-Read the *COPYING* file for copying conditions.
-Read the *COPYRIGHT* file for copyright notices.
+Read the _COPYING_ file for copying conditions.
+Read the _COPYRIGHT_ file for copyright notices.
 
-<!--------------------------- LINKS --------------------------------->
 [1]: https://github.com/zeppe-lin/pkgman
 [2]: https://github.com/zeppe-lin/pkgmk
-<!------------------------------------------------------------------->
 
 <!-- vim:sw=2:ts=2:sts=2:et:cc=72:tw=70
 End of file. -->
