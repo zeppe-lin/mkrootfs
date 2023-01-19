@@ -190,14 +190,15 @@ assert_optarg() {
 parse_options() {
 	while [ "$1" ]; do
 		case $1 in
+
 		-r|--rootfs)
 			assert_optarg "$@"
 			ROOTFS_DIR="$2"
 			shift
 			;;
-		--rootfs=*|-r*)
+		-r*|--rootfs=*)
 			ROOTFS_DIR="$(echo "$1" | sed 's/^-\(-rootfs=\|r\)//')"
-			assert_optarg '-r (--rootfs)' "$ROOTFS_DIR"
+			assert_optarg '-r/--rootfs' "$ROOTFS_DIR"
 			;;
 
 		-t|--tar)
@@ -205,9 +206,9 @@ parse_options() {
 			ROOTFS_TAR="$2"
 			shift
 			;;
-		--tar=*|-t*)
+		-t*|--tar=*)
 			ROOTFS_TAR="$(echo "$1" | sed 's/^-\(-tar=\|t\)//')"
-			assert_optarg '-t (--tar)' "$ROOTFS_TAR"
+			assert_optarg '-t/--tar' "$ROOTFS_TAR"
 			;;
 
 		-l|--log)
@@ -215,9 +216,9 @@ parse_options() {
 			ROOTFS_LOG="$2"
 			shift
 			;;
-		--log=*|-l*)
+		-l*|--log=*)
 			ROOTFS_LOG="$(echo "$1" | sed 's/^-\(-log=\|l\)//')"
-			assert_optarg '-l (--log)' "$ROOTFS_LOG"
+			assert_optarg '-l/--log' "$ROOTFS_LOG"
 			;;
 
 		-p|--packages)
@@ -225,9 +226,9 @@ parse_options() {
 			ROOTFS_PKG="$2"
 			shift
 			;;
-		--packages=*|-p*)
+		-p*|--packages=*)
 			ROOTFS_PKG="$(echo "$1" | sed 's/^-\(-packages=\|p\)//')"
-			assert_optarg '-p (--packages)' "$ROOTFS_PKG"
+			assert_optarg '-p/--packages' "$ROOTFS_PKG"
 			;;
 
 		-c|--config)
@@ -236,9 +237,9 @@ parse_options() {
 			MKROOTFS_CONF="$2"
 			shift
 			;;
-		--config=*|-c*)
+		-c*|--config=*)
 			MKROOTFS_CONF="$(echo "$1" | sed 's/^-\(-config=\|c\)//')"
-			assert_optarg '-c (--config)' "$MKROOTFS_CONF"
+			assert_optarg '-c/--config' "$MKROOTFS_CONF"
 			assert_filefound "$MKROOTFS_CONF"
 			;;
 
@@ -248,9 +249,9 @@ parse_options() {
 			ROOTFS_PKGMK_CONF="$2"
 			shift
 			;;
-		--pkgmk-config=*|-x*)
+		-x*|--pkgmk-config=*)
 			ROOTFS_PKGMK_CONF="$(echo "$1" | sed 's/^-\(-pkgmk-config=\|x\)//')"
-			assert_optarg '-x (--pkgmk-config)' "$ROOTFS_PKGMK_CONF"
+			assert_optarg '-x/--pkgmk-config' "$ROOTFS_PKGMK_CONF"
 			assert_filefound "$ROOTFS_PKGMK_CONF"
 			;;
 
@@ -260,9 +261,9 @@ parse_options() {
 			ROOTFS_PKGMAN_CONF="$2"
 			shift
 			;;
-		--pkgman-config=*|-y*)
+		-y*|--pkgman-config=*)
 			ROOTFS_PKGMAN_CONF="$(echo "$1" | sed 's/^-\(-pkgman-config=\|y\)//')"
-			assert_optarg '-y (--pkgman-config)' "$ROOTFS_PKGMAN_CONF"
+			assert_optarg '-y/--pkgman-config' "$ROOTFS_PKGMAN_CONF"
 			assert_filefound "$ROOTFS_PKGMAN_CONF"
 			;;
 
