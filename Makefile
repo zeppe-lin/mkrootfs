@@ -41,4 +41,4 @@ uninstall:
 clean:
 	rm -f mkrootfs mkrootfs.config.5 mkrootfs.release.7 mkrootfs.8
 
-.PHONY: all install uninstall clean
+.PHONY: all check install uninstall clean
