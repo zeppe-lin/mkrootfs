@@ -1,0 +1,39 @@
+ABOUT mkrootfs
+
+	This directory contains mkrootfs, an utility that makes root
+	filesystem of Zeppe-Lin distribution for chroot installation.
+
+REQUIREMENTS
+
+	Build time:
+
+		* POSIX sh(1p), make(1p) and "mandatory utilities"
+		* pod2man(1pm) to build man pages
+
+	Runtime:
+
+		* POSIX sh(1p) and "mandatory utilities"
+		* pkgmk and pkgman
+		* tar(1)
+		* gnupg(1) is optional, used to sign rootfs tarball
+
+	Tests:
+
+		* podchecker(1pm) to check PODs for errors
+		* curl(1) to check URLs for response codes
+
+INSTALL
+
+	The shell commands "make && make install" should build and install
+	this package.
+
+	The shell command "make check" should start some tests.
+
+LICENSE
+
+	mkrootfs is licensed through the GNU General Public License v3 or
+	later <http://gnu.org/licenses/gpl.html>.
+	Read the COPYING file for copying conditions.
+	Read the COPYRIGHT file for copyright notices.
+
+End of file.
