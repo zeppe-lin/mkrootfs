@@ -8,7 +8,7 @@ all:  mkrootfs mkrootfs.8 mkrootfs.config.5 mkrootfs.release.7
 	sed "s/@VERSION@/${VERSION}/g" $< > $@
 
 %: %.pod
-	pod2man --nourls -r ${VERSION} -c ' ' \
+	pod2man --nourls -r "mkrootfs ${VERSION}" -c ' ' \
 		-n $(basename $@) -s $(subst .,,$(suffix $@)) $< > $@
 
 check:
