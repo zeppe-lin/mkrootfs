@@ -16,7 +16,7 @@ This manual page describes the format of the
 L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>'s
 configuration file.
 
-mkrootfs configuration file is a list of environment variables.
+B<mkrootfs> configuration file is a list of environment variables.
 Each variable must be written in POSIX way, bashism not allowed.
 
 Example:
