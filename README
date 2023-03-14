@@ -13,7 +13,7 @@ REQUIREMENTS
 	Runtime:
 
 		* POSIX sh(1p) and "mandatory utilities"
-		* pkgmk and pkgman
+		* pkgmk, pkgutils and pkgman
 		* tar(1)
 		* gnupg(1) is optional, used to sign rootfs tarball
 
