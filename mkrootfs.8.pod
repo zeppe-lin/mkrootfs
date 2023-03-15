@@ -63,14 +63,14 @@ Set default packages to extract into the rootfs directory.
 
 Use alternative configuration file.
 
-Default is F</etc/mkrootfs/config>.
+Default: F</etc/mkrootfs/config>.
 
 =item B<-x>, B<--pkgmk-config>=I<FILE>
 
 Use alternative L<pkgmk(8)|https://zeppe-lin.github.io/pkgmk.8.html>'s
 configuration file.
 
-Default is F</etc/pkgmk.conf>.
+Default: F</etc/pkgmk.conf>.
 
 =item B<-y>, B<--pkgman-config>=I<FILE>
 
@@ -78,7 +78,7 @@ Use alternative
 L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>'s configuration
 file.
 
-Default is F</etc/pkgman.conf>.
+Default: F</etc/pkgman.conf>.
 
 =back
 
