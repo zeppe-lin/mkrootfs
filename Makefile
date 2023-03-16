@@ -13,8 +13,8 @@ all:  ${BIN8} ${MAN5} ${MAN7} ${MAN8}
 	sed "s/@VERSION@/${VERSION}/g" $< > $@
 
 %: %.pod
-	pod2man --nourls -r "${NAME} ${VERSION}" -c ' ' \
-		-n $(basename $@) -s $(subst .,,$(suffix $@)) $< > $@
+	pod2man -r "${NAME} ${VERSION}" -c ' ' -n $(basename $@) \
+		-s $(subst .,,$(suffix $@)) $< > $@
 
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/sbin
