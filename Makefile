@@ -16,13 +16,11 @@ all:  ${BIN8} ${MAN5} ${MAN7} ${MAN8}
 	pod2man --nourls -r "${NAME} ${VERSION}" -c ' ' \
 		-n $(basename $@) -s $(subst .,,$(suffix $@)) $< > $@
 
-install-dirs:
+install: all
 	mkdir -p ${DESTDIR}${PREFIX}/sbin
 	mkdir -p ${DESTDIR}${MANPREFIX}/man5
 	mkdir -p ${DESTDIR}${MANPREFIX}/man7
 	mkdir -p ${DESTDIR}${MANPREFIX}/man8
-
-install: all install-dirs
 	cp -f ${BIN8} ${DESTDIR}${PREFIX}/sbin/
 	cp -f ${MAN5} ${DESTDIR}${MANPREFIX}/man5/
 	cp -f ${MAN7} ${DESTDIR}${MANPREFIX}/man7/
@@ -41,4 +39,4 @@ uninstall:
 clean:
 	rm -f ${BIN8} ${MAN5} ${MAN7} ${MAN8}
 
-.PHONY: all install-dirs install uninstall clean
+.PHONY: all install uninstall clean
