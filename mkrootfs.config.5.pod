@@ -12,8 +12,7 @@ B</etc/mkrootfs/config>
 
 =head1 DESCRIPTION
 
-This manual page describes the format of the
-L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>'s
+This manual page describes the format of the L<mkrootfs(8)>'s
 configuration file.
 
 B<mkrootfs> configuration file is a list of environment variables.
@@ -70,22 +69,19 @@ Default: all packages from core.
 
 =item B<ROOTFS_LOG>="I<FILE>"
 
-The log file for
-L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>'s invocations.
+The log file for L<pkgman(1)>'s invocations.
 
 Default: C<ROOTFS_DIR>.log
 
 =item B<ROOTFS_PKGMK_CONF>="I<FILE>"
 
-The configuration file for
-L<pkgmk(8)|https://zeppe-lin.github.io/pkgmk.8.html>'s invocations.
+The configuration file for L<pkgmk(8)>'s invocations.
 
 Default: C</etc/pkgmk.conf>.
 
 =item B<ROOTFS_PKGMAN_CONF>="I<FILE>"
 
-The configuration file for
-L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>'s invocations.
+The configuration file for L<pkgman(1)>'s invocations.
 
 =back
 
@@ -123,15 +119,13 @@ L<pkgman(1)|https://zeppe-lin.github.io/pkgman.1.html>'s invocations.
 
 =item F</etc/mkrootfs/config>
 
-Configuration file for
-L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>.
+Configuration file for L<mkrootfs(8)>.
 
 =back
 
 =head1 SEE ALSO
 
-L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>,
-L<mkrootfs.release(7)|https://zeppe-lin.github.io/mkrootfs.release.7.html>
+L<mkrootfs(8)>, L<mkrootfs.release(7)>
 
 =cut
 

@@ -13,10 +13,9 @@ tarball and prepare the release on github.
 
 =head1 CONFIGURATION
 
-By default, L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>
-uses F</etc/mkrootfs/config>, F</etc/pkgmk.conf> and
-F</etc/pkgman.conf> configuration files.
-These files (if you haven't edited them in your zeppe-lin installation)
+By default, L<mkrootfs(8)> uses F</etc/mkrootfs/config>,
+F</etc/pkgmk.conf> and F</etc/pkgman.conf> configuration files.  These
+files (if you haven't edited them in your zeppe-lin installation)
 contain reasonable defaults and can be used to create a root
 filesystem with your current built system packages.
 
@@ -24,8 +23,8 @@ If you changed configuration files mentioned above, for example
 changed C<CFLAGS> in F</etc/pkgmk.conf> from C<-march=x86_64> to
 C<-march=native>, but want to build rootfs for generic x86_64, then
 make a copy of F<pkgmk.conf> with your settings and tell
-L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html> to use it by
-using C<-x>/C<--pkgmk-config> command-line options:
+L<mkrootfs(8)> to use it by using C<-x>/C<--pkgmk-config> command-line
+options:
 
   $ sudo mkrootfs -x /etc/mkrootfs/pkgmk.conf ...
 
@@ -39,25 +38,22 @@ mkrootfs' configuration file:
 
   ROOTFS_PKGMAN_CONF=/etc/mkrootfs/pkgman.conf
 
-By default, L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>
-builds the rootfs in the F</tmp/rootfs-{DATE}-{ARCH}> directory, and
-saves build+installation logs in F</tmp/rootfs-{DATE}-{ARCH}.log>.
-This can be changed by C<-r>/C<--rootfs> and C<-l>/C<--log>
-command-line options.  Also, default location can be changed by editing
-F</etc/mkrootfs/config> as showed above:
+By default, L<mkrootfs(8)> builds the rootfs in the
+F</tmp/rootfs-{DATE}-{ARCH}> directory, and saves build+installation
+logs in F</tmp/rootfs-{DATE}-{ARCH}.log>.  This can be changed by
+C<-r>/C<--rootfs> and C<-l>/C<--log> command-line options.  Also,
+default location can be changed by editing F</etc/mkrootfs/config> as
+showed above:
 
   ROOTFS_DIR=...
   ROOTFS_LOG=...
 
-Also, by default
-L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>
-builds and installs only I<core> packages.  This can be changed by
-C<-p>/C<--packages> command-line option or by declaring C<ROOTFS_PKG>
-variable in F</etc/mkrootfs/config>.
+Also, by default L<mkrootfs(8)> builds and installs only I<core>
+packages.  This can be changed by C<-p>/C<--packages> command-line
+option or by declaring C<ROOTFS_PKG> variable in
+F</etc/mkrootfs/config>.
 
-See
-L<mkrootfs.config(5)|https://zeppe-lin.github.io/mkrootfs.config.5.html>
-for more information.
+See L<mkrootfs.config(5)> for more information.
 
 =head1 MAKE TARBALL
 
@@ -97,9 +93,8 @@ You must sign the created tarball.
 
   $ mkrootfs sign
 
-This command calls L<gpg(1)|https://www.mankier.com/1/gpg> with your
-default signing key.  It doesn't need to be called via
-L<sudo(8)|https://www.mankier.com/8/sudo> or as C<root> unless the
+This command calls L<gpg(1)> with your default signing key.  It
+doesn't need to be called via L<sudo(8)> or as C<root> unless the
 C<root> owns the signing keys.
 
 As a result (if you haven't edited default settings), you have the
@@ -188,10 +183,9 @@ Also, after that, regenerate the website:
 
 =head1 SEE ALSO
 
-L<mkrootfs(8)|https://zeppe-lin.github.io/mkrootfs.8.html>,
-L<mkrootfs.config(5)|https://zeppe-lin.github.io/mkrootfs.config.5.html>
+L<mkrootfs(8)>, L<mkrootfs.config(5)>
 
 =cut
 
-<!-- vim:sw=2:ts=2:sts=2:et:cc=72:tw=70
-End of file. -->
+# vim:sw=2:ts=2:sts=2:et:cc=72:tw=70
+# End of file.

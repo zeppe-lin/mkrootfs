@@ -11,15 +11,6 @@ all:  mkrootfs mkrootfs.8 mkrootfs.config.5 mkrootfs.release.7
 	pod2man --nourls -r "mkrootfs ${VERSION}" -c ' ' \
 		-n $(basename $@) -s $(subst .,,$(suffix $@)) $< > $@
 
-check:
-	@echo "=======> Check PODs for errors"
-	@podchecker *.pod
-	@echo "=======> Check URLs for response code"
-	@grep -Eiho "https?://[^\"\\'> ]+" *.*       \
-		| xargs -P10 -I{} curl -o /dev/null  \
-		  -sw "[%{http_code}] %{url}\n" '{}' \
-		| sort -u
-
 install-dirs:
 	mkdir -p ${DESTDIR}${PREFIX}/sbin
 	mkdir -p ${DESTDIR}${MANPREFIX}/man5
@@ -45,4 +36,4 @@ uninstall:
 clean:
 	rm -f mkrootfs mkrootfs.config.5 mkrootfs.release.7 mkrootfs.8
 
-.PHONY: all check install uninstall clean
+.PHONY: all install-dirs install uninstall clean
