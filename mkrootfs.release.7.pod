@@ -175,7 +175,7 @@ B<REMEMBER> to update the rootfs' URL in the C<Zeppe-Lin Handbook>
 Also, after that, regenerate the website:
 
   $ cd /usr/src/zeppe-lin.github.io
-  $ make
+  $ make -j$(nproc)
   $ make update
   $ git push
 
