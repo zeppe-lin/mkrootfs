@@ -13,8 +13,10 @@ REQUIREMENTS
 	Runtime:
 
 		* POSIX sh(1p) and "mandatory utilities"
-		* pkgmk, pkgutils and pkgman
-		* tar(1)
+		* pkgmk to build packages
+		* pkgutils to install packages
+		* pkgman to orchestrate package building and installation
+		* tar(1) to prepare the rootfs tarball
 		* gnupg(1) is optional, used to sign rootfs tarball
 
 INSTALL
