@@ -8,14 +8,14 @@ mkrootfs.release - prepare release with mkrootfs
 
 =head1 DESCRIPTION
 
-This manual page describes the how to build zeppe-lin root filesystem
-tarball and prepare the release on github.
+This manual page describes the how to build Zeppe-Lin root filesystem
+tarball and prepare the release on GitHub.
 
 =head1 CONFIGURATION
 
 By default, L<mkrootfs(8)> uses F</etc/mkrootfs/config>,
 F</etc/pkgmk.conf> and F</etc/pkgman.conf> configuration files.  These
-files (if you haven't edited them in your zeppe-lin installation)
+files (if you haven't edited them in your Zeppe-Lin installation)
 contain reasonable defaults and can be used to create a root
 filesystem with your current built system packages.
 
@@ -138,7 +138,7 @@ Example:
   git push
   git push --tags
 
-Secondly, go to zeppe-lin's C<pkgsrc> repository on the GitHub and
+Secondly, go to Zeppe-Lin's C<pkgsrc> repository on the GitHub and
 press C<Draft a new release>
 (L<https://github.com/zeppe-lin/pkgsrc/release/new>).
 
