@@ -101,29 +101,29 @@ Configuration file for invocated pkgman.
 
 =over 8
 
-=item "0"
+=item C<0>
 
 No error occurred.
 
-=item "1"
+=item C<1>
 
 A general error has occurred.
 
-=item "2"
+=item C<2>
 
 An error occurred during building rootfs directory.
 
-=item "3"
+=item C<3>
 
 An error occurred during checking rootfs directory for missing
 libraries.
 
-=item "4"
+=item C<4>
 
 An error occurred during compressing rootfs directory (preparing the
 tarball).
 
-=item "5"
+=item C<5>
 
 An error occurred during signing prepared tarball.
 
