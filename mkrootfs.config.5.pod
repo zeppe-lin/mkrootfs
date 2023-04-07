@@ -103,7 +103,7 @@ The configuration file for L<pkgman(1)>'s invocations.
   ROOTFS_LOG="$ROOTFS_DIR.log"
 
   # build and install all core packages into rootfs dir
-  ROOTFS_PKG="$(ls -1 /usr/src/pkgsrc/core)"
+  ROOTFS_PKG="$(ls -1 /usr/src/pkgsrc-core)"
 
   # configuration file for pkgmk's invocations
   ROOTFS_PKGMK_CONF=/etc/pkgmk.conf
