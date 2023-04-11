@@ -349,7 +349,8 @@ MKROOTFS_CONF=/etc/mkrootfs/config
 ROOTFS_DIR="${TMPDIR:-/tmp}/rootfs-$(date +%F)-$(uname -m)"
 ROOTFS_TAR="$ROOTFS_DIR.tar.xz"
 ROOTFS_LOG="$ROOTFS_DIR.log"
-ROOTFS_PKG="$(ls -1 /usr/src/pkgsrc-core)"
+ROOTFS_PKG="$(pkgman --no-std-config \
+	--config-set="pkgsrcdir /usr/src/pkgsrc-core" printf %n\\n)"
 ROOTFS_PKGMK_CONF=/etc/pkgmk.conf
 ROOTFS_PKGMAN_CONF=/etc/pkgman.conf
 
