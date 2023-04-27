@@ -1,24 +1,49 @@
-name: Makefile CI
-
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+name: GitHub CI
+on: [push, pull_request, create]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Install shellcheck
-      run: sudo apt-get install -y shellcheck
+      - name: IRC Push Notification
+        uses: Gottox/irc-message-action@v2
+        if: github.event_name == 'push'
+        with:
+          channel: '#zeppe-lin'
+          nickname: zeppbot
+          message: |-
+            ${{ github.actor }} pushed ${{ github.event.ref }} ${{ github.event.compare }}
+            ${{ join(github.event.commits.*.message, ', ') }}
+            https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
 
-    - name: Check mkrootfs script for errors
-      run: shellcheck -s sh mkrootfs.in
+      - name: IRC Pull Request Notification
+        uses: Gottox/irc-message-action@v2
+        if: github.event_name == 'pull_request'
+        with:
+          channel: '#zeppe-lin'
+          nickname: zeppbot
+          message: |-
+            ${{ github.actor }} opened PR ${{ github.event.pull_request.html_url }}
 
-    - name: Check PODs for errors
-      run: podchecker *.pod
+      - name: IRC Tag Created Notification
+        uses: Gottox/irc-message-action@v2
+        if: github.event_name == 'create' && github.event.ref_type == 'tag'
+        with:
+          channel: '#zeppe-lin'
+          nickname: zeppbot
+          message: |-
+            ${{ github.actor }} tagged ${{ github.repository }} ${{ github.event.ref }}
+
+      - name: Install shellcheck
+        run: sudo apt-get install -y shellcheck
+
+      - name: Check mkrootfs script for errors
+        run: shellcheck -s sh mkrootfs.in
+
+      - name: Check PODs for errors
+        run: podchecker *.pod
+
+# End of file.
