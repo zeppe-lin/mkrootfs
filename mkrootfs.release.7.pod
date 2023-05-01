@@ -129,14 +129,12 @@ First, you need to prepare rootfs tarball as described above.  Next,
 create a tag in C<pkgsrc-core> repository (F</usr/src/pkgsrc-core>).
 Example:
 
-  cd /usr/src/pkgsrc-core
-
-  PREVTAG=$(git describe --tags --abbrev=0)
-  CURTAG=$(date +%F)
-
-  git tag -a $CURTAG -m $CURTAG
-  git push
-  git push --tags
+  $ cd /usr/src/pkgsrc-core
+  $ PREVTAG=$(git describe --tags --abbrev=0)
+  $ CURTAG=$(date +%F)
+  $ git tag -a $CURTAG -m $CURTAG
+  $ git push
+  $ git push --tags
 
 Secondly, go to Zeppe-Lin's C<pkgsrc-core> repository on the GitHub
 and press C<Draft a new release>
