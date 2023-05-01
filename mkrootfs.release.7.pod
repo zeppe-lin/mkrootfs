@@ -140,7 +140,7 @@ Secondly, go to Zeppe-Lin's C<pkgsrc-core> repository on the GitHub
 and press C<Draft a new release>
 (L<https://github.com/zeppe-lin/pkgsrc-core/release/new>).
 
-=over 8
+=over 2
 
 =item *
 
