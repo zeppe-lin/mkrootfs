@@ -126,10 +126,10 @@ This is a rootfs tarball signature.
 =head1 PREPARE OFFICIAL RELEASE
 
 First, you need to prepare rootfs tarball as described above.  Next,
-create a tag in C<pkgsrc> repository (F</usr/src/pkgsrc>).
+create a tag in C<pkgsrc-core> repository (F</usr/src/pkgsrc-core>).
 Example:
 
-  cd /usr/src/pkgsrc
+  cd /usr/src/pkgsrc-core
 
   PREVTAG=$(git describe --tags --abbrev=0)
   CURTAG=$(date +%F)
@@ -138,9 +138,9 @@ Example:
   git push
   git push --tags
 
-Secondly, go to Zeppe-Lin's C<pkgsrc> repository on the GitHub and
-press C<Draft a new release>
-(L<https://github.com/zeppe-lin/pkgsrc/release/new>).
+Secondly, go to Zeppe-Lin's C<pkgsrc-core> repository on the GitHub
+and press C<Draft a new release>
+(L<https://github.com/zeppe-lin/pkgsrc-core/release/new>).
 
 =over 8
 
@@ -153,8 +153,8 @@ Select B<Choose a tag> and select the tag you previously created.
 Set B<Release title> the same as the tag.  To describe this release,
 prepare the git log for the rootfs tarball:
 
-  $ git log --oneline $PREVTAG..$CURTAG core/ |
-      xclip -selection clipboard
+  $ cd /usr/src/pkgsrc-core
+  $ git log --oneline $PREVTAG..$CURTAG . | xclip -selection clipboard
 
 Next, paste the clipboard content into the C<Describe> section on
 GitHub.
