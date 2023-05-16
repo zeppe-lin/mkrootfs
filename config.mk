@@ -1,8 +1,8 @@
 # project metadata
-NAME = mkrootfs
-VERSION = 1.2
-DIST = ${NAME}-${VERSION}
+NAME      = mkrootfs
+VERSION   = 1.2
+DIST      = ${NAME}-${VERSION}
 
 # paths
-PREFIX = /usr
+PREFIX    = /usr
 MANPREFIX = ${PREFIX}/share/man
