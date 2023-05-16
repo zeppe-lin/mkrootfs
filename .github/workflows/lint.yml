@@ -16,10 +16,10 @@ jobs:
     - name: Install shellcheck
       run: sudo apt-get install -y shellcheck
 
-    - name: Check PODs for errors
-      run: podchecker *.pod
-
     - name: Check shell scripts for errors
       run: shellcheck -s sh mkrootfs.in
+
+    - name: Check PODs for errors
+      run: podchecker *.pod
 
 # End of file.
