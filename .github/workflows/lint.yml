@@ -17,9 +17,9 @@ jobs:
       run: sudo apt-get install -y shellcheck
 
     - name: Check shell scripts for errors
-      run: shellcheck -s sh mkrootfs.in
+      run: make -f utils.mk shellcheck
 
     - name: Check PODs for errors
-      run: podchecker *.pod
+      run: make -f utils.mk podchecker
 
 # End of file.
