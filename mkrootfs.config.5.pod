@@ -61,25 +61,25 @@ Set filename for compressed root filesystem.
 
 Default: C<ROOTFS_DIR>.tar.xz
 
-=item B<ROOTFS_PKG>="I<PKG1> I<PKG2>..."
-
-Packages that will be extracted into the C<ROOTFS_DIR>.
-
-Default: all packages from core.
-
 =item B<ROOTFS_LOG>="I<FILE>"
 
 The log file for L<pkgman(1)>'s invocations.
 
 Default: C<ROOTFS_DIR>.log
 
-=item B<ROOTFS_PKGMK_CONF>="I<FILE>"
+=item B<PACKAGES>="I<PKGNAME1> I<PKGNAME2>..."
+
+Packages that will be built and extracted into the C<ROOTFS_DIR>.
+
+Default: all packages from C<core> pkgsrc collection.
+
+=item B<PKGMK_CONF>="I<FILE>"
 
 The configuration file for L<pkgmk(8)>'s invocations.
 
 Default: C</etc/pkgmk.conf>.
 
-=item B<ROOTFS_PKGMAN_CONF>="I<FILE>"
+=item B<PKGMAN_CONF>="I<FILE>"
 
 The configuration file for L<pkgman(1)>'s invocations.
 
@@ -94,23 +94,23 @@ The configuration file for L<pkgman(1)>'s invocations.
   #
 
   # path to the temporary directory for rootfs
-  ROOTFS_DIR="/tmp/rootfs-$(date +%F)-$(uname -m)"
+  ROOTFS_DIR=/tmp/rootfs-$(date +%F)-$(uname -m)
 
   # path to the compressed rootfs tarball
-  ROOTFS_TAR="$ROOTFS_DIR.tar.xz"
+  ROOTFS_TAR=$ROOTFS_DIR.tar.xz
 
   # log file for pkgman's invocations
-  ROOTFS_LOG="$ROOTFS_DIR.log"
+  ROOTFS_LOG=$ROOTFS_DIR.log
 
   # build and install all core packages into rootfs dir
-  ROOTFS_PKG="$(pkgman --no-std-config \
-    --config-set="pkgsrcdir /usr/src/pkgsrc-core" printf %n\\n)"
+  PACKAGES=$(pkgman printf %n\\n \
+    --no-std-config --config-set="pkgsrcdir /usr/src/pkgsrc-core")
 
   # configuration file for pkgmk's invocations
-  ROOTFS_PKGMK_CONF=/etc/pkgmk.conf
+  PKGMK_CONF=/etc/pkgmk.conf
 
   # configuration file for pkgman's invocations
-  ROOTFS_PKGMAN_CONF=/etc/pkgman.conf
+  PKGMAN_CONF=/etc/pkgman.conf
 
   # End of file.
 
