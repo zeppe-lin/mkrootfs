@@ -83,7 +83,7 @@ make_tarball() {
 
 print_help() {
   cat <<EOF
-Usage: mkrootfs [COMMAND]... [OPTIONS]... [PKGNAME]...
+Usage: mkrootfs [COMMAND]... [OPTION]... [PKGNAME]...
 Build customized root filesystem for chroot installation.
 
 COMMANDS:
