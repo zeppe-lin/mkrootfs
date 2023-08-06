@@ -8,31 +8,29 @@ mkrootfs - make root filesystem for chroot installation
 
 =head1 SYNOPSIS
 
-B<mkrootfs> [I<COMMAND>] [I<OPTIONS>]...
+B<mkrootfs> [I<COMMAND>]... [I<OPTION>]... [I<PKGNAME>]...
 
 =head1 DESCRIPTION
 
 B<mkrootfs> builds customized root filesystem for chroot installation.
+By default, B<mkrootfs> builds and installs all packages from C<core>
+pkgsrc collection, unless I<PKGNAME>(s) specified.
 
 =head1 COMMANDS
 
 =over 8
 
-=item B<rootfs>
+=item B<-B>
 
 Prepare rootfs directory.
 
-=item B<revdep>
+=item B<-C>
 
 Check rootfs directory for missing libraries.
 
-=item B<tar>
+=item B<-T>
 
 Compress rootfs directory (prepare tarball).
-
-=item B<sign>
-
-Sign prepared tarball.
 
 =back
 
@@ -46,17 +44,19 @@ Mandatory arguments to long options are mandatory for short options too.
 
 Set path to rootfs directory.
 
+Default: /tmp/rootfs-C<DATE>-C<ARCH>/
+
 =item B<-t>, B<--tar>=I<FILE>
 
 Set path to compressed rootfs tarball.
+
+Default: /tmp/rootfs-C<DATE>-C<ARCH>.tar.xz
 
 =item B<-l>, B<--log>=I<FILE>
 
 Set path to log file for L<pkgman(1)>.
 
-=item B<-p>, B<--packages>="I<PKG1> I<PKG2>..."
-
-Set default packages to extract into the rootfs directory.
+Default: /tmp/rootfs-C<DATE>-C<ARCH>.log
 
 =item B<-c>, B<--config>=I<FILE>
 
@@ -89,11 +89,11 @@ information.
 
 =item F</etc/pkgmk.conf>
 
-Configuration file for invocated pkgmk.
+Configuration file for invoked pkgmk.
 
 =item F</etc/pkgman.conf>
 
-Configuration file for invocated pkgman.
+Configuration file for invoked pkgman.
 
 =back
 
@@ -103,29 +103,23 @@ Configuration file for invocated pkgman.
 
 =item C<0>
 
-No error occurred.
+Success.
 
 =item C<1>
 
-A general error has occurred.
+Generic error code.
 
 =item C<2>
 
-An error occurred during building rootfs directory.
+Building rootfs directory failed.
 
 =item C<3>
 
-An error occurred during checking rootfs directory for missing
-libraries.
+Checking rootfs directory for missing libraries failed.
 
 =item C<4>
 
-An error occurred during compressing rootfs directory (preparing the
-tarball).
-
-=item C<5>
-
-An error occurred during signing prepared tarball.
+Compressing rootfs directory (preparing the tarball) failed.
 
 =back
 
