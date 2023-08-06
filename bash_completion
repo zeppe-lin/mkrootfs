@@ -9,7 +9,7 @@ _mkrootfs()
 
   case "$prev" in
 
-  --help|--version|-!(-*)[hv])
+  --help|--version|-!(-*)[hV])
     return
     ;;
   --rootfs|-r)
