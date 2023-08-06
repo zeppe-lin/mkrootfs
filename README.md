@@ -12,12 +12,12 @@ REQUIREMENTS
 
 **Runtime**:
 - POSIX sh(1p) and "mandatory utilities"
+- GNU getopt(1) to parse cmdline options
 - pkgmk to build packages
 - pkgutils to install packages
 - pkgman to orchestrate package building and installation
 - revdep to check rootfs tarball for missing libraries
 - tar(1) to prepare the rootfs tarball
-- gnupg(1) is optional, used to sign rootfs tarball
 
 
 INSTALL
