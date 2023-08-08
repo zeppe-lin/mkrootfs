@@ -36,6 +36,13 @@ uninstall:
 	cd ${DESTDIR}${MANPREFIX}/man7 && rm -f ${MAN7}
 	cd ${DESTDIR}${MANPREFIX}/man8 && rm -f ${MAN8}
 
+install-bashcomp:
+	mkdir -p ${DESTDIR}${BASHCOMPDIR}
+	cp -f bash_completion ${DESTDIR}${BASHCOMPDIR}/mkrootfs
+
+uninstall-bashcomp:
+	rm -f ${DESTDIR}${BASHCOMPDIR}/mkrootfs
+
 clean:
 	rm -f ${BIN8} ${MAN5} ${MAN7} ${MAN8}
 	rm -f ${DIST}.tar.gz
@@ -43,4 +50,4 @@ clean:
 dist: clean
 	git archive --format=tar.gz -o ${DIST}.tar.gz --prefix=${DIST}/ HEAD
 
-.PHONY: all install uninstall clean dist
+.PHONY: all install uninstall install-bashcomp uninstall-bashcomp clean dist
