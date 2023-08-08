@@ -46,7 +46,7 @@ build_rootfs() {
   run touch    "$ROOTFS_DIR/var/lib/pkg/db"
   run touch    "$ROOTFS_LOG"
 
-  # Intentional.
+  # Intentional globbing? and wordsplitting.
   # shellcheck disable=SC2086
   run pkgman install \
     --root="$ROOTFS_DIR"                   \
@@ -65,6 +65,8 @@ check_rootfs() {
 
   [ -d "$ROOTFS_DIR" ] || fatal "missing rootfs directory: $ROOTFS_DIR"
 
+  # Intentional word splitting.
+  # shellcheck disable=SC2046
   run chroot "$ROOTFS_DIR" revdep $([ $VERBOSE -ge 2 ] && echo "-P")
 }
 
