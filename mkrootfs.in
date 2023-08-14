@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ######################################################################
-# error codes                                                        #
+# Error codes.                                                       #
 ######################################################################
 
 readonly E_GENERAL=1  # Generic error code
@@ -10,81 +10,108 @@ readonly E_REVDEP=3   # Error checking rootfs dir for missing libs
 readonly E_TARBALL=4  # Error making rootfs tarball
 
 ######################################################################
-# notification helpers                                               #
+# Notification helpers.                                              #
 ######################################################################
 
 info() {
-  echo "=======> $1"
+	echo "=======> $1"
 }
 
 warn() {
-  info "WARNING: $1" >&2
+	info "WARNING: $1" 1>&2
 }
 
 error() {
-  info "ERROR: $1" >&2
+	info "ERROR: $1" 1>&2
 }
 
 fatal() {
-  echo "mkrootfs: $1" >&2
-  exit $E_GENERAL
+	echo "mkrootfs: $1" 1>&2
+	exit $E_GENERAL
 }
 
 ######################################################################
-# mkrootfs' routines                                                 #
+# Exit hooks.                                                        #
+######################################################################
+
+# Don't warn about unreachable commands in these functions, see
+# trap(1p).
+
+# shellcheck disable=2317
+interrupted() {
+	echo "" 1>&2
+	echo "=======> Interrupted." 1>&2
+	exit $E_GENERAL
+}
+
+atexit() {
+	# Remove build artefacts depending on interrupted action?
+	# e.g., build -> remove work dir, tar -> remove tarball
+
+	# Do nothing at the moment.
+	:
+}
+
+######################################################################
+# Mkrootfs' routines.                                                #
 ######################################################################
 
 run() {
-  [ $VERBOSE -ge 2 ] && printf "+ %s\n" "$*" >&2
-  "$@"
+	[ $VERBOSE -ge 2 ] && printf "+ %s\n" "$*" 1>&2
+	"$@"
 }
 
 build_rootfs() {
-  info "Preparing rootfs directory ($ROOTFS_DIR)"
+	info "Preparing rootfs directory ($ROOTFS_DIR)"
 
-  run mkdir -p "$ROOTFS_DIR/var/lib/pkg"
-  run touch    "$ROOTFS_DIR/var/lib/pkg/db"
-  run touch    "$ROOTFS_LOG"
+	run mkdir -p "$ROOTFS_DIR/var/lib/pkg"
+	run touch    "$ROOTFS_DIR/var/lib/pkg/db"
+	run touch    "$ROOTFS_LOG"
 
-  # Intentional globbing? and wordsplitting.
-  # shellcheck disable=SC2086
-  run pkgman install \
-    --root="$ROOTFS_DIR"                   \
-    --config="$PKGMAN_CONF"                \
-    --config-append="writelog enabled"     \
-    --config-append="logfile $ROOTFS_LOG"  \
-    --config-append="logmode append"       \
-    --config-append="runscripts no"        \
-    --force --deps --group -d              \
-    --margs="-cf $PKGMK_CONF"              \
-    -- $PACKAGES
+	# Intentional globbing? and wordsplitting.
+	# shellcheck disable=SC2086
+	run pkgman install \
+		--root="$ROOTFS_DIR"                   \
+		--config="$PKGMAN_CONF"                \
+		--config-append="writelog enabled"     \
+		--config-append="logfile $ROOTFS_LOG"  \
+		--config-append="logmode append"       \
+		--config-append="runscripts no"        \
+		--force --deps --group -d              \
+		--margs="-cf $PKGMK_CONF"              \
+		-- $PACKAGES
 }
 
 check_rootfs() {
-  info "Checking rootfs ($ROOTFS_DIR) for missing libraries"
+	info "Checking rootfs ($ROOTFS_DIR) for missing libraries"
 
-  [ -d "$ROOTFS_DIR" ] || fatal "missing rootfs directory: $ROOTFS_DIR"
+	if [ ! -d "$ROOTFS_DIR" ]; then
+		fatal "missing rootfs directory: $ROOTFS_DIR"
+	fi
 
-  # Intentional word splitting.
-  # shellcheck disable=SC2046
-  run chroot "$ROOTFS_DIR" revdep $([ $VERBOSE -ge 2 ] && echo "-P")
+	# Intentional word splitting.
+	# shellcheck disable=SC2046
+	run chroot "$ROOTFS_DIR" revdep \
+		$([ $VERBOSE -ge 2 ] && echo "-P")
 }
 
 make_tarball() {
-  info "Preparing rootfs tarball ($ROOTFS_TAR)"
+	info "Preparing rootfs tarball ($ROOTFS_TAR)"
 
-  [ -d "$ROOTFS_DIR" ] || fatal "missing rootfs directory: $ROOTFS_DIR"
+	if [ ! -d "$ROOTFS_DIR" ]; then
+		fatal "missing rootfs directory: $ROOTFS_DIR"
+	fi
 
-  run tar -cJf "$ROOTFS_TAR" -C "$ROOTFS_DIR" .
-  run sync
+	run tar -cJf "$ROOTFS_TAR" -C "$ROOTFS_DIR" .
+	run sync
 }
 
 ######################################################################
-# main and its helpers                                               #
+# Command-line helpers.                                              #
 ######################################################################
 
 print_help() {
-  cat <<EOF
+	cat <<EOF
 Usage: mkrootfs [COMMAND]... [OPTION]... [PKGNAME]...
 Build customized root filesystem for chroot installation.
 
@@ -109,87 +136,84 @@ EOF
 }
 
 print_version() {
-  echo "mkrootfs @VERSION@"
+	echo "mkrootfs @VERSION@"
 }
 
 parse_options() {
-  eval set -- "$(getopt -n "mkrootfs" -a \
-    -l "rootfs:,tar:,log:,config:,pkgmk-config:,pkgman-config:,verbose,version,help" \
-    -o ":BCTr:t:l:c:x:y:vVh" -- "$@"
-  )"
+	eval set -- "$(
+		getopt -n "mkrootfs" -a -l "$LONGOPTS" -o "$SHORTOPTS" \
+			-- "$@"
+	)"
 
-  while true; do
-    case $1 in
-              -B|-C|-T) ACTION="$ACTION $1"          ;;
-           -r|--rootfs) ROOTFS_DIR="$2"     ; shift  ;;
-              -t|--tar) ROOTFS_TAR="$2"     ; shift  ;;
-              -l|--log) ROOTFS_LOG="$2"     ; shift  ;;
-           -c|--config) MKROOTFS_CONF="$2"  ; shift  ;;
-     -x|--pkgmk-config) PKGMK_CONF="$2"     ; shift  ;;
-    -y|--pkgman-config) PKGMAN_CONF="$2"    ; shift  ;;
-          -v|--verbose) VERBOSE=$(( VERBOSE + 1 ))   ;;
-          -V|--version) print_version       ; exit 0 ;;
-             -h|--help) print_help          ; exit 0 ;;
-                    --) shift               ; break  ;;
-                     *) fatal "unknown option: $1"   ;;
-    esac
-    shift
-  done
+	while true; do
+		case $1 in
+		          -B|-C|-T) ACTION="$ACTION $1"          ;;
+		       -r|--rootfs) ROOTFS_DIR="$2"     ; shift  ;;
+		          -t|--tar) ROOTFS_TAR="$2"     ; shift  ;;
+		          -l|--log) ROOTFS_LOG="$2"     ; shift  ;;
+		       -c|--config) MKROOTFS_CONF="$2"  ; shift  ;;
+		 -x|--pkgmk-config) PKGMK_CONF="$2"     ; shift  ;;
+		-y|--pkgman-config) PKGMAN_CONF="$2"    ; shift  ;;
+		      -v|--verbose) VERBOSE=$(( VERBOSE + 1 ))   ;;
+		      -V|--version) print_version       ; exit 0 ;;
+		         -h|--help) print_help          ; exit 0 ;;
+		                --) shift               ; break  ;;
+		                 *) fatal "unknown option: $1"   ;;
+		esac
+		shift
+	done
 
-  [ "$ACTION" ] || fatal "action (-B|-C|-T) must be specified"
+	[ "$ACTION" ] || fatal "action (-B|-C|-T) must be specified"
 
-  PACKAGES=${*:-$PACKAGES}
+	PACKAGES=${*:-$PACKAGES}
 }
 
 main() {
-  parse_options "$@"
+	parse_options "$@"
 
-  [ "$(id -u)" = 0 ] || fatal "must be run as root"
+	[ "$(id -u)" = 0 ] || fatal "must be run as root"
 
-  if [ ! -f "$MKROOTFS_CONF" ]; then
-    warn "Configuration file '$MKROOTFS_CONF' not found, use defaults"
-  else
-    # shellcheck source="/etc/mkrootfs/config"
-    . "$MKROOTFS_CONF"
-  fi
+	if [ ! -f "$MKROOTFS_CONF" ]; then
+		warn "Configuration file '$MKROOTFS_CONF' not found, use defaults"
+	else
+		# shellcheck source="/etc/mkrootfs/config"
+		. "$MKROOTFS_CONF"
+	fi
 
-  if [ ! -f "$PKGMK_CONF" ]; then
-    error "pkgmk's config '$PKGMK_CONF' not found"
-    exit $E_GENERAL
-  fi
+	if [ ! -f "$PKGMK_CONF" ]; then
+		error "pkgmk's config '$PKGMK_CONF' not found"
+		exit $E_GENERAL
+	fi
 
-  if [ ! -f "$PKGMAN_CONF" ]; then
-    error "pkgman's config '$PKGMAN_CONF' not found"
-    exit $E_GENERAL
-  fi
+	if [ ! -f "$PKGMAN_CONF" ]; then
+		error "pkgman's config '$PKGMAN_CONF' not found"
+		exit $E_GENERAL
+	fi
 
-  # sort actions if mixed and execute them by order: -B, -C, -T
-  for _ACT in $(echo "$ACTION" | sed 's/-[BCT]/&\n/g' | sort); do
-    case $_ACT in
-    -B) build_rootfs || exit $E_BUILD   ;;
-    -C) check_rootfs || exit $E_REVDEP  ;;
-    -T) make_tarball || exit $E_TARBALL ;;
-    esac
-  done
-}
-
-interrupted() {
-  echo "" >&2
-  error "Interrupted."
+	# sort actions if mixed and execute them by order: -B, -C, -T
+	for _ACT in $(echo "$ACTION" | sed 's/-[BCT]/&\n/g' | sort); do
+		case $_ACT in
+		-B) build_rootfs || exit $E_BUILD   ;;
+		-C) check_rootfs || exit $E_REVDEP  ;;
+		-T) make_tarball || exit $E_TARBALL ;;
+		esac
+	done
 }
 
 ######################################################################
-# default configuration                                              #
-######################################################################
 
-# Exit if command fails.
-set -e
+# -e: Exit if command return status greater than 0
+# -f: Disable globbing *?[]
+set -ef
 
 # Set exit hook.
 trap "interrupted" HUP INT QUIT TERM
+trap "atexit"      EXIT
 
 # Globals.
 export LC_ALL=POSIX
+LONGOPTS="rootfs:,tar:,log:,config:,pkgmk-config:,pkgman-config:,verbose,version,help"
+SHORTOPTS=":BCTr:t:l:c:x:y:vVh"
 ROOTFS_DIR=${TMPDIR:-/tmp}/rootfs-$(date +%F)-$(uname -m)
 ROOTFS_TAR=$ROOTFS_DIR.tar.xz
 ROOTFS_LOG=$ROOTFS_DIR.log
@@ -200,7 +224,9 @@ VERBOSE=0
 PACKAGES=$(pkgman printf %n\\n \
   --no-std-config --config-set="pkgsrcdir /usr/src/pkgsrc-core")
 
+######################################################################
+
 main "$@"
 
-# vim:ft=sh:sw=2:ts=2:sts=2:et:cc=72:tw=70
+# vim: cc=72:tw=70
 # End of file.
