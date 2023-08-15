@@ -4,32 +4,30 @@ _avail_pkgs=($(pkgman printf "%n "))
 
 _mkrootfs()
 {
-  local cur prev words cword split
-  _init_completion -s || return
+	local cur prev words cword split
+	_init_completion -s || return
 
-  case "$prev" in
+	case "$prev" in
+	--help|--version|-!(-*)[hV])
+		return
+		;;
+	--rootfs|-r)
+		_filedir -d
+		return
+		;;
+	--tar|--log|--config|--pkgmk-config|--pkgman-config|-!(-*)[tlcxy])
+		_filedir
+		return
+		;;
+	esac
 
-  --help|--version|-!(-*)[hV])
-    return
-    ;;
-  --rootfs|-r)
-    _filedir -d
-    return
-    ;;
-  --tar|--log|--config|--pkgmk-config|--pkgman-config|-!(-*)[tlcxy])
-    _filedir
-    return
-    ;;
-
-  esac
-
-  if [[ $cur == -* ]]; then
-    COMPREPLY=($(compgen -W '$(_parse_help "$1")' -- "$cur"))
-    [[ ${COMPREPLY-} == *= ]] && compopt -o nospace
-  else
-    COMPREPLY=($(compgen -W '"${_avail_pkgs[@]}"' -- $cur))
-  fi
+	if [[ $cur == -* ]]; then
+		COMPREPLY=($(compgen -W '$(_parse_help "$1")' -- "$cur"))
+		[[ ${COMPREPLY-} == *= ]] && compopt -o nospace
+	else
+		COMPREPLY=($(compgen -W '"${_avail_pkgs[@]}"' -- $cur))
+	fi
 } && complete -F _mkrootfs mkrootfs
 
-# vim:sw=2:ts=2:sts=2:et:cc=72:tw=70
+# vim: ft=bash cc=72 tw=70
 # End of file.
