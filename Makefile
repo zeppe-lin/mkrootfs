@@ -9,6 +9,10 @@ MAN8 = mkrootfs.8
 
 all:  ${BIN8} ${MAN5} ${MAN7} ${MAN8}
 
+%: %.pod
+	pod2man -r "${NAME} ${VERSION}" -c ' ' -n $(basename $@) \
+		-s $(subst .,,$(suffix $@)) $< > $@
+
 %: %.in
 	sed -e "s|@HOMEPAGE@|${HOMEPAGE}|" \
 	    -e "s|@BUGTRACKER@|${BUGTRACKER}|" \
@@ -18,10 +22,6 @@ all:  ${BIN8} ${MAN5} ${MAN7} ${MAN8}
 	    -e   "r ${CURDIR}/COPYING.BANNER" \
 	    -e   "d" \
 	    -e "}" $< > $@
-
-%: %.pod
-	pod2man -r "${NAME} ${VERSION}" -c ' ' -n $(basename $@) \
-		-s $(subst .,,$(suffix $@)) $< > $@
 
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/sbin
