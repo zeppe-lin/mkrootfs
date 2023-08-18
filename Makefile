@@ -10,7 +10,14 @@ MAN8 = mkrootfs.8
 all:  ${BIN8} ${MAN5} ${MAN7} ${MAN8}
 
 %: %.in
-	sed "s/@VERSION@/${VERSION}/g" $< > $@
+	sed -e "s|@HOMEPAGE@|${HOMEPAGE}|" \
+	    -e "s|@BUGTRACKER@|${BUGTRACKER}|" \
+	    -e "s|@VERSION@|${VERSION}|" \
+	    -e "/^@COPYRIGHT & COPYING.BANNER@/{" \
+	    -e   "r ${CURDIR}/COPYRIGHT" \
+	    -e   "r ${CURDIR}/COPYING.BANNER" \
+	    -e   "d" \
+	    -e "}" $< > $@
 
 %: %.pod
 	pod2man -r "${NAME} ${VERSION}" -c ' ' -n $(basename $@) \
