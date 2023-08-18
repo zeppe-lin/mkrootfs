@@ -132,11 +132,17 @@ OPTIONS:
   -v, --verbose                increase verbosity
   -V, --version                print version and exit
   -h, --help                   print help and exit
+
+Report bugs to: <@BUGTRACKER@>
+mkrootfs home page: <@HOMEPAGE@>
 EOF
 }
 
 print_version() {
-	echo "mkrootfs @VERSION@"
+	cat <<EOF
+mkrootfs @VERSION@
+@COPYRIGHT & COPYING.BANNER@
+EOF
 }
 
 parse_options() {
