@@ -26,7 +26,7 @@ error() {
 }
 
 fatal() {
-	echo "mkrootfs: $1" 1>&2
+	echo "$ARGV0: $1" 1>&2
 	exit $E_GENERAL
 }
 
@@ -136,12 +136,12 @@ EOF
 }
 
 print_version() {
-	echo "mkrootfs @VERSION@"
+	echo "$ARGV0 @VERSION@"
 }
 
 parse_options() {
-	_OPTS=$(getopt -a -n mkrootfs -l $LOPTS -o $SOPTS -- "$@") || exit 1
-	eval set -- "$_OPTS"; unset _OPTS
+	OPTS=$(getopt -a -n "$ARGV0" -l $LOPTS -o $SOPTS -- "$@") || exit 1
+	eval set -- "$OPTS"; unset OPTS
 	while true; do
 		case $1 in
 		          -B|-C|-T) ACTION="$ACTION $1"          ;;
@@ -167,7 +167,9 @@ parse_options() {
 main() {
 	parse_options "$@"
 
-	[ "$(id -u)" = 0 ] || fatal "must be run as root"
+	if [ "$(id -u)" = 0 ]; then
+		fatal "must be run as root"
+	fi
 
 	if [ ! -f "$MKROOTFS_CONF" ]; then
 		warn "Configuration file '$MKROOTFS_CONF' not found, use defaults"
@@ -208,6 +210,7 @@ trap "atexit"      EXIT
 
 # Globals.
 export LC_ALL=POSIX
+readonly ARGV0="${0##*/}"
 LOPTS="rootfs:,tar:,log:,config:,pkgmk-config:,pkgman-config:,verbose,version,help"
 SOPTS=":BCTr:t:l:c:x:y:vVh"
 ROOTFS_DIR=${TMPDIR:-/tmp}/rootfs-$(date +%F)-$(uname -m)
