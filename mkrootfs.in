@@ -132,25 +132,16 @@ OPTIONS:
   -v, --verbose                increase verbosity
   -V, --version                print version and exit
   -h, --help                   print help and exit
-
-Report bugs to: <@BUGTRACKER@>
-mkrootfs home page: <@HOMEPAGE@>
 EOF
 }
 
 print_version() {
-	cat <<EOF
-mkrootfs @VERSION@
-@COPYRIGHT & COPYING.BANNER@
-EOF
+	echo "mkrootfs @VERSION@"
 }
 
 parse_options() {
-	eval set -- "$(
-		getopt -n "mkrootfs" -a -l "$LONGOPTS" -o "$SHORTOPTS" \
-			-- "$@"
-	)"
-
+	_OPTS=$(getopt -a -n mkrootfs -l $LOPTS -o $SOPTS -- "$@") || exit 1
+	eval set -- "$_OPTS"; unset _OPTS
 	while true; do
 		case $1 in
 		          -B|-C|-T) ACTION="$ACTION $1"          ;;
@@ -164,7 +155,6 @@ parse_options() {
 		      -V|--version) print_version       ; exit 0 ;;
 		         -h|--help) print_help          ; exit 0 ;;
 		                --) shift               ; break  ;;
-		                 *) fatal "unknown option: $1"   ;;
 		esac
 		shift
 	done
@@ -218,8 +208,8 @@ trap "atexit"      EXIT
 
 # Globals.
 export LC_ALL=POSIX
-LONGOPTS="rootfs:,tar:,log:,config:,pkgmk-config:,pkgman-config:,verbose,version,help"
-SHORTOPTS=":BCTr:t:l:c:x:y:vVh"
+LOPTS="rootfs:,tar:,log:,config:,pkgmk-config:,pkgman-config:,verbose,version,help"
+SOPTS=":BCTr:t:l:c:x:y:vVh"
 ROOTFS_DIR=${TMPDIR:-/tmp}/rootfs-$(date +%F)-$(uname -m)
 ROOTFS_TAR=$ROOTFS_DIR.tar.xz
 ROOTFS_LOG=$ROOTFS_DIR.log
@@ -234,5 +224,5 @@ PACKAGES=$(pkgman printf %n\\n \
 
 main "$@"
 
-# vim: cc=72:tw=70
+# vim: cc=72 tw=70
 # End of file.
