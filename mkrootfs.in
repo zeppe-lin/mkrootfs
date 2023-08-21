@@ -112,26 +112,22 @@ make_tarball() {
 
 print_help() {
 	cat <<EOF
-Usage: mkrootfs [COMMAND]... [OPTION]... [PKGNAME]...
+Usage: mkrootfs [OPTION]... [PKGNAME]...
 Build customized root filesystem for chroot installation.
 
-COMMANDS:
-  -B    prepare rootfs directory
-  -C    check rootfs directory for missing libraries
-  -T    compress rootfs directory (prepare tarball)
-
-OPTIONS:
-  Mandatory arguments to long options are mandatory for short options too.
-
-  -r, --rootfs=PATH            set path to rootfs directory
-  -t, --tar=FILE               set path to compressed rootfs tarball
-  -l, --log=FILE               set pkgman's log output file
-  -c, --config=FILE            set path to configuration file
-  -x, --pkgmk-config=FILE      set path to pkgmk's configuration file
-  -y, --pkgman-config=FILE     set path to pkgman's configuration file
-  -v, --verbose                increase verbosity
-  -V, --version                print version and exit
-  -h, --help                   print help and exit
+Mandatory arguments to long options are mandatory for short options too.
+  -B                        prepare rootfs directory
+  -C                        check rootfs directory for missing libraries
+  -T                        compress rootfs directory
+  -r, --rootfs=DIR          specify an alternate rootfs directory
+  -t, --tar=FILE            specify an alternate compressed rootfs tarball
+  -l, --log=FILE            specify an alternate log file for pkgman
+  -c, --config=FILE         specify an alternate configuration file
+  -x, --pkgmk-config=FILE   specify an alternate configuration file for pkgmk
+  -y, --pkgman-config=FILE  specify an alternate configuration file for pkgman
+  -v, --verbose             increase verbosity
+  -V, --version             print version and exit
+  -h, --help                print help and exit
 EOF
 }
 
