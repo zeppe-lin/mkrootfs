@@ -155,7 +155,9 @@ parse_options() {
 		shift
 	done
 
-	[ "$ACTION" ] || fatal "action (-B|-C|-T) must be specified"
+	if [ ! "$ACTION" ]; then
+		fatal "option -B and/or -C and/or -T must be specified"
+	fi
 
 	PACKAGES=${*:-$PACKAGES}
 }
