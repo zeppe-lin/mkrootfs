@@ -112,7 +112,7 @@ make_tarball() {
 
 print_help() {
 	cat <<EOF
-Usage: mkrootfs [OPTION]... [PKGNAME]...
+Usage: $ARGV0 [OPTION]... [PKGNAME]...
 Build customized root filesystem for chroot installation.
 
 Mandatory arguments to long options are mandatory for short options too.
@@ -154,16 +154,15 @@ parse_options() {
 		esac
 		shift
 	done
-
-	if [ ! "$ACTION" ]; then
-		fatal "option -B and/or -C and/or -T must be specified"
-	fi
-
 	PACKAGES=${*:-$PACKAGES}
 }
 
 main() {
 	parse_options "$@"
+
+	if [ ! "$ACTION" ]; then
+		fatal "option -B and/or -C and/or -T must be specified"
+	fi
 
 	if [ "$(id -u)" = 0 ]; then
 		fatal "must be run as root"
