@@ -42,37 +42,37 @@ Mandatory arguments to long options are mandatory for short options too.
 
 =item B<-r>, B<--rootfs>=I<PATH>
 
-Set path to rootfs directory.
+Specify an alternate rootfs directory.
 
 Default: /tmp/rootfs-C<DATE>-C<ARCH>/
 
 =item B<-t>, B<--tar>=I<FILE>
 
-Set path to compressed rootfs tarball.
+Specify an alternate compressed rootfs tarball.
 
 Default: /tmp/rootfs-C<DATE>-C<ARCH>.tar.xz
 
 =item B<-l>, B<--log>=I<FILE>
 
-Set path to log file for L<pkgman(1)>.
+Specify an alternate log file for L<pkgman(1)> invocations.
 
 Default: /tmp/rootfs-C<DATE>-C<ARCH>.log
 
 =item B<-c>, B<--config>=I<FILE>
 
-Use alternative configuration file.
+Specify an alternate configuration file.
 
 Default: F</etc/mkrootfs/config>.
 
 =item B<-x>, B<--pkgmk-config>=I<FILE>
 
-Use alternative L<pkgmk(8)>'s configuration file.
+Specify an alternate configuration file for L<pkgmk(8)> invocations.
 
 Default: F</etc/pkgmk.conf>.
 
 =item B<-y>, B<--pkgman-config>=I<FILE>
 
-Use alternative L<pkgman(1)>'s configuration file.
+Specify an alternate configuration file for L<pkgman(1)> invocations.
 
 Default: F</etc/pkgman.conf>.
 
