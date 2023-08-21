@@ -8,7 +8,7 @@ mkrootfs - make root filesystem for chroot installation
 
 =head1 SYNOPSIS
 
-B<mkrootfs> [I<COMMAND>]... [I<OPTION>]... [I<PKGNAME>]...
+B<mkrootfs> [I<OPTION>]... [I<PKGNAME>]...
 
 =head1 DESCRIPTION
 
@@ -16,7 +16,9 @@ B<mkrootfs> builds customized root filesystem for chroot installation.
 By default, B<mkrootfs> builds and installs all packages from C<core>
 pkgsrc collection, unless I<PKGNAME>(s) specified.
 
-=head1 COMMANDS
+=head1 OPTIONS
+
+Mandatory arguments to long options are mandatory for short options too.
 
 =over 8
 
@@ -32,13 +34,17 @@ Check rootfs directory for missing libraries.
 
 Compress rootfs directory (prepare tarball).
 
-=back
+=item B<-c>, B<--config>=I<FILE>
 
-=head1 OPTIONS
+Specify an alternate configuration file.
 
-Mandatory arguments to long options are mandatory for short options too.
+Default: F</etc/mkrootfs/config>.
 
-=over 8
+=item B<-l>, B<--log>=I<FILE>
+
+Specify an alternate log file for L<pkgman(1)> invocations.
+
+Default: /tmp/rootfs-C<DATE>-C<ARCH>.log
 
 =item B<-r>, B<--rootfs>=I<PATH>
 
@@ -51,18 +57,6 @@ Default: /tmp/rootfs-C<DATE>-C<ARCH>/
 Specify an alternate compressed rootfs tarball.
 
 Default: /tmp/rootfs-C<DATE>-C<ARCH>.tar.xz
-
-=item B<-l>, B<--log>=I<FILE>
-
-Specify an alternate log file for L<pkgman(1)> invocations.
-
-Default: /tmp/rootfs-C<DATE>-C<ARCH>.log
-
-=item B<-c>, B<--config>=I<FILE>
-
-Specify an alternate configuration file.
-
-Default: F</etc/mkrootfs/config>.
 
 =item B<-x>, B<--pkgmk-config>=I<FILE>
 
