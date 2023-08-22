@@ -1,4 +1,6 @@
 #!/bin/sh
+# mkrootfs - build customized root filesystem for chroot installation
+# See COPYING and COPYRIGHT files for corresponding information.
 
 ######################################################################
 # Error codes.                                                       #
