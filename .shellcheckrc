@@ -1,3 +1,0 @@
-# Don't warn about nonexistent "/etc/mkrootfs/config" while sourcing.
-# https://www.shellcheck.net/wiki/SC1091
-disable=1091
