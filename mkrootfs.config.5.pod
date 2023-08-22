@@ -1,3 +1,6 @@
+# mkrootfs.config.5.pod - mkrootfs.config(5) manual page
+# See COPYING and COPYRIGHT files for corresponding information.
+
 =pod
 
 =encoding UTF-8
@@ -20,28 +23,28 @@ Each variable must be written in POSIX way, bashism not allowed.
 
 Example:
 
-  key=value
+	key=value
 
 If value contains spaces it must be quoted:
 
-  key="value1 value2"
+	key="value1 value2"
 
 If value contains special symbols like C<$>, it must be escaped or
 quoted using single quotes:
 
-  key=\\$value
-  key='$value'
+	key=\\$value
+	key='$value'
 
 If line exceeded maximum space on your display and you want to make it
 more readable, you can concatenate them:
 
-  key=value
-  key="${key}value"
+	key=value
+	key="${key}value"
 
 If you want to temporary undefine variable without actually deleting
 it, you can simply prepend C<#>:
 
-  #key=value
+	#key=value
 
 =head1 GENERAL OPTIONS
 
@@ -87,32 +90,33 @@ The configuration file for L<pkgman(1)>'s invocations.
 
 =head1 EXAMPLE
 
-  #
-  # /etc/mkrootfs/config: mkrootfs(8) configuration
-  #
-  # See mkrootfs.conf(5) for more information.
-  #
+	#
+	# /etc/mkrootfs/config: mkrootfs(8) configuration
+	#
+	# See mkrootfs.conf(5) for more information.
+	#
 
-  # path to the temporary directory for rootfs
-  ROOTFS_DIR=/tmp/rootfs-$(date +%F)-$(uname -m)
+	# path to the temporary directory for rootfs
+	ROOTFS_DIR=/tmp/rootfs-$(date +%F)-$(uname -m)
 
-  # path to the compressed rootfs tarball
-  ROOTFS_TAR=$ROOTFS_DIR.tar.xz
+	# path to the compressed rootfs tarball
+	ROOTFS_TAR=$ROOTFS_DIR.tar.xz
 
-  # log file for pkgman's invocations
-  ROOTFS_LOG=$ROOTFS_DIR.log
+	# log file for pkgman's invocations
+	ROOTFS_LOG=$ROOTFS_DIR.log
 
-  # build and install all core packages into rootfs dir
-  PACKAGES=$(pkgman printf %n\\n \
-    --no-std-config --config-set="pkgsrcdir /usr/src/pkgsrc-core")
+	# build and install all core packages into rootfs dir
+	PACKAGES=$(pkgman printf %n\\n \
+		--no-std-config \
+		--config-set="pkgsrcdir /usr/src/pkgsrc-core")
 
-  # configuration file for pkgmk's invocations
-  PKGMK_CONF=/etc/pkgmk.conf
+	# configuration file for pkgmk's invocations
+	PKGMK_CONF=/etc/pkgmk.conf
 
-  # configuration file for pkgman's invocations
-  PKGMAN_CONF=/etc/pkgman.conf
+	# configuration file for pkgman's invocations
+	PKGMAN_CONF=/etc/pkgman.conf
 
-  # End of file.
+	# End of file.
 
 =head1 FILES
 
@@ -130,5 +134,5 @@ L<mkrootfs(8)>, L<mkrootfs.release(7)>
 
 =cut
 
-# vim:sw=2:ts=2:sts=2:et:tw=71:cc=72
+# vim: cc=72 tw=70
 # End of file.
