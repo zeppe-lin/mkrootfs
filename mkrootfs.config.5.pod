@@ -88,7 +88,10 @@ The configuration file for L<pkgman(1)>'s invocations.
 
 =back
 
-=head1 EXAMPLE
+=head1 EXAMPLES
+
+The following configuration file reproduces the defaults: installing
+it is equivalent to not having a F</etc/mkrootfs/config> file at all.
 
 	#
 	# /etc/mkrootfs/config: mkrootfs(8) configuration
