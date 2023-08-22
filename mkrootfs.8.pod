@@ -23,7 +23,7 @@ pkgsrc collection, unless I<PKGNAME>(s) specified.
 
 Mandatory arguments to long options are mandatory for short options too.
 
-=over
+=over 8
 
 =item B<-B>
 
