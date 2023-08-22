@@ -1,3 +1,6 @@
+# mkrootfs.release.7.pod - mkrootfs.release(7) manual page
+# See COPYING and COPYRIGHT files for corresponding information.
+
 =pod
 
 =encoding UTF-8
@@ -26,17 +29,17 @@ make a copy of F<pkgmk.conf> with your settings and tell
 L<mkrootfs(8)> to use it by using C<-x>/C<--pkgmk-config> command-line
 options:
 
-  $ sudo mkrootfs -x /etc/mkrootfs/pkgmk.conf ...
+	$ sudo mkrootfs -x /etc/mkrootfs/pkgmk.conf ...
 
 You can also edit F</etc/mkrootfs/config> and place the following line:
 
-  PKGMK_CONF=/etc/mkrootfs/pkgmk.conf
+	PKGMK_CONF=/etc/mkrootfs/pkgmk.conf
 
 Also, use the C<-y>/C<--pkgman-config> option if you want to use your
 custom F<pkgman.conf> file, or add the following line to default
 mkrootfs' configuration file:
 
-  PKGMAN_CONF=/etc/mkrootfs/pkgman.conf
+	PKGMAN_CONF=/etc/mkrootfs/pkgman.conf
 
 By default, L<mkrootfs(8)> builds the rootfs in the
 F</tmp/rootfs-{DATE}-{ARCH}> directory, and saves build+installation
@@ -45,8 +48,8 @@ C<-r>/C<--rootfs> and C<-l>/C<--log> command-line options.  Also,
 default location can be changed by editing F</etc/mkrootfs/config> as
 showed above:
 
-  ROOTFS_DIR=/path/to/my/rootfs
-  ROOTFS_LOG=/path/to/my/rootfs.log
+	ROOTFS_DIR=/path/to/my/rootfs
+	ROOTFS_LOG=/path/to/my/rootfs.log
 
 Also, by default L<mkrootfs(8)> builds and installs only I<core>
 packages.  This can be changed by specifying B<mkrootfs>' command-line
@@ -63,7 +66,7 @@ See L<mkrootfs.config(5)> for more information.
 
 Create the rootfs directory (build and install packages):
 
-  $ sudo mkrootfs -B
+	$ sudo mkrootfs -B
 
 In the end, you'll see the report of installed packages and the
 message that C<Install transaction done> in case of success.
@@ -74,7 +77,7 @@ Otherwise, exit code 1 will be returned.
 The next step is to check the rootfs for missing libraries of
 installed packages:
 
-  $ sudo mkrootfs -C
+	$ sudo mkrootfs -C
 
 In case there are some missing libraries, you'll see the broken
 packages (hint: add C<-vv> command-line option to see the packages and
@@ -86,7 +89,7 @@ Exit code 2 will be returned in this case.
 
 Now, prepare the rootfs tarball.
 
-  $ sudo mkrootfs -T
+	$ sudo mkrootfs -T
 
 This will compress root filesystem into the C<tar.xz> archive.
 
@@ -94,7 +97,7 @@ This will compress root filesystem into the C<tar.xz> archive.
 
 Note that you can combine all these steps, like:
 
-  $ sudo mkrootfs -BCT
+	$ sudo mkrootfs -BCT
 
 If you haven't modified rootfs/log/tarball location, B<mkrootfs> will
 produce the following files:
@@ -121,17 +124,17 @@ This is a rootfs tarball.
 First, you need to prepare rootfs tarball as described above.  Next,
 sign prepared tarball:
 
-  $ gpg --output /tmp/rootfs-{DATE}-{ARCH}.tar.xz.sig \
-      --detach-sig /tmp/rootfs-{DATE}-{ARCH}.tar.xz
+	$ gpg --output /tmp/rootfs-{DATE}-{ARCH}.tar.xz.sig \
+	--detach-sig /tmp/rootfs-{DATE}-{ARCH}.tar.xz
 
 Create a tag in C<pkgsrc-core> repository (F</usr/src/pkgsrc-core>):
 
-  $ cd /usr/src/pkgsrc-core
-  $ PREVTAG=$(git describe --tags --abbrev=0)
-  $ CURTAG=$(date +%F)
-  $ git tag -a $CURTAG -m $CURTAG
-  $ git push
-  $ git push --tags
+	$ cd /usr/src/pkgsrc-core
+	$ PREVTAG=$(git describe --tags --abbrev=0)
+	$ CURTAG=$(date +%F)
+	$ git tag -a $CURTAG -m $CURTAG
+	$ git push
+	$ git push --tags
 
 Go to Zeppe-Lin's C<pkgsrc-core> repository on the GitHub and press
 C<Draft a new release>(L<https://github.com/zeppe-lin/pkgsrc-core/release/new>).
@@ -147,8 +150,8 @@ Select B<Choose a tag> and select the tag you previously created.
 Set B<Release title> the same as the tag.  To describe this release,
 prepare the git log for the rootfs tarball:
 
-  $ cd /usr/src/pkgsrc-core
-  $ git log --oneline $PREVTAG..$CURTAG . | xclip -selection clipboard
+	$ cd /usr/src/pkgsrc-core
+	$ git log --oneline $PREVTAG..$CURTAG . | xclip -selection clipboard
 
 Next, paste the clipboard content into the C<Describe> section on
 GitHub.
@@ -168,10 +171,10 @@ B<REMEMBER> to update the rootfs' URL in the C<Zeppe-Lin Handbook>
 
 Also, after that, regenerate the website:
 
-  $ cd /usr/src/zeppe-lin.github.io
-  $ make -j$(nproc)
-  $ make update
-  $ git push
+	$ cd /usr/src/zeppe-lin.github.io
+	$ make -j`nproc`
+	$ make update
+	$ git push
 
 =back
 
@@ -181,5 +184,5 @@ L<mkrootfs(8)>, L<mkrootfs.config(5)>
 
 =cut
 
-# vim:sw=2:ts=2:sts=2:et:cc=72:tw=70
+# vim: cc=72 tw=70
 # End of file.
