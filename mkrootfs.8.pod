@@ -1,3 +1,6 @@
+# mkrootfs.8.pod - mkrootfs(8) manual page
+# See COPYING and COPYRIGHT files for corresponding information.
+
 =pod
 
 =encoding UTF-8
