@@ -49,7 +49,7 @@ Specify an alternate log file for L<pkgman(1)> invocations.
 
 Default: /tmp/rootfs-C<DATE>-C<ARCH>.log
 
-=item B<-r>, B<--rootfs>=I<PATH>
+=item B<-r>, B<--rootfs>=I<DIR>
 
 Specify an alternate rootfs directory.
 

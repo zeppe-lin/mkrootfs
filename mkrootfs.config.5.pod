@@ -50,7 +50,7 @@ it, you can simply prepend C<#>:
 
 =over 8
 
-=item B<ROOTFS_DIR>="I<PATH>"
+=item B<ROOTFS_DIR>="I<DIR>"
 
 Set directory for root filesystem.
 
