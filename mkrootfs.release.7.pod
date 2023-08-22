@@ -1,4 +1,4 @@
-# mkrootfs.release.7.pod - mkrootfs.release(7) manual page
+# mkrootfs.release(7) manual page
 # See COPYING and COPYRIGHT files for corresponding information.
 
 =pod

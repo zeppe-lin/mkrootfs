@@ -1,4 +1,4 @@
-# mkrootfs.config.5.pod - mkrootfs.config(5) manual page
+# mkrootfs.config(5) manual page
 # See COPYING and COPYRIGHT files for corresponding information.
 
 =pod

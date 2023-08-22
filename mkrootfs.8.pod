@@ -1,4 +1,4 @@
-# mkrootfs.8.pod - mkrootfs(8) manual page
+# mkrootfs(8) manual page
 # See COPYING and COPYRIGHT files for corresponding information.
 
 =pod
@@ -126,5 +126,5 @@ L<mkrootfs.config(5)>, L<mkrootfs.release(7)>
 
 =cut
 
-# vim: sw=2 ts=2 sts=2 et tw=71 cc=72
+# vim: cc=72 tw=70
 # End of file.
