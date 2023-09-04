@@ -7,9 +7,7 @@ filesystem of Zeppe-Lin distribution for chroot installation.
 REQUIREMENTS
 ------------
 **Build time**:
-- POSIX sh(1p) and "mandatory utilities"
-- GNU make(1)
-- pod2man(1pm) to build man pages
+- POSIX sh(1p), make(1p) and "mandatory utilities"
 
 **Runtime**:
 - POSIX sh(1p) and "mandatory utilities"
@@ -23,8 +21,8 @@ REQUIREMENTS
 
 INSTALL
 -------
-The shell commands `make && make install` should build and install
-this package.
+The shell command `make install` should install this package.
+See `config.mk` file for configuration parameters.
 
 
 LICENSE
