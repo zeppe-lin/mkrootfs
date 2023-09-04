@@ -1,0 +1,115 @@
+.\" mkrootfs(8) manual page
+.\" See COPYING and COPYRIGHT files for corresponding information.
+.Dd September 4, 2023
+.Dt MKROOTFS 8
+.Os mkrootfs @VERSION@
+.Sh NAME
+.Nm mkrootfs
+.Nd make root filesystem for chroot installation
+.Sh SYNOPSIS
+.Nm mkrootfs
+.Op Fl BCTv
+.Op Fl c Ar conffile
+.Op Fl l Ar logfile
+.Op Fl r Ar rootfsdir
+.Op Fl t Ar tarball
+.Op Fl x Ar pkgmk_conffile
+.Op Fl y Ar pkgman_conffile
+.Op Ar pkgname ...
+.Nm
+.Op Fl V
+.Nm
+.Op Fl h
+.Sh DESCRIPTION
+The
+.Nm
+utility builds customized root filesystem for chroot installation.
+By default,
+.Nm
+builds and installs all packages from
+.Dq core pkgsrc collection ,
+unless
+.Ar pkgname Ns (s)
+specified.
+.Pp
+The options are as follows:
+.Bl -tag -width Ds
+.It Fl B
+Prepare rootfs directory.
+.It Fl C
+Check rootfs directory for missing libraries.
+.It Fl T
+Compress rootfs directory (prepare tarball).
+.It Fl c Ar conffile , Fl -config Ns = Ns Ar conffile
+Specify an alternate configuration file instead of the default
+.Pa /etc/mkrootfs/config .
+.It Fl l Ar logfile  , Fl -log Ns = Ns Ar logfile
+Specify an alternate log file for
+.Xr pkgman 1
+invocations instead of the default
+.Dq /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns .log .
+Here and below, the
+.Aq DATE
+is the output of
+.Dq date +%F ,
+and the
+.Aq ARCH
+is the output of
+.Dq uname -m
+commands.
+.It Fl r Ar rootfsdir , Fl -rootfs Ns = Ns Ar rootfsdir
+Specify an alternate rootfs directory instead of the default
+.Dq /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns / .
+.It Fl t Ar tarball , Fl -tar Ns = Ns Ar tarball
+Specify an alternate compressed rootfs tarball instead of the default
+.Dq /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns .tar.xz .
+.It Fl x Ar pkgmk_conffile , Fl -pkgmk-config Ns = Ns Ar pkgmk_conffile
+Specify an alternate configuration file for
+.Xr pkgmk 8
+invocations instead of the default
+.Pa /etc/pkgmk.conf .
+.It Fl y Ar pkgman_conffile , Fl -pkgman-config Ns = Ns Ar pkgman_conffile
+Specify an alternate configuration file for
+.Xr pkgman 1
+invocations instead of the default
+.Pa /etc/pkgman.conf .
+.It Fl v , Fl -verbose
+Verbose output.
+.It Fl V , Fl -version
+Print version and exit.
+.It Fl h , Fl -help
+Print help and exit.
+.El
+.Sh FILES
+.Bl -tag -width Ds
+.It Pa /etc/mkrootfs/config
+Configuration file for
+.Nm .
+See
+.Xr mkrootfs.config 5
+for more information.
+.It Pa /etc/pkgmk.conf
+Configuration file for invoked
+.Xr pkgmk 8 .
+.It Pa /etc/pkgman.conf
+Configuration file for invoked
+.Xr pkgman 1 .
+.El
+.Sh EXIT STATUS
+.Bl -tag -width Ds
+.It 0
+Success.
+.It 1
+Generic error code.
+.It 2
+Building rootfs directory failed.
+.It 3
+Checking rootfs directory for missing libraries failed.
+.It 4
+Compressing rootfs directory (preparing the tarball) failed.
+.El
+.Sh SEE ALSO
+.Xr mkrootfs.config 5 ,
+.Xr mkrootfs.release 7
+.\" vim: cc=72 tw=70
+.\" End of file.
