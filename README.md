@@ -21,7 +21,10 @@ REQUIREMENTS
 
 INSTALL
 -------
-The shell command `make install` should install this package.
+The shell command `make install` should install this package.  The
+shell command `make install_bashcomp` should install bash completion
+script.
+
 See `config.mk` file for configuration parameters.
 
 
