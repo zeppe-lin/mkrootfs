@@ -28,7 +28,7 @@ error() {
 }
 
 fatal() {
-	echo "$ARGV0: $1" 1>&2
+	echo "mkrootfs: $1" 1>&2
 	exit $E_GENERAL
 }
 
@@ -117,7 +117,10 @@ make_tarball() {
 
 print_help() {
 	cat <<EOF
-Usage: $ARGV0 [OPTION]... [PKGNAME]...
+Usage: mkrootfs [-BCTv] [-c conffile] [-l logfile] [-r rootfsdir] [-t tarball]
+                [-x pkgmk_conffile] [-y pkgman_conffile] [pkgname ...]
+       mkrootfs [-V]
+       mkrootfs [-h]
 Build customized root filesystem for chroot installation.
 
 Mandatory arguments to long options are mandatory for short options too.
@@ -137,11 +140,11 @@ EOF
 }
 
 print_version() {
-	echo "$ARGV0 @VERSION@"
+	echo "mkrootfs @VERSION@"
 }
 
 parse_options() {
-	OPTS=$(getopt -a -n "$ARGV0" -l $LOPTS -o $SOPTS -- "$@") || exit 1
+	OPTS=$(getopt -a -n "mkrootfs" -l $LOPTS -o $SOPTS -- "$@") || exit 1
 	eval set -- "$OPTS"; unset OPTS
 	while true; do
 		case $1 in
@@ -214,7 +217,6 @@ trap "atexit"      EXIT
 
 # Globals.
 export LC_ALL=POSIX
-readonly ARGV0="${0##*/}"
 LOPTS="rootfs:,tar:,log:,config:,pkgmk-config:,pkgman-config:,verbose,version,help"
 SOPTS=":BCTr:t:l:c:x:y:vVh"
 ROOTFS_DIR=${TMPDIR:-/tmp}/rootfs-$(date +%F)-$(uname -m)
