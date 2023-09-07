@@ -3,9 +3,11 @@
 .Dd September 4, 2023
 .Dt MKROOTFS 8
 .Os mkrootfs @VERSION@
+.\" ==================================================================
 .Sh NAME
 .Nm mkrootfs
 .Nd make root filesystem for chroot installation
+.\" ==================================================================
 .Sh SYNOPSIS
 .Nm mkrootfs
 .Op Fl BCTv
@@ -20,6 +22,7 @@
 .Op Fl V
 .Nm
 .Op Fl h
+.\" ==================================================================
 .Sh DESCRIPTION
 The
 .Nm
@@ -80,6 +83,7 @@ Print version and exit.
 .It Fl h , Fl -help
 Print help and exit.
 .El
+.\" ==================================================================
 .Sh FILES
 .Bl -tag -width Ds
 .It Pa /etc/mkrootfs/config
@@ -95,6 +99,7 @@ Configuration file for invoked
 Configuration file for invoked
 .Xr pkgman 1 .
 .El
+.\" ==================================================================
 .Sh EXIT STATUS
 .Bl -tag -width Ds
 .It 0
@@ -108,6 +113,7 @@ Checking rootfs directory for missing libraries failed.
 .It 4
 Compressing rootfs directory (preparing the tarball) failed.
 .El
+.\" ==================================================================
 .Sh SEE ALSO
 .Xr mkrootfs.config 5 ,
 .Xr mkrootfs.release 7
