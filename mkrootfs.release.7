@@ -3,12 +3,15 @@
 .Dd September 4, 2023
 .Dt MKROOTFS.RELEASE 7
 .Os mkrootfs @VERSION@
+.\" ==================================================================
 .Sh NAME
 .Nm mkrootfs.release
 .Nd prepare an release with mkrootfs
+.\" ==================================================================
 .Sh DESCRIPTION
 This manual page describes the how to build the root filesystem
 tarball and prepare the Zeppe-Lin release on GitHub.
+.\" ------------------------------------------------------------------
 .Ss Overview
 The
 .Xr mkrootfs 8
@@ -95,6 +98,7 @@ and
 .Xr mkrootfs.config 5
 manual pages.
 It is simply necessary to understand the steps in this manual.
+.\" ------------------------------------------------------------------
 .Ss Prepare rootfs
 The official Zeppe-Lin tarball must be built for x86_64 architecture.
 Make sure you don't mess with
@@ -157,6 +161,7 @@ This is a rootfs tarball.
 .El
 .Pp
 You may remove rootfs directory and log file if you no more need them.
+.\" ------------------------------------------------------------------
 .Ss Prepare an Official Release
 First, you need to prepare rootfs tarball as described above.
 Next, sign prepared tarball:
@@ -217,6 +222,7 @@ $ git push
 .Ed
 .El
 That's it.
+.\" ==================================================================
 .Sh SEE ALSO
 .Xr mkrootfs.config 5 ,
 .Xr mkrootfs 8
