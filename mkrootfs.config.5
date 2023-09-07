@@ -3,11 +3,14 @@
 .Dd September 4, 2023
 .Dt MKROOTFS.CONFIG 5
 .Os mkrootfs @VERSION@
+.\" ==================================================================
 .Sh NAME
 .Nm mkrootfs.config
 .Nd configuration file for mkrootfs
+.\" ==================================================================
 .Sh SYNOPSIS
 .Nm /etc/mkrootfs/config
+.\" ==================================================================
 .Sh DESCRIPTION
 This manual page describes the format of the
 .Xr mkrootfs 8 Ns \&'s
@@ -48,6 +51,7 @@ it, you can simply prepend
 .Bd -literal -offset indent
 #key=value
 .Ed
+.\" ------------------------------------------------------------------
 .Ss General Options
 The configuration options are as follows:
 .Bl -tag -width Ds
@@ -88,12 +92,14 @@ Specify the configuration file for
 invocations instead of the default
 .Pa /etc/pkgman.conf .
 .El
+.\" ==================================================================
 .Sh FILES
 .Bl -tag -width Ds
 .It Pa /etc/mkrootfs/config
 Configuration file for
 .Xr mkrootfs 8 .
 .El
+.\" ==================================================================
 .Sh EXAMPLES
 The following configuration file reproduces the defaults: installing
 it is equivalent to not having a
@@ -128,6 +134,7 @@ PKGMAN_CONF=/etc/pkgman.conf
 
 # End of file.
 .Ed
+.\" ==================================================================
 .Sh SEE ALSO
 .Xr mkrootfs.release 7 ,
 .Xr mkrootfs 8
