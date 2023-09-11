@@ -64,6 +64,7 @@ run() {
 	if [ $VERBOSE -ge 2 ]; then
 		printf "+ %s\n" "$*" 1>&2
 	fi
+
 	"$@"
 }
 
@@ -145,8 +146,8 @@ print_version() {
 }
 
 parse_options() {
-	OPTS=$(getopt -a -n "mkrootfs" -l $LOPTS -o $SOPTS -- "$@") || exit 1
-	eval set -- "$OPTS"; unset OPTS
+	_OPTS=$(getopt -a -n "mkrootfs" -l $LOPTS -o $SOPTS -- "$@") || exit 1
+	eval set -- "$_OPTS"; unset _OPTS
 	while true; do
 		case $1 in
 		          -B|-C|-T) ACTION="$ACTION $1"          ;;
