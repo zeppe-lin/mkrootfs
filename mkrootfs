@@ -39,6 +39,7 @@ fatal() {
 # Don't warn about unreachable commands in these functions, see
 # trap(1p).
 
+# https://www.shellcheck.net/wiki/SC2317
 # shellcheck disable=2317
 interrupted() {
 	echo ""                      1>&2
