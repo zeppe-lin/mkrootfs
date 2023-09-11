@@ -11,9 +11,9 @@ install:
 	mkdir -p ${DESTDIR}${MANPREFIX}/man8
 	sed "s/@VERSION@/${VERSION}/" mkrootfs \
 		> ${DESTDIR}${PREFIX}/sbin/mkrootfs
-	cp -f mkrootfs.config.5  ${DESTDIR}${MANPREFIX}/man5/mkrootfs.config.5
-	cp -f mkrootfs.release.7 ${DESTDIR}${MANPREFIX}/man7/mkrootfs.release.7
-	cp -f mkrootfs.8         ${DESTDIR}${MANPREFIX}/man8/mkrootfs.8
+	cp -f mkrootfs.config.5  ${DESTDIR}${MANPREFIX}/man5/
+	cp -f mkrootfs.release.7 ${DESTDIR}${MANPREFIX}/man7/
+	cp -f mkrootfs.8         ${DESTDIR}${MANPREFIX}/man8/
 	chmod 0755 ${DESTDIR}${PREFIX}/sbin/mkrootfs
 	chmod 0644 ${DESTDIR}${MANPREFIX}/man5/mkrootfs.config.5
 	chmod 0644 ${DESTDIR}${MANPREFIX}/man7/mkrootfs.release.7
