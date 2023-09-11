@@ -151,12 +151,12 @@ If you haven't modified rootfs/log/tarball location,
 .Xr mkrootfs 8
 produced the following files:
 .Bl -tag -width Ds
-.It Dq /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns /
+.It \&* /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns /
 This is a rootfs directory.
-.It Dq /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns .log
+.It \&* /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns .log
 This is a build/installation log file for the prepared above rootfs
 directory.
-.It Dq /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns .tar.xz
+.It \&* /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns .tar.xz
 This is a rootfs tarball.
 .El
 .Pp
@@ -184,7 +184,8 @@ $ git push --tags
 Go to Zeppe-Lin's
 .Dq pkgsrc-core
 repository on GitHub and press
-.Lk https://github.com/zeppe-lin/pkgsrc-core/release/new Dq Draft New Release :
+.Lk https://github.com/zeppe-lin/pkgsrc-core/release/new \
+Draft New Release
 .Bl -bullet
 .It
 Select
@@ -197,7 +198,8 @@ the same as the tag.
 To describe this release, prepare the git log for the rootfs tarball:
 .Bd -literal -offset indent
 $ cd /usr/src/pkgsrc-core
-$ git log --oneline $PREVTAG..$CURTAG . | xclip -selection clipboard
+$ git log --oneline $PREVTAG..$CURTAG . |
+    xclip -selection clipboard
 .Ed
 .Pp
 Next, paste the clipboard content into the
