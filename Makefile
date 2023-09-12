@@ -25,11 +25,11 @@ uninstall:
 	rm -f ${DESTDIR}${MANPREFIX}/man7/mkrootfs.release.7
 	rm -f ${DESTDIR}${MANPREFIX}/man8/mkrootfs.8
 
-install-bashcomp:
+install_bashcomp:
 	mkdir -p ${DESTDIR}${BASHCOMPDIR}
 	cp -f bash_completion ${DESTDIR}${BASHCOMPDIR}/mkrootfs
 
-uninstall-bashcomp:
+uninstall_bashcomp:
 	rm -f ${DESTDIR}${BASHCOMPDIR}/mkrootfs
 
 clean:
@@ -38,4 +38,4 @@ clean:
 dist: clean
 	git archive --format=tar.gz -o ${DIST}.tar.gz --prefix=${DIST}/ HEAD
 
-.PHONY: all install uninstall install-bashcomp uninstall-bashcomp clean dist
+.PHONY: all install uninstall install_bashcomp uninstall_bashcomp clean dist
