@@ -21,16 +21,16 @@ REQUIREMENTS
 
 INSTALL
 -------
-The shell command `make install` should install this package.  The
-shell command `make install_bashcomp` should install bash completion
-script.
+The shell command `make install` should install this package.
+The shell command `make install_bashcomp` should install bash
+completion script.
 
 See `config.mk` file for configuration parameters.
 
 
 LICENSE
 -------
-mkrootfs is licensed through the GNU General Public License v3 or
-later <http://gnu.org/licenses/gpl.html>.
+mkrootfs is licensed through the GNU General Public License v3
+or later <http://gnu.org/licenses/gpl.html>.
 Read the COPYING file for copying conditions.
 Read the COPYRIGHT file for copyright notices.
