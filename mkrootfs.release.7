@@ -167,7 +167,7 @@ First, you need to prepare rootfs tarball as described above.
 Next, sign prepared tarball:
 .Bd -literal -offset indent
 $ gpg --output /tmp/rootfs-<DATE>-<ARCH>.tar.xz.sig \e
-      --detach-sig /tmp/rootfs-<DATE>-<ARCH>.tar.xz
+      --detach-sign /tmp/rootfs-<DATE>-<ARCH>.tar.xz
 .Ed
 .Pp
 Create a tag in
