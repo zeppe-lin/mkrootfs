@@ -174,7 +174,7 @@ main() {
 		fatal "option -B and/or -C and/or -T must be specified"
 	fi
 
-	if [ "$(id -u)" = 0 ]; then
+	if [ "$(id -u)" != 0 ]; then
 		fatal "must be run as root"
 	fi
 
