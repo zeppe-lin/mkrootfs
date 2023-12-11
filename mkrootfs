@@ -99,7 +99,7 @@ check_rootfs() {
 	# Intentional word splitting.
 	# shellcheck disable=SC2046
 	run chroot "$ROOTFS_DIR" revdep \
-		$([ $VERBOSE -ge 2 ] && echo "-p")
+		$([ "$VERBOSE" -ge 2 ] && echo "-p")
 }
 
 make_tarball() {
