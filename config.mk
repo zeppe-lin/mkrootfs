@@ -1,6 +1,6 @@
 # project metadata
 NAME        = mkrootfs
-VERSION     = 1.2
+VERSION     = 1.3
 DIST        = ${NAME}-${VERSION}
 
 # paths
