@@ -48,13 +48,12 @@ interrupted() {
 }
 
 # shellcheck disable=2317
-atexit() {
+#atexit() {
 	# Remove build artefacts depending on interrupted action?
 	# e.g. build -> remove work dir, tar -> remove tarball
 
 	# Do nothing at the moment.
-	:
-}
+#}
 
 ######################################################################
 # Mkrootfs' routines.                                                #
