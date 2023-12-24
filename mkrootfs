@@ -217,7 +217,7 @@ set -ef
 
 # Set exit hook.
 trap "interrupted" HUP INT QUIT TERM
-trap "atexit"      EXIT
+#trap "atexit"      EXIT
 
 # Globals.
 export LC_ALL=POSIX
