@@ -145,9 +145,9 @@ print_version() {
 }
 
 parse_options() {
-	if ! _OPTS=$(getopt -a -n "mkrootfs" -l "$LOPTS" -o "$SOPTS" -- "$@"); then
+	if ! _OPTS=$(getopt -a -n mkrootfs -l "$LOPTS" -o "$SOPTS" -- "$@"); then
 		echo "Try 'mkrootfs --help' for more information." 1>&2
-		exit 1
+		exit $E_GENERAL
 	fi
 	eval set -- "$_OPTS"; unset _OPTS
 	while true; do
