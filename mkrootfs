@@ -222,7 +222,7 @@ trap "interrupted" HUP INT QUIT TERM
 # Globals.
 export LC_ALL=POSIX
 LOPTS="rootfs:,tar:,log:,config:,pkgmk-config:,pkgman-config:,verbose,version,help"
-SOPTS=":BCTr:t:l:c:x:y:vVh"
+SOPTS="BCTr:t:l:c:x:y:vVh"
 ROOTFS_DIR=${TMPDIR:-/tmp}/rootfs-$(date +%F)-$(uname -m)
 ROOTFS_TAR=$ROOTFS_DIR.tar.xz
 ROOTFS_LOG=$ROOTFS_DIR.log
