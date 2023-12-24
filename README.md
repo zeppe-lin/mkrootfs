@@ -11,7 +11,7 @@ REQUIREMENTS
 
 **Runtime**:
 - POSIX sh(1p) and "mandatory utilities"
-- GNU getopt(1) to parse cmdline options
+- GNU getopt(1) to parse command-line options
 - pkgmk to build packages
 - pkgutils to install packages
 - pkgman to orchestrate package building and installation
