@@ -1,10 +1,11 @@
 TODO mkrootfs
 
-	- [x] Add bash completion.
-	Date: Tue Aug  8 11:15:29 AM EEST 2023
-
 	- [?] Add chroot action?
 	It's definitely not a mkrootfs action.
-	May be add an extra script?
+	May be add an extra script? to pkgmaint?
+
+DONE:
+	- [x] Add bash completion.
+	Date: Tue Aug  8 11:15:29 AM EEST 2023
 
 End of file.
