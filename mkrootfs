@@ -125,18 +125,20 @@ Usage: mkrootfs [-BCTv] [-c conffile] [-l logfile] [-r rootfsdir] [-t tarball]
 Build customized root filesystem for chroot installation.
 
 Mandatory arguments to long options are mandatory for short options too.
-  -B                        prepare rootfs directory
-  -C                        check rootfs directory for missing libraries
-  -T                        compress rootfs directory
-  -r, --rootfs=DIR          specify an alternate rootfs directory
-  -t, --tar=FILE            specify an alternate compressed rootfs tarball
-  -l, --log=FILE            specify an alternate log file for pkgman
-  -c, --config=FILE         specify an alternate configuration file
-  -x, --pkgmk-config=FILE   specify an alternate configuration file for pkgmk
-  -y, --pkgman-config=FILE  specify an alternate configuration file for pkgman
-  -v, --verbose             increase verbosity
-  -V, --version             print version and exit
-  -h, --help                print help and exit
+  -B                       prepare rootfs directory
+  -C                       check rootfs directory for missing libraries
+  -T                       compress rootfs directory
+  -r, --rootfs=rootfsdir   specify an alternate rootfs directory
+  -t, --tar=tarball        specify an alternate compressed rootfs tarball
+  -l, --log=logfile        specify an alternate log file for pkgman
+  -c, --config=conffile    specify an alternate configuration file
+  -x, --pkgmk-config=pkgmk_conffile
+                           specify an alternate configuration file for pkgmk
+  -y, --pkgman-config=pkgman_conffile
+                           specify an alternate configuration file for pkgman
+  -v, --verbose            increase verbosity
+  -V, --version            print version and exit
+  -h, --help               print help and exit
 EOF
 }
 
