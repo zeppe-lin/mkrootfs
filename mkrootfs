@@ -118,10 +118,9 @@ make_tarball() {
 
 print_help() {
 	cat <<EOF
-Usage: mkrootfs [-BCTv] [-c conffile] [-l logfile] [-r rootfsdir] [-t tarball]
-                [-x pkgmk_conffile] [-y pkgman_conffile] [pkgname ...]
-       mkrootfs [-V]
-       mkrootfs [-h]
+Usage: mkrootfs [-BCTVhv] [-c conffile] [-l logfile] [-r rootfsdir]
+                [-t tarball] [-x pkgmk_conffile] [-y pkgman_conffile]
+                [pkgname ...]
 Build customized root filesystem for chroot installation.
 
 Mandatory arguments to long options are mandatory for short options too.
