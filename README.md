@@ -10,17 +10,17 @@ REQUIREMENTS
 
 Build time
 ----------
-- POSIX sh(1p), make(1p) and "mandatory utilities"
+* POSIX sh(1p), make(1p) and "mandatory utilities"
 
 Runtime
 -------
-- POSIX sh(1p) and "mandatory utilities"
-- GNU getopt(1) to parse command-line options
-- pkgmk to build packages
-- pkgutils to install packages
-- pkgman to orchestrate package building and installation
-- revdep to check rootfs tarball for missing libraries
-- tar(1) to prepare the rootfs tarball
+* POSIX sh(1p) and "mandatory utilities"
+* GNU getopt(1) to parse command-line options
+* pkgmk to build packages
+* pkgutils to install packages
+* pkgman to orchestrate package building and installation
+* revdep to check rootfs tarball for missing libraries
+* tar(1) to prepare the rootfs tarball
 
 
 INSTALL
