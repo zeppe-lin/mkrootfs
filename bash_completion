@@ -4,7 +4,6 @@
 _mkrootfs()
 {
 	local cur prev words cword split
-	local pkgs
 
 	_init_completion -s || return
 
@@ -27,9 +26,7 @@ _mkrootfs()
 		[[ ${COMPREPLY-} == *= ]] && compopt -o nospace
 	else
 		# all available pkgsrc packages
-		pkgs=($(pkgman printf "%n "))
-
-		COMPREPLY=($(compgen -W '"${pkgs[@]}"' -- $cur))
+		COMPREPLY=($(compgen -W '$(pkgman printf "%n ")' -- $cur))
 	fi
 } && complete -F _mkrootfs mkrootfs
 
