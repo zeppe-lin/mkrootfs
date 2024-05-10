@@ -6,6 +6,8 @@ _avail_pkgs=($(pkgman printf "%n "))
 _mkrootfs()
 {
 	local cur prev words cword split
+	local pkgs
+
 	_init_completion -s || return
 
 	case "$prev" in
@@ -26,7 +28,8 @@ _mkrootfs()
 		COMPREPLY=($(compgen -W '$(_parse_help "$1")' -- "$cur"))
 		[[ ${COMPREPLY-} == *= ]] && compopt -o nospace
 	else
-		COMPREPLY=($(compgen -W '"${_avail_pkgs[@]}"' -- $cur))
+		pkgs=($(pkgman printf "%n "))
+		COMPREPLY=($(compgen -W '"${pkgs[@]}"' -- $cur))
 	fi
 } && complete -F _mkrootfs mkrootfs
 
