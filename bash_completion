@@ -26,7 +26,9 @@ _mkrootfs()
 		COMPREPLY=($(compgen -W '$(_parse_help "$1")' -- "$cur"))
 		[[ ${COMPREPLY-} == *= ]] && compopt -o nospace
 	else
+		# all available pkgsrc packages
 		pkgs=($(pkgman printf "%n "))
+
 		COMPREPLY=($(compgen -W '"${pkgs[@]}"' -- $cur))
 	fi
 } && complete -F _mkrootfs mkrootfs
