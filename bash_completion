@@ -1,8 +1,6 @@
 # bash completion for mkrootfs(8)
 # See COPYING and COPYRIGHT files for corresponding information.
 
-_avail_pkgs=($(pkgman printf "%n "))
-
 _mkrootfs()
 {
 	local cur prev words cword split
