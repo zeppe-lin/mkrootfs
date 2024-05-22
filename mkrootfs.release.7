@@ -150,14 +150,15 @@ $ sudo mkrootfs -BCT
 If you haven't modified rootfs/log/tarball location,
 .Xr mkrootfs 8
 produced the following files:
-.Bl -tag -width Ds
-.It \&* /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns /
-This is a rootfs directory.
-.It \&* /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns .log
-This is a build/installation log file for the prepared above rootfs
-directory.
-.It \&* /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns .tar.xz
-This is a rootfs tarball.
+.Pp
+.Bl -column "/tmp/rootfs‐⟨DATE⟩‐⟨ARCH⟩.tar.xz" -offset indent -compact
+.It Sy File Ta Sy Description
+.It /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns / Ta
+rootfs directory (work dir)
+.It /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns .log Ta
+build/installation log file
+.It /tmp/rootfs- Ns Ao DATE Ac Ns - Ns Ao ARCH Ac Ns .tar.xz Ta
+rootfs tarball
 .El
 .Pp
 You may remove rootfs directory and log file if you no more need them.
