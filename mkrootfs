@@ -15,18 +15,26 @@ readonly E_TARBALL=4  # Error making rootfs tarball
 # Notification helpers.                                              #
 ######################################################################
 
+# Print information message to stdout.
+#   arg $1: the message
 info() {
 	echo "=======> $1"
 }
 
+# Print warning message to stderr.
+#   arg $1: the message
 warn() {
 	info "WARNING: $1" 1>&2
 }
 
+# Print error message to stderr.
+#   arg $1: the message
 error() {
 	info "ERROR: $1" 1>&2
 }
 
+# Print error message to stderr and terminate the program.
+#   arg $1: the message
 fatal() {
 	echo "mkrootfs: $1" 1>&2
 	exit $E_GENERAL
