@@ -218,7 +218,7 @@ to update the rootfs' URL in the
 Also, after that, regenerate the website:
 .Bd -literal -offset indent
 $ cd /usr/src/zeppe-lin.github.io
-$ make -j`nproc`
+$ make -j$(nproc)
 $ make update
 $ git push
 .Ed
