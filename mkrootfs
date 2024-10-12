@@ -208,7 +208,7 @@ main() {
 		exit $E_GENERAL
 	fi
 
-	# sort actions if mixed and execute them by order: -B, -C, -T
+	# Sort actions if mixed and execute them by order: -B, -C, -T.
 	for _ACT in $(echo "$ACTION" | sed 's/-[BCT]/&\n/g' | sort); do
 		case $_ACT in
 		-B) build_rootfs || exit $E_BUILD   ;;
@@ -220,8 +220,8 @@ main() {
 
 ######################################################################
 
-# -e: Exit if command return status greater than 0
-# -f: Disable globbing *?[]
+# -e: Exit if command return status greater than 0.
+# -f: Disable globbing *?[].
 set -ef
 
 # Set exit hook.
