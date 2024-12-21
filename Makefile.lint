@@ -26,17 +26,17 @@ deadlinks:
 
 spellcheck:
 	@echo "=======> Check man pages for spelling errors"
-	@mandoc -T html *.[1-9] | hunspell -H -l - | sort -u
+	@mandoc -T html man/*.[1-9] | hunspell -H -l - | sort -u
 	@echo "=======> Check README.md for spelling errors"
 	@hunspell -l README.md | sort -u
 
 mancheck:
 	@echo "=======> Check man pages for syntax errors"
-	@mandoc -T lint *.[1-9]
+	@mandoc -T lint man/*.[1-9]
 
 shellcheck:
 	@echo "=======> Check shell script for syntax errors"
-	@shellcheck -s sh mkrootfs
+	@shellcheck -s sh src/mkrootfs.in
 
 longlines:
 	@echo "=======> Check for long lines"
