@@ -1,3 +1,5 @@
+.POSIX:
+
 include $(CURDIR)/../config.mk
 
 BIN8 = mkrootfs
