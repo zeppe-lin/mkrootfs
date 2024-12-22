@@ -1,6 +1,6 @@
 .POSIX:
 
-include $(CURDIR)/../../config.mk
+include ../config.mk
 
 all:
 

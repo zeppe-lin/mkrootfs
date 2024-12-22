@@ -1,6 +1,6 @@
 .POSIX:
 
-include $(CURDIR)/../config.mk
+include ../config.mk
 
 MAN5 = mkrootfs.config.5
 MAN7 = mkrootfs.release.7
