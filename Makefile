@@ -2,9 +2,9 @@
 
 include config.mk
 
-all install uninstall clean:
+all lint install uninstall clean:
 	cd src && $(MAKE) $@
 	cd man && $(MAKE) $@
 	cd completion && $(MAKE) $@
 
-.PHONY: all install uninstall clean
+.PHONY: all lint install uninstall clean

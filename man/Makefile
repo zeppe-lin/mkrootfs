@@ -8,6 +8,9 @@ MAN8 = mkrootfs.8
 
 all:
 
+lint:
+	mandoc -Tlint $(MAN5) $(MAN7) $(MAN8)
+
 install:
 	mkdir -p $(DESTDIR)$(MANPREFIX)/man5
 	mkdir -p $(DESTDIR)$(MANPREFIX)/man7
@@ -26,4 +29,4 @@ uninstall:
 
 clean:
 
-.PHONY: all install uninstall clean
+.PHONY: all lint install uninstall clean

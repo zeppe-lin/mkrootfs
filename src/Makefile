@@ -6,6 +6,9 @@ BIN8 = mkrootfs
 
 all: $(BIN8)
 
+lint:
+	shellcheck -s sh mkrootfs.in
+
 $(BIN8):
 	sed "s/@VERSION@/$(VERSION)/" $@.in > $@
 	chmod 0755 $@
@@ -21,4 +24,4 @@ uninstall:
 clean:
 	rm -f $(BIN8)
 
-.PHONY: all install uninstall clean
+.PHONY: all lint install uninstall clean
