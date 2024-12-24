@@ -7,7 +7,8 @@ BIN8 = mkrootfs
 all: $(BIN8)
 
 $(BIN8):
-	sed "s/@VERSION@/$(VERSION)/" $@.in > $@ && chmod 0755 $@
+	sed "s/@VERSION@/$(VERSION)/" $@.in > $@
+	chmod 0755 $@
 
 install: all
 	mkdir -p $(DESTDIR)$(PREFIX)/sbin
