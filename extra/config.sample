@@ -4,25 +4,6 @@
 # See mkrootfs.config(5) for more information.
 #
 
-# path to the temporary directory for rootfs
-ROOTFS_DIR=/tmp/rootfs-$(date +%F)-$(uname -m)
-
-# path to the compressed rootfs tarball
-ROOTFS_TAR=$ROOTFS_DIR.tar.xz
-
-# log file for pkgman's invocations
-ROOTFS_LOG=$ROOTFS_DIR.log
-
-# build and install all core packages into rootfs dir
-CORE_DIR=/usr/src/pkgsrc-core
-PACKAGES=$(pkgman printf %n\\n --no-std-config \
-           --config-set="pkgsrcdir $CORE_DIR")
-
-# configuration file for pkgmk's invocations
-PKGMK_CONF=/etc/pkgmk.conf
-
-# configuration file for pkgman's invocations
-PKGMAN_CONF=/etc/pkgman.conf
 
 # vim: ft=sh
 # End of file.
