@@ -1,8 +1,8 @@
 OVERVIEW
 ========
 
-This directory contains mkrootfs, an utility that makes root filesystem
-of Zeppe-Lin distribution for chroot installation.
+This directory contains mkrootfs, an utility that makes root
+filesystem of Zeppe-Lin distribution for chroot installation.
 
 
 REQUIREMENTS
@@ -34,7 +34,7 @@ See `config.mk` file for configuration parameters.
 LICENSE
 =======
 
-mkrootfs is licensed through the GNU General Public License v3 or later
-<http://gnu.org/licenses/gpl.html>.
+mkrootfs is licensed through the GNU General Public License v3 or
+later <http://gnu.org/licenses/gpl.html>.
 Read the COPYING file for copying conditions.
 Read the COPYRIGHT file for copyright notices.
