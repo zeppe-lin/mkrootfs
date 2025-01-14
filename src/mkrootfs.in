@@ -67,6 +67,12 @@ interrupted() {
 # Mkrootfs' routines.                                                #
 ######################################################################
 
+# Print the resolved absolute path.
+#   arg $1: relative path
+realpath() {
+	readlink -f $1
+}
+
 run() {
 	if [ "$VERBOSE" -ge 2 ]; then
 		printf "+ %s\n" "$*" 1>&2
@@ -161,17 +167,17 @@ parse_options() {
 	eval set -- "$_opts"; unset _opts
 	while true; do
 		case $1 in
-		          -B|-C|-T) ACTION="$ACTION $1"          ;;
-		       -r|--rootfs) ROOTFS_DIR="$2"     ; shift  ;;
-		          -t|--tar) ROOTFS_TAR="$2"     ; shift  ;;
-		          -l|--log) ROOTFS_LOG="$2"     ; shift  ;;
-		       -c|--config) MKROOTFS_CONF="$2"  ; shift  ;;
-		 -x|--pkgmk-config) PKGMK_CONF="$2"     ; shift  ;;
-		-y|--pkgman-config) PKGMAN_CONF="$2"    ; shift  ;;
-		      -v|--verbose) VERBOSE=$(( VERBOSE + 1 ))   ;;
-		      -V|--version) print_version       ; exit 0 ;;
-		         -h|--help) print_help          ; exit 0 ;;
-		                --) shift               ; break  ;;
+		          -B|-C|-T) ACTION="$ACTION $1"                     ;;
+		       -r|--rootfs) ROOTFS_DIR="$(realpath $2)"    ; shift  ;;
+		          -t|--tar) ROOTFS_TAR="$(realpath $2)"    ; shift  ;;
+		          -l|--log) ROOTFS_LOG="$(realpath $2)"    ; shift  ;;
+		       -c|--config) MKROOTFS_CONF="$(realpath $2)" ; shift  ;;
+		 -x|--pkgmk-config) PKGMK_CONF="$(realpath $2)"    ; shift  ;;
+		-y|--pkgman-config) PKGMAN_CONF="$(realpath $2)"   ; shift  ;;
+		      -v|--verbose) VERBOSE=$(( VERBOSE + 1 ))              ;;
+		      -V|--version) print_version                  ; exit 0 ;;
+		         -h|--help) print_help                     ; exit 0 ;;
+		                --) shift                          ; break  ;;
 		esac
 		shift
 	done
