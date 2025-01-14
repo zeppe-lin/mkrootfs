@@ -70,7 +70,7 @@ interrupted() {
 # Print the resolved absolute path.
 #   arg $1: relative path
 realpath() {
-	readlink -f $1
+	readlink -f "$1"
 }
 
 run() {
@@ -168,12 +168,12 @@ parse_options() {
 	while true; do
 		case $1 in
 		          -B|-C|-T) ACTION="$ACTION $1"                     ;;
-		       -r|--rootfs) ROOTFS_DIR="$(realpath $2)"    ; shift  ;;
-		          -t|--tar) ROOTFS_TAR="$(realpath $2)"    ; shift  ;;
-		          -l|--log) ROOTFS_LOG="$(realpath $2)"    ; shift  ;;
-		       -c|--config) MKROOTFS_CONF="$(realpath $2)" ; shift  ;;
-		 -x|--pkgmk-config) PKGMK_CONF="$(realpath $2)"    ; shift  ;;
-		-y|--pkgman-config) PKGMAN_CONF="$(realpath $2)"   ; shift  ;;
+		       -r|--rootfs) ROOTFS_DIR=$(realpath "$2")    ; shift  ;;
+		          -t|--tar) ROOTFS_TAR=$(realpath "$2")    ; shift  ;;
+		          -l|--log) ROOTFS_LOG=$(realpath "$2")    ; shift  ;;
+		       -c|--config) MKROOTFS_CONF=$(realpath "$2") ; shift  ;;
+		 -x|--pkgmk-config) PKGMK_CONF=$(realpath "$2")    ; shift  ;;
+		-y|--pkgman-config) PKGMAN_CONF=$(realpath "$2")   ; shift  ;;
 		      -v|--verbose) VERBOSE=$(( VERBOSE + 1 ))              ;;
 		      -V|--version) print_version                  ; exit 0 ;;
 		         -h|--help) print_help                     ; exit 0 ;;
