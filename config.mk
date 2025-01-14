@@ -1,6 +1,6 @@
 # project metadata
 NAME        = mkrootfs
-VERSION     = 1.3.1
+VERSION     = 1.4
 
 # paths
 PREFIX      = /usr
