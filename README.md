@@ -1,7 +1,7 @@
 OVERVIEW
 ========
 
-This directory contains mkrootfs, an utility that makes root
+This repository contains mkrootfs, an utility that makes root
 filesystem of Zeppe-Lin distribution for chroot installation.
 
 
