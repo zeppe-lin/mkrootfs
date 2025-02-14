@@ -38,13 +38,9 @@ Online documentation
 --------------------
 
 Manual pages:
-- [mkrootfs.8][1]
-- [mkrootfs.config.5][2]
-- [mkrootfs.release.7][3]
-
-[1]: https://zeppe-lin.github.io/mkrootfs.8.html
-[2]: https://zeppe-lin.github.io/mkrootfs.config.5.html
-[3]: https://zeppe-lin.github.io/mkrootfs.release.7.html
+- [mkrootfs.8](https://zeppe-lin.github.io/mkrootfs.8.html)
+- [mkrootfs.config.5](https://zeppe-lin.github.io/mkrootfs.config.5.html)
+- [mkrootfs.release.7](https://zeppe-lin.github.io/mkrootfs.release.7.html)
 
 
 LICENSE
