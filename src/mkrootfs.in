@@ -73,6 +73,9 @@ realpath() {
 	readlink -f "$1"
 }
 
+# Wrapper around command execution to also print the executed command
+# if verbosity level is greater than 2 (-vv command line argument).
+#   arg $@: command and command options
 run() {
 	if [ "$VERBOSE" -ge 2 ]; then
 		printf "+ %s\n" "$*" 1>&2
@@ -81,6 +84,7 @@ run() {
 	"$@"
 }
 
+# Prepare rootfs work directory (install packages).
 build_rootfs() {
 	info "Preparing rootfs directory ($ROOTFS_DIR)"
 
@@ -102,6 +106,8 @@ build_rootfs() {
 		-- $PACKAGES
 }
 
+# Check prepared rootfs work directory for missing or wrong libraries
+# of installed packages.
 check_rootfs() {
 	info "Checking rootfs ($ROOTFS_DIR) for missing libraries"
 
@@ -115,6 +121,7 @@ check_rootfs() {
 		$([ "$VERBOSE" -ge 2 ] && echo "-p")
 }
 
+# Prepare the compressed (xz) archive of rootfs work directory.
 make_tarball() {
 	info "Preparing rootfs tarball ($ROOTFS_TAR)"
 
@@ -130,7 +137,10 @@ make_tarball() {
 # Command-line helpers.                                              #
 ######################################################################
 
+# Print program help message.
 print_help() {
+	# keep 79 characters as 'standard' limit for help message
+	# width
 	cat <<EOF
 Usage: mkrootfs [-BCTVhv] [-c conffile] [-l logfile] [-r rootfsdir]
                 [-t tarball] [-x pkgmk_conffile] [-y pkgman_conffile]
@@ -155,10 +165,12 @@ Mandatory arguments to long options are mandatory for short options too.
 EOF
 }
 
+# Print program version.
 print_version() {
 	echo "mkrootfs @VERSION@"
 }
 
+# Parse command-line options.
 parse_options() {
 	if ! _opts=$(getopt -a -n mkrootfs -l "$LOPTS" -o "$SOPTS" -- "$@"); then
 		echo "Try 'mkrootfs --help' for more information." 1>&2
@@ -183,6 +195,8 @@ parse_options() {
 	done
 	PACKAGES=${*:-$PACKAGES}
 }
+
+######################################################################
 
 main() {
 	parse_options "$@"
