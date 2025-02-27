@@ -228,9 +228,10 @@ main() {
 		exit $E_GENERAL
 	fi
 
-	# Sort actions if mixed and execute them by order: -B, -C, -T.
-	for _ACT in $(echo "$ACTION" | sed 's/-[BCT]/&\n/g' | sort); do
-		case $_ACT in
+	# Sort the specified command-line action options (if they're
+	# mixed) and execute them in the following order: -B, -C, -T.
+	for _act in $(echo "$ACTION" | sed 's/-[BCT]/&\n/g' | sort); do
+		case $_act in
 		-B) build_rootfs || exit $E_BUILD   ;;
 		-C) check_rootfs || exit $E_REVDEP  ;;
 		-T) make_tarball || exit $E_TARBALL ;;
@@ -246,7 +247,7 @@ set -ef
 
 # Set exit hook.
 trap "interrupted" HUP INT QUIT TERM
-#trap "atexit"      EXIT
+#trap "atexit"     EXIT
 
 # Globals.
 export LC_ALL=POSIX
