@@ -11,8 +11,9 @@ Coding style
 
 * Indent with tabs, align with spaces.
 
-* Maintain a 71-column limit for code where possible, and enforce a strict
-  79-column limit for formatted output messages, such as usage, help, etc.
+* Maintain a 71-column limit for code where possible, and enforce a
+  strict 79-column limit for formatted output messages, such as usage,
+  help, etc.
 
 
 Documentation
