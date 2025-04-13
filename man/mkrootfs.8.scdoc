@@ -1,0 +1,93 @@
+MKROOTFS(8)
+
+# NAME
+
+mkrootfs - make root filesystem for chroot installation
+
+# SYNOPSIS
+
+*mkrootfs* \
+[*-BCTVhv*] \
+[*-c* _conffile_] \
+[*-l* _logfile_] \
+[*-r* _rootfsdir_] \
+[*-t* _tarball_] \
+[*-x* _pkgmk_conffile_] \
+[*-y* _pkgman_conffile_] \
+[_pkgname_ ...]
+
+# DESCRIPTION
+
+*mkrootfs* builds customized root filesystem for chroot installation.
+By default, *mkrootfs* builds and installs all packages from *core*
+pkgsrc collection, unless _pkgname_(s) specified.
+
+The options are as follows:
+
+*-B*  Prepare rootfs directory.
+
+*-C*  Check rootfs directory for missing libraries.
+
+*-T*  Compress rootfs directory (prepare tarball).
+
+*-c* _conffile_, *--config*=_conffile_
+	Specify an alternate configuration file instead of the default
+	_/etc/mkrootfs/config_.
+
+*-l* _logfile_, *--log*=_logfile_
+	Specify an alternate log file for *pkgman*(1) invocations
+	instead of the default "/tmp/rootfs-<DATE>-<ARCH>.log".
+
+	Here and below <DATE> is the output of *date +%F*, and <ARCH>
+	is the output of *uname -m* commands.
+
+*-r* _rootfsdir_, *--rootfs*=_rootfsdir_
+	Specify an alternate rootfs directory instead of the default
+	"/tmp/rootfs-<DATE>-<ARCH>/".
+
+*-t* _tarball_, *--tar*=_tarball_
+	Specify an alternate compressed rootfs tarball instead of the
+	default "/tmp/rootfs-<DATE>-<ARCH>.tar.xz".
+
+*-x* _pkgmk_conffile_, *--pkgmk-config*=_pkgmk_conffile_
+	Specify an alternate configuration file for *pkgmk*(8)
+	invocations instead of the default _/etc/pkgmk.conf_.
+
+*-y* _pkgman_conffile_, *--pkgman-config*=_pkgman_conffile_
+	Specify an alternate configuration file for *pkgman*(1)
+	invocations instead of the default _/etc/pkgman.conf_.
+
+*-v*, *--verbose*
+	Verbose output.
+
+*-V*, *--version*
+	Print version and exit.
+
+*-h*, *--help*
+	Print help and exit.
+
+# FILES
+
+_/etc/mkrootfs/config_
+	Default configuration file for *mkrootfs*.
+	See *mkrootfs.config*(5) for more information.
+
+_/etc/pkgmk.conf_
+	Configuration file for invoked *pkgmk*(8).
+
+_/etc/pkgman.conf_
+	Configuration file for invoked *pkgman*(1).
+
+# EXIT STATUS
+
+*0*   Success.++
+*1*   Generic error code.++
+*2*   Building rootfs directory failed.++
+*3*   Checking rootfs directory for missing libraries failed.++
+*4*   Compressing rootfs directory (preparing the tarball) failed.
+
+# SEE ALSO
+
+*mkrootfs.config*(5)
+
+; vim: ft=scdoc cc=72 tw=70
