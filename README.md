@@ -11,6 +11,7 @@ REQUIREMENTS
 Build time
 ----------
   * POSIX sh(1p), make(1p) and "mandatory utilities"
+  * scdoc to build man pages
 
 Runtime
 -------
@@ -37,10 +38,7 @@ DOCUMENTATION
 Online documentation
 --------------------
 
-Manual pages:
-- [mkrootfs.8](https://zeppe-lin.github.io/mkrootfs.8.html)
-- [mkrootfs.config.5](https://zeppe-lin.github.io/mkrootfs.config.5.html)
-- [mkrootfs.release.7](https://zeppe-lin.github.io/mkrootfs.release.7.html)
+Refer to the human-readable man pages located in the `/man` directory.
 
 
 LICENSE
