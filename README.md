@@ -35,10 +35,7 @@ See `config.mk` file for configuration parameters.
 DOCUMENTATION
 =============
 
-Online documentation
---------------------
-
-Refer to the human-readable man pages located in the `/man` directory.
+See `/man` directory for manual pages.
 
 
 LICENSE
