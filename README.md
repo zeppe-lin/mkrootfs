@@ -11,16 +11,16 @@ REQUIREMENTS
 Build time
 ----------
   * POSIX sh(1p), make(1p) and "mandatory utilities"
-  * scdoc to build man pages
+  * scdoc(1) to build manual pages
 
 Runtime
 -------
   * POSIX sh(1p) and "mandatory utilities"
   * GNU getopt(1) to parse command-line options
-  * pkgmk to build packages
-  * pkgutils to install packages
-  * pkgman to orchestrate package building and installation
-  * revdep to check rootfs tarball for missing libraries
+  * pkgmk(8) to build packages
+  * pkgadd(8) and pkgrm(8) to install and remove packages
+  * pkgman(1) to orchestrate package building and installation
+  * revdep(1) to check rootfs tarball for missing libraries
   * tar(1) to prepare the rootfs tarball
 
 
