@@ -19,8 +19,8 @@ mkrootfs - make root filesystem for chroot installation
 # DESCRIPTION
 
 *mkrootfs* builds customized root filesystem for chroot installation.
-By default, *mkrootfs* builds and installs all packages from *core*
-pkgsrc collection, unless _pkgname_(s) specified.
+By default, *mkrootfs* builds and installs all packages from
+_/usr/src/pkgsrc-core_ collection, unless _pkgname_(s) specified.
 
 The options are as follows:
 
@@ -80,11 +80,16 @@ _/etc/pkgman.conf_
 
 # EXIT STATUS
 
-*0*   Success.++
-*1*   Generic error code.++
-*2*   Building rootfs directory failed.++
-*3*   Checking rootfs directory for missing libraries failed.++
-*4*   Compressing rootfs directory (preparing the tarball) failed.
+*0*
+	Success.
+*1*
+	Generic error code.
+*2*
+	Building rootfs directory failed.
+*3*
+	Checking rootfs directory for missing libraries failed.
+*4*
+	Compressing rootfs directory (preparing the tarball) failed.
 
 # SEE ALSO
 
