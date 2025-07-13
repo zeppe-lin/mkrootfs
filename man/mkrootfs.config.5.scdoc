@@ -10,12 +10,12 @@ mkrootfs.config - configuration file for mkrootfs
 
 # DESCRIPTION
 
-This manual page describes the format of the mkrootfs(8)'s
+This manual page describes the format of the *mkrootfs*(8)'s
 configuration file.
 
 ## Syntax
 
-*mkrootfs* configuration file is a list of environment variables.
+*mkrootfs*(8) configuration file is a list of environment variables.
 Each variable must be written in POSIX way, bashism not allowed.
 
 Example:
