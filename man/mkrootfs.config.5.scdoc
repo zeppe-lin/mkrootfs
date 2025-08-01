@@ -108,7 +108,7 @@ ROOTFS_LOG=$ROOTFS_DIR.log
 
 # build and install all core packages into rootfs dir
 PACKAGES=$(pkgman printf "%n\\n" \\
-	--no-std--onfig \\
+	--no-std-config \\
 	--config-set="pkgsrcdir /usr/src/pkgsrc-core")
 
 # configuration file for pkgmk's invocations
