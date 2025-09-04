@@ -10,85 +10,75 @@ mkrootfs.config - configuration file for mkrootfs
 
 # DESCRIPTION
 
-This manual page describes the format of the *mkrootfs*(8)'s
-configuration file.
+*mkrootfs*(8) reads its configuration from _/etc/mkrootfs/config_.
 
-## Syntax
+The file consists of POSIX-style variable assignments.
+No bashisms are allowed.
 
-*mkrootfs*(8) configuration file is a list of environment variables.
-Each variable must be written in POSIX way, bashism not allowed.
-
-Example:
 ```
 key=value
+key="value with spaces"
+key=\$escaped
+key='$literal'
 ```
 
-If value contains spaces it must be quoted:
-```
-key="value1 value2"
-```
+Variables can be concatenated across lines:
 
-If value contains special symbols like '*$*', it must be escaped or
-quoted using single quotes:
-```
-key=\\\\$value
-key='$value'
-```
-
-If line exceeded maximum space on your display and you want to make it
-more readable, you can concatenate them:
 ```
 key=value
-key="${key}value"
+key="${key}more"
 ```
 
-If you want to temporary undefine variable without actually deleting
-it, you can simply prepend '*#*':
-```
-#key=value
-```
+Lines beginning with '*#*' are comments and may be used to disable
+variables.
 
-## General Options
+# OPTIONS
 
 The configuration options are as follows:
 
 *ROOTFS_DIR*=<DIR>
-	Specify a rootfs directory instead of the default
-	"/tmp/rootfs-<DATE>-<ARCH>/".  The <DATE> is the output of
-	*date +%F*, and the <ARCH> is the output of *uname -m*
+	Rootfs directory.
+
+	Default: '/tmp/rootfs-DATE-ARCH/', where 'DATE' is the output
+	of '*date +%F*', and 'ARCH' is the output from '*uname -m*'
 	commands.
 
 *ROOTFS_TAR*=<FILE>
-	Specify an output filename (full path is recommended) for
-	compressed rootfs instead of the default
-	"<ROOTFS_DIR>.tar.xz".
+	Output filename for compressed rootfs tarball.
+	Full path is recommended.
+
+	Default: '${ROOTFS_DIR}.tar.xz'
 
 *ROOTFS_LOG*=<FILE>
-	Specify a log file for *pkgman*(1)'s invocations instead of
-	the default "<ROOTFS_DIR>.log".
+	Log file for *pkgman*(1)'s invocations.
 
-*PACKAGES*=<PKGNAME ...>
-	Specify the packages that will be built and extracted into the
-	<ROOTFS_DIR>.  By default all packages from *core* pkgsrc
-	collection.
+	Default: 'ROOTFS_DIR.log'
+
+*PACKAGES*="<PKGNAME ...>"
+	Packages to build into rootfs.
+
+	Default: all from _/usr/src/pkgsrc-core_
 
 *PKGMK_CONF*=<FILE>
-	Specify the configuration file for *pkgmk*(8)'s invocations
-	instead of the default _/etc/pkgmk.conf_.
+	Configuration file for *pkgmk*(8)'s invocations.
+
+	Default: _/etc/pkgmk.conf_
 
 *PKGMAN_CONF*=<FILE>
-	Specify the configuration file for *pkgman*(1)'s invocations
-	instead of the default _/etc/pkgman.conf_.
+	Configuration file for *pkgman*(1)'s invocations.
+
+	Default: _/etc/pkgman.conf_
 
 # FILES
 
 _/etc/mkrootfs/config_
-	Configuration file for *mkrootfs*(8).
+	Default configuration file for *mkrootfs*(8).
 
 # EXAMPLES
 
-The following configuration file reproduces the defaults: installing
-it is equivalent to not having a _/etc/mkrootfs/config_ file at all.
+The following configuration file reproduces the defaults.  Installing
+it is the same as having _/etc/mkrootfs/config_ empty or not having
+the file at all.
 
 ```
 #

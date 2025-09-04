@@ -18,9 +18,10 @@ mkrootfs - make root filesystem for chroot installation
 
 # DESCRIPTION
 
-*mkrootfs* builds customized root filesystem for chroot installation.
-By default, *mkrootfs* builds and installs all packages from
-_/usr/src/pkgsrc-core_ collection, unless _pkgname_(s) specified.
+*mkrootfs* builds a customized root filesystem for chroot
+installation.  By default, it builds and installs all packages from
+_/usr/src/pkgsrc-core_, unless one or more _pkgname_ arguments are
+given.
 
 The options are as follows:
 
@@ -28,34 +29,34 @@ The options are as follows:
 
 *-C*  Check rootfs directory for missing libraries.
 
-*-T*  Compress rootfs directory (prepare tarball).
+*-T*  Compress rootfs directory into a tarball.
 
 *-c* _conffile_, *--config*=_conffile_
-	Specify an alternate configuration file instead of the default
+	Use alternate configuration file instead of
 	_/etc/mkrootfs/config_.
 
 *-l* _logfile_, *--log*=_logfile_
-	Specify an alternate log file for *pkgman*(1) invocations
-	instead of the default "/tmp/rootfs-<DATE>-<ARCH>.log".
+	Write *pkgman*(1) logs to _logfile_ instead of
+	'/tmp/rootfs-DATE-ARCH.log'.
 
-	Here and below <DATE> is the output of *date +%F*, and <ARCH>
-	is the output of *uname -m* commands.
+	Here and below 'DATE' is the output of '*date +%F*', and
+	'ARCH' is the output of '*uname -m*' commands.
 
 *-r* _rootfsdir_, *--rootfs*=_rootfsdir_
-	Specify an alternate rootfs directory instead of the default
-	"/tmp/rootfs-<DATE>-<ARCH>/".
+	Use alternate rootfs directory instead of
+	'/tmp/rootfs-DATE-ARCH/'.
 
 *-t* _tarball_, *--tar*=_tarball_
-	Specify an alternate compressed rootfs tarball instead of the
-	default "/tmp/rootfs-<DATE>-<ARCH>.tar.xz".
+	Write compressed rootfs tarball to _tarball_ instead of
+	'/tmp/rootfs-DATE-ARCH.tar.xz'.
 
 *-x* _pkgmk_conffile_, *--pkgmk-config*=_pkgmk_conffile_
-	Specify an alternate configuration file for *pkgmk*(8)
-	invocations instead of the default _/etc/pkgmk.conf_.
+	Use alternate *pkgmk*(8) configuration file instead of
+	_/etc/pkgmk.conf_.
 
 *-y* _pkgman_conffile_, *--pkgman-config*=_pkgman_conffile_
-	Specify an alternate configuration file for *pkgman*(1)
-	invocations instead of the default _/etc/pkgman.conf_.
+	Use alternate *pkgman*(1) configuration file instead of
+	_/etc/pkgman.conf_.
 
 *-v*, *--verbose*
 	Verbose output.
@@ -83,13 +84,13 @@ _/etc/pkgman.conf_
 *0*
 	Success.
 *1*
-	Generic error code.
+	Generic error.
 *2*
 	Building rootfs directory failed.
 *3*
 	Checking rootfs directory for missing libraries failed.
 *4*
-	Compressing rootfs directory (preparing the tarball) failed.
+	Compressing rootfs directory into a tarball failed.
 
 # SEE ALSO
 
