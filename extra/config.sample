@@ -4,10 +4,11 @@
 # See mkrootfs.config(5) for more information.
 #
 
-################################################################
-# This configuration file reproduces the defaults: using it is #
-# equivalent to not having /etc/mkrootfs/config file at all.   #
-################################################################
+######################################################################
+# This configuration file reproduces the defaults.  Using it is the  #
+# same as having `/etc/mkrootfs/config` empty or not having the file #
+# at all.                                                            #
+######################################################################
 
 # path to the temporary directory for rootfs
 ROOTFS_DIR=/tmp/rootfs‐$(date +%F)‐$(uname ‐m)
