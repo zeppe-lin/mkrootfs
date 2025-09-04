@@ -6,7 +6,7 @@
 # Error codes.                                                       #
 ######################################################################
 
-readonly E_GENERAL=1  # Generic error code
+readonly E_GENERAL=1  # Generic error
 readonly E_BUILD=2    # Error while building rootfs dir
 readonly E_REVDEP=3   # Error checking rootfs dir for missing libs
 readonly E_TARBALL=4  # Error making rootfs tarball
