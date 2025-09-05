@@ -44,8 +44,7 @@ fatal() {
 # Exit hooks.                                                        #
 ######################################################################
 
-# Don't warn about unreachable commands in these functions, see
-# trap(1p).
+# Don't warn about unreachable commands in these functions, see trap(1p).
 
 # https://www.shellcheck.net/wiki/SC2317
 # shellcheck disable=2317
@@ -139,8 +138,7 @@ make_tarball() {
 
 # Print program help message.
 print_help() {
-	# keep 79 characters as 'standard' limit for help message
-	# width
+	# keep 79 characters as standard limit for help message width
 	cat <<EOF
 Usage: mkrootfs [-BCTVhv] [-c conffile] [-l logfile] [-r rootfsdir]
                 [-t tarball] [-x pkgmk_conffile] [-y pkgman_conffile]
@@ -260,8 +258,8 @@ MKROOTFS_CONF=/etc/mkrootfs/config
 PKGMK_CONF=/etc/pkgmk.conf
 PKGMAN_CONF=/etc/pkgman.conf
 VERBOSE=0
-PACKAGES=$(pkgman printf %n\\n \
-  --no-std-config --config-set="pkgsrcdir /usr/src/pkgsrc-core")
+PACKAGES=$(pkgman printf %n\\n --no-std-config \
+	--config-set="pkgsrcdir /usr/src/pkgsrc-core")
 
 ######################################################################
 
