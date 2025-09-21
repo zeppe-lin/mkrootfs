@@ -2,61 +2,76 @@ MKROOTFS(8)
 
 # NAME
 
-mkrootfs - make root filesystem for chroot installation
+mkrootfs - build root filesystem for chroot installation
 
 # SYNOPSIS
 
 *mkrootfs* \
 [*-BCTVhv*] \
-[*-c* _conffile_] \
-[*-l* _logfile_] \
-[*-r* _rootfsdir_] \
-[*-t* _tarball_] \
-[*-x* _pkgmk_conffile_] \
-[*-y* _pkgman_conffile_] \
-[_pkgname_ ...]
+[*-c* _config-file_] \
+[*-l* _log-file_] \
+[*-r* _rootfs-dir_] \
+[*-t* _tar-file_] \
+[*-x* _pkgmkconf-file_] \
+[*-y* _pkgmanconf-file_] \
+[_package-name_ ...]
 
 # DESCRIPTION
 
-*mkrootfs* builds a customized root filesystem for chroot
-installation.  By default, it builds and installs all packages from
-_/usr/src/pkgsrc-core_, unless one or more _pkgname_ arguments are
-given.
+The *mkrootfs* utility creates a root filesystem suitable for chroot
+installation.
+By default, it builds and installs all packages from
+_/usr/src/pkgsrc-core_.
+If one or more _package-name_ arguments are specified, only those
+packages are processed.
+
+Package building is delegated to *pkgmk*(8), and installation to
+*pkgman*(1).
+Configuration files for both tools may be overridden via command-line
+options.
 
 The options are as follows:
 
-*-B*  Prepare rootfs directory.
+*-B*
+	Prepare the rootfs directory.
 
-*-C*  Check rootfs directory for missing libraries.
+*-C*
+	Check the rootfs directory for missing libraries.
 
-*-T*  Compress rootfs directory into a tarball.
+*-T*
+	Compress the rootfs directory into a tarball.
 
-*-c* _conffile_, *--config*=_conffile_
-	Use alternate configuration file instead of
-	_/etc/mkrootfs/config_.
+*-c* _config-file_, *--config*=_config-file_
+	Use an alternate *mkrootfs* configuration file.
 
-*-l* _logfile_, *--log*=_logfile_
-	Write *pkgman*(1) logs to _logfile_ instead of
-	'/tmp/rootfs-DATE-ARCH.log'.
+	Default: _/etc/mkrootfs/config_.
 
+*-l* _log-file_, *--log*=_log-file_
+	Write *pkgman*(1) logs to _log-file_.
+
+	Default: '/tmp/rootfs-DATE-ARCH.log'.
 	Here and below 'DATE' is the output of '*date +%F*', and
 	'ARCH' is the output of '*uname -m*' commands.
 
-*-r* _rootfsdir_, *--rootfs*=_rootfsdir_
-	Use alternate rootfs directory instead of
-	'/tmp/rootfs-DATE-ARCH/'.
+*-r* _rootfs-dir_, *--rootfs*=_rootfs-dir_
+	Use an alternate rootfs directory.
 
-*-t* _tarball_, *--tar*=_tarball_
-	Write compressed rootfs tarball to _tarball_ instead of
-	'/tmp/rootfs-DATE-ARCH.tar.xz'.
+	Default: '/tmp/rootfs-DATE-ARCH/'.
 
-*-x* _pkgmk_conffile_, *--pkgmk-config*=_pkgmk_conffile_
-	Use alternate *pkgmk*(8) configuration file instead of
-	_/etc/pkgmk.conf_.
+*-t* _tar-file_, *--tar*=_tar-file_
+	Write compressed rootfs tarball to _tar-file_.
+
+	Default: '/tmp/rootfs-DATE-ARCH.tar.xz'.
+
+*-x* _pkgmkconf-file_, *--pkgmk-config*=_pkgmkconf-file_
+	Use an alternate *pkgmk*(8) configuration file.
+
+	Default: _/etc/pkgmk.conf_.
 
 *-y* _pkgman_conffile_, *--pkgman-config*=_pkgman_conffile_
-	Use alternate *pkgman*(1) configuration file instead of
-	_/etc/pkgman.conf_.
+	Use an alternate *pkgman*(1) configuration file.
+
+	Default: _/etc/pkgman.conf_.
 
 *-v*, *--verbose*
 	Verbose output.
@@ -65,35 +80,44 @@ The options are as follows:
 	Print version and exit.
 
 *-h*, *--help*
-	Print help and exit.
+	Print usage and exit.
 
 # FILES
 
 _/etc/mkrootfs/config_
-	Default configuration file for *mkrootfs*.
-	See *mkrootfs.config*(5) for more information.
+	Configuration file for *mkrootfs*.
+
+	See *mkrootfs.config*(5).
 
 _/etc/pkgmk.conf_
-	Configuration file for invoked *pkgmk*(8).
+	Configuration file passed to *pkgmk*(8).
+
+	See *pkgmk.conf*(5).
 
 _/etc/pkgman.conf_
-	Configuration file for invoked *pkgman*(1).
+	Configuration file passed to *pkgman*(1).
+
+	See *pkgman.conf*(5).
 
 # EXIT STATUS
 
 *0*
 	Success.
 *1*
-	Generic error.
+	General error.
 *2*
-	Building rootfs directory failed.
+	Failed to build rootfs directory.
 *3*
-	Checking rootfs directory for missing libraries failed.
+	Failed to check rootfs directory for missing libraries.
 *4*
-	Compressing rootfs directory into a tarball failed.
+	Failed to compress rootfs directory into tarball.
 
 # SEE ALSO
 
-*mkrootfs.config*(5)
+*mkrootfs.config*(5),
+*pkgman*(1),
+*pkgman.conf*(5),
+*pkgmk*(8),
+*pkgmk.conf*(5)
 
 ; vim: ft=scdoc cc=72 tw=70

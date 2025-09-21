@@ -10,101 +10,75 @@ mkrootfs.config - configuration file for mkrootfs
 
 # DESCRIPTION
 
-*mkrootfs*(8) reads its configuration from _/etc/mkrootfs/config_.
+The _mkrootfs.config_ file provides configuration settings used by
+*mkrootfs*(8) when creating a root filesystem.
 
-The file consists of POSIX-style variable assignments.
-No bashisms are allowed.
+It is a POSIX *sh*(1p) script consisting of variable assignments.
+Lines beginning with '*#*' are comments.
+Because it is interpreted by the shell, standard syntax such as
+variable expansion, command substitution, and conditional statements
+may be used.
+Functions, loops, and other POSIX *sh*(1p) constructs are also
+permitted.
 
-```
-key=value
-key="value with spaces"
-key=\$escaped
-key='$literal'
-```
-
-Variables can be concatenated across lines:
-
-```
-key=value
-key="${key}more"
-```
-
-Lines beginning with '*#*' are comments and may be used to disable
-variables.
-
-# OPTIONS
-
-The configuration options are as follows:
+The following variables are recognized:
 
 *ROOTFS_DIR*=<DIR>
-	Rootfs directory.
+	Path to the rootfs working directory.
 
 	Default: '/tmp/rootfs-DATE-ARCH/', where 'DATE' is the output
-	of '*date +%F*', and 'ARCH' is the output from '*uname -m*'
-	commands.
+	of '*date +%F*', and 'ARCH' is the output of '*uname -m*'.
 
 *ROOTFS_TAR*=<FILE>
-	Output filename for compressed rootfs tarball.
-	Full path is recommended.
+	Path to the compressed rootfs tarball.
 
 	Default: '${ROOTFS_DIR}.tar.xz'
 
 *ROOTFS_LOG*=<FILE>
-	Log file for *pkgman*(1)'s invocations.
+	Path to the log file used by *pkgman*(1).
 
-	Default: 'ROOTFS_DIR.log'
+	Default: 'ROOTFS_DIR.log'.
 
-*PACKAGES*="<PKGNAME ...>"
-	Packages to build into rootfs.
+*PACKAGES*="<NAME ...>"
+	Space-separated list of packages to build and install.
 
-	Default: all from _/usr/src/pkgsrc-core_
+	Default: all packages from _/usr/src/pkgsrc-core_.
 
 *PKGMK_CONF*=<FILE>
-	Configuration file for *pkgmk*(8)'s invocations.
+	Path to the configuration file passed to *pkgmk*(8).
 
-	Default: _/etc/pkgmk.conf_
+	Default: _/etc/pkgmk.conf_.
 
 *PKGMAN_CONF*=<FILE>
-	Configuration file for *pkgman*(1)'s invocations.
+	Path to the configuration file passed to *pkgman*(1).
 
 	Default: _/etc/pkgman.conf_
 
 # FILES
 
 _/etc/mkrootfs/config_
-	Default configuration file for *mkrootfs*(8).
+	Default configuration file.
 
 # EXAMPLES
 
-The following configuration file reproduces the defaults.  Installing
-it is the same as having _/etc/mkrootfs/config_ empty or not having
-the file at all.
+The following configuration reproduces the defaults.
+Installing it is equivalent to leaving _/etc/mkrootfs/config_ empty or
+absent.
 
 ```
 #
-# /etc/mkrootfs/config: mkrootfs(8) configuration
+# /etc/mkrootfs/config: configuration file for mkrootfs(8)
 #
 # See mkrootfs.conf(5) for more information.
 #
 
-# path to the temporary directory for rootfs
 ROOTFS_DIR=/tmp/rootfs-$(date +%F)-$(uname -m)
-
-# path to the compressed rootfs tarball
 ROOTFS_TAR=$ROOTFS_DIR.tar.xz
-
-# log file for pkgman's invocations
 ROOTFS_LOG=$ROOTFS_DIR.log
-
-# build and install all core packages into rootfs dir
 PACKAGES=$(pkgman printf "%n\\n" \\
 	--no-std-config \\
 	--config-set="pkgsrcdir /usr/src/pkgsrc-core")
-
-# configuration file for pkgmk's invocations
 PKGMK_CONF=/etc/pkgmk.conf
-
-# configuration file for pkgman's invocations
 PKGMAN_CONF=/etc/pkgman.conf
 
 # End of file.
