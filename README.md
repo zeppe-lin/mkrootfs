@@ -1,14 +1,14 @@
 OVERVIEW
 ========
 
-This repository contains `mkrootfs`, an utility that makes root
-filesystem of Zeppe-Lin distribution for chroot installation.
+The `mkrootfs` utility creates a root filesystem of Zeppe-Lin
+distribution, suitable for chroot installation.
 
 
 REQUIREMENTS
 ============
 
-Build time
+Build-time
 ----------
   * POSIX `sh(1p)`, `make(1p)` and "mandatory utilities"
   * `scdoc(1)` to build manual pages
@@ -45,5 +45,4 @@ LICENSE
 
 `mkrootfs` is licensed through the GNU General Public License v3 or
 later <http://gnu.org/licenses/gpl.html>.
-Read the COPYING file for copying conditions.
-Read the COPYRIGHT file for copyright notices.
+See `COPYING` for license terms and `COPYRIGHT` for notices.
