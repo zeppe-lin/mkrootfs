@@ -10,16 +10,17 @@ mkrootfs.config - configuration file for mkrootfs
 
 # DESCRIPTION
 
-The _mkrootfs.config_ file provides configuration settings used by
+The _mkrootfs.config_ file contains configuration settings used by
 *mkrootfs*(8) when creating a root filesystem.
 
-It is a POSIX *sh*(1p) script consisting of variable assignments.
+# FILE FORMAT
+
+The file is a POSIX *sh*(1p) script consisting primarily of variable
+assignments.
 Lines beginning with '*#*' are comments.
-Because it is interpreted by the shell, standard syntax such as
-variable expansion, command substitution, and conditional statements
-may be used.
-Functions, loops, and other POSIX *sh*(1p) constructs are also
-permitted.
+Because the file is interpreted by the shell, standard syntax such as
+quoting, variable expansion, command substitution, conditionals,
+functions, and loops may also be used.
 
 The following variables are recognized:
 
@@ -87,5 +88,12 @@ PKGMAN_CONF=/etc/pkgman.conf
 # SEE ALSO
 
 *mkrootfs*(8)
+
+# CAVEATS
+
+Since _mkrootfs.config_ is interpreted by the shell, it may include
+conditionals, functions, or other logic.
+While this permits customization, any syntax errors will prevent
+*mkrootfs*(8) from running.
 
 ; vim: ft=scdoc cc=72 tw=70
