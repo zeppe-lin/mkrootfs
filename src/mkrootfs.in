@@ -138,28 +138,30 @@ make_tarball() {
 
 # Print program help message.
 print_help() {
-	# keep 79 characters as standard limit for help message width
+	# keep 72 characters as standard limit for help message width
 	cat <<EOF
-Usage: mkrootfs [-BCTVhv] [-c conffile] [-l logfile] [-r rootfsdir]
-                [-t tarball] [-x pkgmk_conffile] [-y pkgman_conffile]
-                [pkgname ...]
-Build customized root filesystem for chroot installation.
+Usage: mkrootfs [-BCTVhv] [-c config-file] [-l log-file] [-r rootfs-dir]
+                [-t tar-file] [-x pkgmkconf-file] [-y pkgmanconf-file]
+                [package-name ...]
+Build root filesystem for chroot installation.
 
 Mandatory arguments to long options are mandatory for short options too.
-  -B                       prepare rootfs directory
-  -C                       check rootfs directory for missing libraries
-  -T                       compress rootfs directory
-  -r, --rootfs=rootfsdir   specify an alternate rootfs directory
-  -t, --tar=tarball        specify an alternate compressed rootfs tarball
-  -l, --log=logfile        specify an alternate log file for pkgman
-  -c, --config=conffile    specify an alternate configuration file
-  -x, --pkgmk-config=pkgmk_conffile
-                           specify an alternate configuration file for pkgmk
-  -y, --pkgman-config=pkgman_conffile
-                           specify an alternate configuration file for pkgman
-  -v, --verbose            increase verbosity
-  -V, --version            print version and exit
-  -h, --help               print help and exit
+  -B                  Prepare the rootfs directory
+  -C                  Check the rootfs directory for missing libraries
+  -T                  Compress the rootfs directory into a tarball
+  -c, --config=config-file
+                      Use an alternate mkrootfs configuration file
+  -l, --log=log-file  Write pkgman logs to specified file
+  -r, --rootfs=rootfs-dir
+                      Use an alternate rootfs directory
+  -t, --tar=tar-file  Write compressed rootfs tarball to specified file
+  -x, --pkgmk-config=pkgmkconf-file
+                      Use an alternate pkgmk configuration file
+  -y, --pkgman-config=pkgmanconf-file
+                      Use an alternate pkgman configuration file
+  -v, --verbose       Increase verbosity
+  -V, --version       Print version and exit
+  -h, --help          Print this help and exit
 EOF
 }
 
