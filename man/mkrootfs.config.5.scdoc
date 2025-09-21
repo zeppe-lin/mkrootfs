@@ -22,6 +22,8 @@ Because the file is interpreted by the shell, standard syntax such as
 quoting, variable expansion, command substitution, conditionals,
 functions, and loops may also be used.
 
+## Variables
+
 The following variables are recognized:
 
 *ROOTFS_DIR*=<DIR>
