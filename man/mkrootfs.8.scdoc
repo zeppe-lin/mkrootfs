@@ -6,15 +6,10 @@ mkrootfs - build root filesystem for chroot installation
 
 # SYNOPSIS
 
-*mkrootfs* \
-[*-BCTVhv*] \
-[*-c* _config-file_] \
-[*-l* _log-file_] \
-[*-r* _rootfs-dir_] \
-[*-t* _tar-file_] \
-[*-x* _pkgmkconf-file_] \
-[*-y* _pkgmanconf-file_] \
-[_package-name_ ...]
+*mkrootfs* [*-BCTVhv*] [*-c* _config-file_] [*-l* _log-file_]++
+         [*-r* _rootfs-dir_] [*-t* _tar-file_]++
+         [*-x* _pkgmkconf-file_] [*-y* _pkgmanconf-file_]++
+         [_package-name_ ...]
 
 # DESCRIPTION
 
