@@ -4,30 +4,28 @@
 # See mkrootfs.config(5) for more information.
 #
 
-######################################################################
-# This configuration file reproduces the defaults.  Using it is the  #
-# same as having `/etc/mkrootfs/config` empty or not having the file #
-# at all.                                                            #
-######################################################################
+# This configuration file reproduces the defaults.
+# Using it is the same as having /etc/mkrootfs/config empty
+# or not having the file at all.
 
-# path to the temporary directory for rootfs
+# Temporary rootfs directory
 ROOTFS_DIR=/tmp/rootfs‐$(date +%F)‐$(uname ‐m)
 
-# path to the compressed rootfs tarball
+# Compressed rootfs archive
 ROOTFS_TAR=$ROOTFS_DIR.tar.xz
 
-# log file for pkgman’s invocations
+# Log file for pkgman invocations
 ROOTFS_LOG=$ROOTFS_DIR.log
 
-# build and install all core packages into rootfs dir
+# Core packages to install into the rootfs
 PACKAGES=$(pkgman printf %n\\n \
 	‐‐no‐std‐config \
 	‐‐config‐set="pkgsrcdir /usr/src/pkgsrc‐core")
 
-# configuration file for pkgmk’s invocations
+# pkgmk configuration file
 PKGMK_CONF=/etc/pkgmk.conf
 
-# configuration file for pkgman’s invocations
+# pkgman configuration file
 PKGMAN_CONF=/etc/pkgman.conf
 
 # vim: ft=sh
