@@ -87,7 +87,7 @@ The options are as follows:
 	format (output of *date +%F*).
 
 *ARCH*
-	The machine architecture.
+	The machine architecture for the rootfs.
 	If unset, it defaults to the host machine architecture
 	(output of *uname -m*).
 
