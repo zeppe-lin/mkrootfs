@@ -44,19 +44,17 @@ The options are as follows:
 *-l* _log-file_, *--log*=_log-file_
 	Write *pkgman*(1) logs to _log-file_.
 
-	Default: '/tmp/rootfs-DATE-ARCH.log'.
-	Here and below 'DATE' is the output of '*date +%F*', and
-	'ARCH' is the output of '*uname -m*' commands.
+	Default: _$TMPDIR/rootfs-$VERSION-$ARCH.log_.
 
 *-r* _rootfs-dir_, *--rootfs*=_rootfs-dir_
 	Use an alternate rootfs directory.
 
-	Default: '/tmp/rootfs-DATE-ARCH/'.
+	Default: _$TMPDIR/rootfs-$DATE-$ARCH_.
 
 *-t* _tar-file_, *--tar*=_tar-file_
 	Write compressed rootfs tarball to _tar-file_.
 
-	Default: '/tmp/rootfs-DATE-ARCH.tar.xz'.
+	Default: _$TMPDIR/rootfs-$DATE-$ARCH.tar.xz_.
 
 *-x* _pkgmkconf-file_, *--pkgmk-config*=_pkgmkconf-file_
 	Use an alternate *pkgmk*(8) configuration file.
@@ -76,6 +74,22 @@ The options are as follows:
 
 *-h*, *--help*
 	Print usage and exit.
+
+# ENVIRONMENT
+
+*TMPDIR*
+	The directory for temporary files.
+	If unset, it defaults to _/tmp_.
+
+*VERSION*
+	The version string for the rootfs.
+	If unset, it defaults to the current date in _YYYY-MM-DD_
+	format (output of *date +%F*).
+
+*ARCH*
+	The machine architecture.
+	If unset, it defaults to the host machine architecture
+	(output of *uname -m*).
 
 # FILES
 
