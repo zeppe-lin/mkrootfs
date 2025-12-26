@@ -9,7 +9,7 @@
 # or not having the file at all.
 
 # Temporary rootfs directory
-ROOTFS_DIR=/tmp/rootfs‐$(date +%F)‐$(uname ‐m)
+ROOTFS_DIR=${TMPDIR:-/tmp}/rootfs-${VERSION:-$(date +%F)}-${ARCH:-$(uname -m)}
 
 # Compressed rootfs archive
 ROOTFS_TAR=$ROOTFS_DIR.tar.xz
@@ -18,9 +18,9 @@ ROOTFS_TAR=$ROOTFS_DIR.tar.xz
 ROOTFS_LOG=$ROOTFS_DIR.log
 
 # Core packages to install into the rootfs
-PACKAGES=$(pkgman printf %n\\n \
-	‐‐no‐std‐config \
-	‐‐config‐set="pkgsrcdir /usr/src/pkgsrc‐core")
+PACKAGES=$(pkgman --no-std-config \
+	--config-set='pkgsrcdir /usr/src/pkgsrc-core' \
+	printf -- '%n\n')
 
 # pkgmk configuration file
 PKGMK_CONF=/etc/pkgmk.conf
