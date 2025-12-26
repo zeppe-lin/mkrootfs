@@ -43,6 +43,7 @@ See `/man` directory for manual pages.
 LICENSE
 =======
 
-`mkrootfs` is licensed through the GNU General Public License v3 or
-later <http://gnu.org/licenses/gpl.html>.
+`mkrootfs` is licensed through the
+[GNU General Public License v3 or later](http://gnu.org/licenses/gpl.html).
+
 See `COPYING` for license terms and `COPYRIGHT` for notices.
