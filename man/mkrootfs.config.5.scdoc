@@ -29,18 +29,17 @@ The following variables are recognized:
 *ROOTFS_DIR*=<DIR>
 	Path to the rootfs working directory.
 
-	Default: '/tmp/rootfs-DATE-ARCH/', where 'DATE' is the output
-	of '*date +%F*', and 'ARCH' is the output of '*uname -m*'.
+	Default: _${TMPDIR}/rootfs-${DATE}-${ARCH}_.
 
 *ROOTFS_TAR*=<FILE>
 	Path to the compressed rootfs tarball.
 
-	Default: '${ROOTFS_DIR}.tar.xz'
+	Default: _${ROOTFS_DIR}.tar.xz_.
 
 *ROOTFS_LOG*=<FILE>
 	Path to the log file used by *pkgman*(1).
 
-	Default: 'ROOTFS_DIR.log'.
+	Default: _${ROOTFS_DIR}.log_.
 
 *PACKAGES*="<NAME ...>"
 	Space-separated list of packages to build and install.
@@ -56,6 +55,12 @@ The following variables are recognized:
 	Path to the configuration file passed to *pkgman*(1).
 
 	Default: _/etc/pkgman.conf_
+
+# ENVIRONMENT
+
+*mkrootfs.config* often relies on the following variables inherited
+from the environment: *TMPDIR*, *VERSION*, and *ARCH*.
+See *mkrootfs*(8) for details on their defaults.
 
 # FILES
 
@@ -75,12 +80,32 @@ absent.
 # See mkrootfs.conf(5) for more information.
 #
 
-ROOTFS_DIR=/tmp/rootfs-$(date +%F)-$(uname -m)
+# --- Environment Handlers ---
+# Use values from the environment if present, otherwise set
+# defaults.
+TMPDIR=${TMPDIR:-/tmp}
+VERSION=${VERSION:-$(date +%F)}
+ARCH=${ARCH:-$(uname -m)}
+
+# --- Path Definitions ---
+# The working directory for the rootfs construction.
+ROOTFS_DIR=$TMPDIR/rootfs-$VERSION-$ARCH
+
+# Output paths for the compressed archive and the installation log.
 ROOTFS_TAR=$ROOTFS_DIR.tar.xz
 ROOTFS_LOG=$ROOTFS_DIR.log
+
+# --- Package Selection ---
+# Dynamically generate the list of core packages to be installed.
+# We use pkgman to query names directly from the pkgsrc-core
+# directory.
 PACKAGES=$(pkgman printf "%n\\n" \\
 	--no-std-config \\
 	--config-set="pkgsrcdir /usr/src/pkgsrc-core")
+
+# --- Tool Configurations ---
+# Absolute paths to configuration files for the underlying
+# build/install tools.
 PKGMK_CONF=/etc/pkgmk.conf
 PKGMAN_CONF=/etc/pkgman.conf
 
