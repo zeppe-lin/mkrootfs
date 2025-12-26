@@ -56,10 +56,22 @@ interrupted() {
 
 # shellcheck disable=2317
 #atexit() {
-	# Remove build artefacts depending on interrupted action?
-	# e.g. build -> remove work dir, tar -> remove tarball
-
-	# Do nothing at the moment.
+#	# Exit hook for mkrootfs.
+#	#
+#	# Purpose:
+#	#   Clean up build artefacts if the program is interrupted or
+#	#   fails.
+#	#
+#	# Possible actions:
+#	#   - If interrupted during build: remove the working
+#	#     directory.
+#	#   - If interrupted during tarball creation: remove the
+#	#     partial tarball.
+#	#
+#	# Currently disabled: no cleanup performed.
+#	#
+#	# To enable, uncomment and register with:
+#	#   trap 'atexit' EXIT
 #}
 
 ######################################################################
