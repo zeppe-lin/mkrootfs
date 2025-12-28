@@ -1,15 +1,15 @@
 #!/bin/sh
 # mkrootfs - build customized root filesystem for chroot installation
-# See COPYING and COPYRIGHT files for corresponding information.
+# See COPYING for license terms and COPYRIGHT for notices.
 
 ######################################################################
 # Error codes.                                                       #
 ######################################################################
 
-readonly E_GENERAL=1  # Generic error
-readonly E_BUILD=2    # Error while building rootfs dir
-readonly E_REVDEP=3   # Error checking rootfs dir for missing libs
-readonly E_TARBALL=4  # Error making rootfs tarball
+readonly E_GENERAL=1  # General error
+readonly E_BUILD=2    # Failed to build rootfs dir
+readonly E_REVDEP=3   # Failed to check rootfs dir for missing libs
+readonly E_TARBALL=4  # Failed to compress rootfs dir into tarball
 
 ######################################################################
 # Notification helpers.                                              #
