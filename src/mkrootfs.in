@@ -152,8 +152,9 @@ make_tarball() {
 print_help() {
 	# keep 72 characters as standard limit for help message width
 	cat <<EOF
-Usage: mkrootfs [-BCTVhv] [-c config-file] [-l log-file] [-r rootfs-dir]
-                [-t tar-file] [-x pkgmkconf-file] [-y pkgmanconf-file]
+Usage: mkrootfs [-BCTVhv] [-c config-file] [-l log-file]
+                [-r rootfs-dir] [-t tar-file]
+                [-x pkgmkconf-file] [-y pkgmanconf-file]
                 [package-name ...]
 Build root filesystem for chroot installation.
 
