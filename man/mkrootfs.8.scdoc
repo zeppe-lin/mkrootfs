@@ -123,10 +123,11 @@ _/etc/pkgman.conf_
 
 # SEE ALSO
 
-*mkrootfs.config*(5),
-*pkgman*(1),
-*pkgman.conf*(5),
+*mkrootfs.config*(5)
+
 *pkgmk*(8),
 *pkgmk.conf*(5)
+*pkgman*(1),
+*pkgman.conf*(5)
 
 ; vim: ft=scdoc cc=72 tw=70
