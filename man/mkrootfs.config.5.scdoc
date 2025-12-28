@@ -116,6 +116,11 @@ PKGMAN_CONF=/etc/pkgman.conf
 
 *mkrootfs*(8)
 
+*pkgmk*(8),
+*pkgmk.conf*(5),
+*pkgman*(1),
+*pkgman.conf*(5)
+
 # CAVEATS
 
 Since _mkrootfs.config_ is interpreted by the shell, it may include
