@@ -1,5 +1,5 @@
 # bash completion for mkrootfs(8)
-# See COPYING and COPYRIGHT files for corresponding information.
+# See COPYING for license terms and COPYRIGHT for notices.
 
 _mkrootfs()
 {
@@ -24,7 +24,7 @@ _mkrootfs()
 		COMPREPLY=($(compgen -W '$(_parse_help "$1")' -- "$cur"))
 		[[ ${COMPREPLY-} == *= ]] && compopt -o nospace
 	else
-		# complete with all available pkgsrc packages
+		# Complete with all available pkgsrc packages
 		COMPREPLY=($(compgen -W '$(pkgman printf "%n ")' -- $cur))
 	fi
 } && complete -F _mkrootfs mkrootfs
